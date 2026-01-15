@@ -3,37 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kasi Viswanath - AI Engineer & Researcher</title>
-    <meta name="description" content="Portfolio of Kasi Viswanath Vegisetti, an AI Engineer and Team Leader specializing in Conversational AI, NLP, and intelligent automation.">
+    <title>Kasi Viswanath - AI Systems Engineer</title>
+    <meta name="description" content="Portfolio of Kasi Viswanath Vegisetti, an AI Systems Engineer specializing in Edge Intelligence, Research Prototypes, and Space-grade Automation.">
     
     <!-- Design & Fonts -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22></text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Added 'K' to the favicon so it shows up -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>K</text></svg>">
 
-    <!-- Animation Libraries -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Animation Libraries (GSAP) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
-    <!-- Lenis for Ultra Smooth Scrolling -->
-    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
     
     <!-- Utilities -->
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
 
     <script>
         tailwind.config = {
+            darkMode: 'class', 
             theme: {
                 extend: {
                     colors: {
                         dark: { 900: '#020617', 800: '#0f172a', 700: '#1e293b' },
-                        primary: { 500: '#c084fc', 400: '#d8b4fe', 300: '#e9d5ff' }, // Lighter purple for dark mode
+                        primary: { 500: '#c084fc', 400: '#d8b4fe', 600: '#a855f7' }, 
                         secondary: { 500: '#f472b6', 400: '#fbcfe8' } 
                     },
-                    fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
+                    fontFamily: { 
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'] 
+                    },
                     animation: {
                         'blob': 'blob 10s infinite',
                         'float': 'float 6s ease-in-out infinite',
@@ -55,43 +55,144 @@
         }
     </script>
     <style>
+        /* CSS Variables for Theming */
         :root {
             --bg-color: #020617;
-            --text-color: #f8fafc;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --glass-bg: rgba(10, 15, 30, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+            --card-bg: rgba(5, 5, 10, 0.7);
+            --blob-opacity: 0.4;
+            --accent-glow: rgba(192, 132, 252, 0.15);
         }
-        body { background-color: var(--bg-color); color: var(--text-color); overflow-x: hidden; }
-        
-        /* Performance-Optimized Glass */
-        .glass { 
-            background: rgba(17, 25, 40, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.05); 
-            backdrop-filter: blur(12px); /* Reduced blur for performance */
-            -webkit-backdrop-filter: blur(12px);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-        }
-        
-        /* Smooth Scroll Setup */
-        html.lenis { height: auto; }
-        .lenis.lenis-smooth { scroll-behavior: auto; }
-        .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
-        .lenis.lenis-stopped { overflow: hidden; }
 
-        /* The Gradient Text Pattern from Image */
+        :root[data-theme="light"] {
+            --bg-color: #f8fafc;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --glass-bg: rgba(255, 255, 255, 0.75);
+            --glass-border: rgba(0, 0, 0, 0.06);
+            --glass-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+            --card-bg: rgba(255, 255, 255, 0.8);
+            --blob-opacity: 0.15;
+            --accent-glow: rgba(168, 85, 247, 0.08);
+        }
+
+        /* Performance Optimization: Disable transitions during theme switch */
+        .no-transition, .no-transition * {
+            transition: none !important;
+        }
+
+        body { 
+            background-color: var(--bg-color); 
+            color: var(--text-primary); 
+            transition: background-color 0.5s ease, color 0.5s ease;
+            overflow-x: hidden; 
+        }
+        
+        /* Glassmorphism Classes using Variables */
+        .glass { 
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border); 
+            backdrop-filter: blur(16px); 
+            -webkit-backdrop-filter: blur(16px);
+            box-shadow: var(--glass-shadow);
+            transition: background 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
+        }
+        
+        .project-card { 
+            position: relative;
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 1.5rem;
+            overflow: hidden;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s ease, box-shadow 0.3s ease; /* More elastic transition */
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            will-change: transform; /* Performance optimization */
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px) scale(1.03); /* Auto enlarge (Scale) + Lift */
+            border-color: rgba(168, 85, 247, 0.4); /* Primary color hint */
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); /* Deeper shadow */
+            z-index: 20; /* Ensure it sits on top of neighbors */
+        }
+
+        /* Flagship Card Style */
+        .project-card.flagship {
+            border: 1px solid rgba(255, 215, 0, 0.3); /* Subtle gold hint */
+        }
+        .project-card.flagship:hover {
+            border-color: rgba(255, 215, 0, 0.6);
+            box-shadow: 0 20px 40px -5px rgba(255, 215, 0, 0.1);
+        }
+
+        /* Mouse Spotlight */
+        .project-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(
+                800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+                var(--accent-glow),
+                transparent 40%
+            );
+            opacity: 0;
+            transition: opacity 0.5s;
+            pointer-events: none !important;
+            z-index: 2; 
+        }
+        .project-card:hover::after { opacity: 1; }
+
+        .card-content { position: relative; z-index: 10; pointer-events: auto; height: 100%; display: flex; flex-direction: column; }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+        .modal-overlay.active { opacity: 1; pointer-events: auto; }
+        
+        .modal-container {
+            background: var(--bg-color);
+            border: 1px solid var(--glass-border);
+            width: 100%;
+            max-width: 800px;
+            max-height: 90vh;
+            border-radius: 1.5rem;
+            overflow-y: auto;
+            transform: scale(0.95) translateY(20px);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+        .modal-overlay.active .modal-container { transform: scale(1) translateY(0); }
+        body.modal-open { overflow: hidden; }
+
+        /* Typography & Utilities */
         .logo-gradient-text {
             background: linear-gradient(135deg, #d946ef 0%, #a855f7 100%);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-
-        .project-card { 
-            transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease;
-            transform-style: preserve-3d;
-            perspective: 1000px;
-            will-change: transform; /* Hint to browser for performance */
-        }
         
-        .nav-link { position: relative; font-weight: 500; font-size: 0.95rem; }
+        .nav-link { position: relative; font-weight: 500; font-size: 0.95rem; color: var(--text-secondary); transition: color 0.3s; }
+        .nav-link:hover { color: var(--text-primary); }
         .nav-link::after { 
             content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1.5px; 
             background: linear-gradient(90deg, #a855f7, #ec4899); 
@@ -100,73 +201,75 @@
         .nav-link:hover::after { width: 100%; }
         
         #header.scrolled { 
-            background-color: rgba(2, 6, 23, 0.9); 
-            backdrop-filter: blur(10px); 
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05); 
+            background-color: var(--glass-bg); 
+            backdrop-filter: blur(12px); 
+            border-bottom: 1px solid var(--glass-border); 
         }
         
-        .magnetic-btn {
-            transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            will-change: transform;
-        }
-
+        /* Modern Inputs */
         .modern-input {
             background: transparent;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid var(--glass-border);
+            color: var(--text-primary);
             transition: all 0.3s ease;
         }
         .modern-input:focus {
             border-bottom-color: #a855f7;
-            background: linear-gradient(180deg, transparent, rgba(168, 85, 247, 0.05));
+            background: linear-gradient(180deg, transparent, var(--accent-glow));
         }
+        .modern-input::placeholder { color: transparent; }
 
-        /* Custom Scrollbar */
+        /* Scrollbar */
         ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #020617; }
-        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+        ::-webkit-scrollbar-track { background: var(--bg-color); }
+        ::-webkit-scrollbar-thumb { background: #475569; border-radius: 3px; }
         
-        /* CSS-Only Animated Background (Performance friendly) */
-        .bg-gradient-mesh {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: 0;
-            pointer-events: none;
-        }
-        .bg-blob {
-            position: absolute;
-            filter: blur(80px);
-            opacity: 0.4;
-            animation: blob 10s infinite;
-        }
+        /* Blobs - OPTIMIZED: Reduced blur from 80px to 40px */
+        .bg-blob { position: absolute; filter: blur(40px); opacity: var(--blob-opacity); animation: blob 10s infinite; transition: opacity 0.5s ease; }
         .blob-1 { top: -10%; left: -10%; width: 500px; height: 500px; background: #4c1d95; animation-delay: 0s; }
         .blob-2 { top: 20%; right: -10%; width: 400px; height: 400px; background: #831843; animation-delay: 2s; }
         .blob-3 { bottom: -10%; left: 20%; width: 600px; height: 600px; background: #1e1b4b; animation-delay: 4s; }
+
+        /* Smooth Hide/Show for Filters */
+        .project-card.hidden { display: none; }
+        
+        /* Micro-interactions */
+        .btn-press:active { transform: scale(0.98); }
+        .icon-float { animation: float 4s ease-in-out infinite; }
     </style>
 </head>
-<body class="font-sans antialiased selection:bg-primary-500/30 selection:text-primary-200">
+<body class="font-sans antialiased selection:bg-primary-500/30 selection:text-primary-600">
 
     <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
-                <!-- Updated Logo Style matching the image -->
                 <a href="#home" class="text-2xl font-bold tracking-tight relative group flex items-center gap-1">
                     <span class="logo-gradient-text">Kasi</span>
-                    <span class="text-white">Viswanath</span>
+                    <span class="text-primary transition-colors duration-300">Viswanath</span>
                 </a>
-                <nav class="hidden md:flex space-x-10">
-                    <a href="#home" class="nav-link text-gray-400 hover:text-white transition-colors duration-300">Home</a>
-                    <a href="#about" class="nav-link text-gray-400 hover:text-white transition-colors duration-300">About</a>
-                    <a href="#research" class="nav-link text-gray-400 hover:text-white transition-colors duration-300">Projects</a>
-                    <a href="#resume" class="nav-link text-gray-400 hover:text-white transition-colors duration-300">Experience</a>
-                    <a href="#contact" class="nav-link text-gray-400 hover:text-white transition-colors duration-300">Contact</a>
+                <nav class="hidden md:flex items-center space-x-10">
+                    <a href="#home" class="nav-link">Home</a>
+                    <a href="#about" class="nav-link">About</a>
+                    <a href="#research" class="nav-link">Projects</a>
+                    <a href="#resume" class="nav-link">Experience</a>
+                    <a href="#contact" class="nav-link">Contact</a>
+                    
+                    <!-- Theme Toggle -->
+                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors btn-press ml-4" aria-label="Toggle Theme">
+                        <i data-feather="moon" class="w-5 h-5 text-gray-500 dark:hidden"></i>
+                        <i data-feather="sun" class="w-5 h-5 text-yellow-400 hidden dark:block"></i>
+                    </button>
                 </nav>
-                <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-white p-2">
-                    <i data-feather="menu" class="w-6 h-6"></i>
-                </button>
+                
+                <div class="flex items-center gap-4 md:hidden">
+                    <button id="theme-toggle-mobile" class="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors">
+                        <i data-feather="moon" class="w-5 h-5 text-gray-500 dark:hidden"></i>
+                        <i data-feather="sun" class="w-5 h-5 text-yellow-400 hidden dark:block"></i>
+                    </button>
+                    <button id="mobile-menu-btn" class="text-gray-500 hover:text-primary-500 p-2 transition-colors">
+                        <i data-feather="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
             </div>
         </div>
         <!-- Mobile Menu -->
@@ -183,7 +286,6 @@
 
     <main>
         <section id="home" class="hero-bg min-h-screen flex items-center justify-center relative px-4 py-20 overflow-hidden">
-            <!-- New CSS-Only Background (Lag Free) -->
             <div class="bg-gradient-mesh">
                 <div class="bg-blob blob-1"></div>
                 <div class="bg-blob blob-2"></div>
@@ -194,7 +296,7 @@
                 
                 <!-- Status Badge -->
                 <div class="gsap-hero opacity-0 translate-y-10 mb-10">
-                    <div class="inline-flex items-center gap-3 px-5 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-gray-300 text-xs font-semibold uppercase tracking-widest hover:bg-white/10 transition-all cursor-default">
+                    <div class="inline-flex items-center gap-3 px-5 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-gray-500 dark:text-gray-300 text-xs font-semibold uppercase tracking-widest hover:bg-white/10 transition-all cursor-default shadow-sm">
                         <span class="relative flex h-2 w-2">
                           <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                           <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
@@ -203,107 +305,111 @@
                     </div>
                 </div>
 
-                <!-- Main Heading (Updated to Match Image Pattern) -->
-                <h1 class="gsap-hero opacity-0 translate-y-10 text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter leading-[1.1] mb-8 font-sans">
-                    <span class="block text-white mb-2">Hello, I'm</span>
+                <!-- Adjusted font sizes: text-5xl on mobile, scaling up to 9xl -->
+                <h1 class="gsap-hero opacity-0 translate-y-10 text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter leading-[1.1] mb-8 font-sans text-primary">
+                    <span class="block mb-2 text-[var(--text-primary)]">Hello, I'm</span>
                     <span class="inline-block logo-gradient-text">Kasi</span>
                     <span class="inline-block logo-gradient-text">Viswanath</span>
                 </h1>
 
-                <!-- Dynamic Bio -->
-                <h2 class="gsap-hero opacity-0 translate-y-10 text-xl md:text-2xl text-gray-400 mb-10 font-light h-8 flex items-center justify-center gap-2">
-                    Architecting <span id="typed-subtitle" class="font-medium text-white"></span>
-                </h2>
-                
-                <p class="gsap-hero opacity-0 translate-y-10 text-base md:text-lg max-w-2xl mx-auto mb-14 text-gray-400 leading-relaxed font-light tracking-wide">
-                    Bridging the gap between <span class="text-gray-200 font-medium">Software Intelligence</span> and <span class="text-gray-200 font-medium">Hardware Execution</span>. <br class="hidden md:block">Specializing in Conversational AI, Edge Computing, and Intelligent Automation.
-                </p>
+                <!-- Semantic Motion Subtitle -->
+                <div class="gsap-hero opacity-0 translate-y-10 h-8 flex items-center justify-center gap-2 mb-8">
+                    <span class="text-xl md:text-2xl text-gray-400 font-light">Architecting</span>
+                    <span id="semantic-subtitle" class="text-xl md:text-2xl font-medium text-[var(--text-primary)]">Intelligent Systems</span>
+                </div>
 
-                <!-- Actions -->
-                <div class="gsap-hero opacity-0 translate-y-10 flex flex-wrap justify-center gap-6">
-                    <a href="#research" class="magnetic-btn group relative px-8 py-4 bg-white text-dark-900 rounded-full font-bold overflow-hidden transition-all hover:scale-105 shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+                <!-- Strategic Positioning -->
+                <div class="gsap-hero opacity-0 translate-y-10 border-t border-[var(--glass-border)] pt-6 mt-2 max-w-2xl mx-auto">
+                    <p class="text-base md:text-lg text-[var(--text-primary)] tracking-wide font-medium">
+                        Designing AI systems that survive <span class="text-primary-500">real-world constraints</span>
+                    </p>
+                    <p class="text-sm md:text-base text-[var(--text-secondary)] mt-2 font-light">
+                        Edge Intelligence • NLP • Embedded Systems
+                    </p>
+                </div>
+                
+                <div class="gsap-hero opacity-0 translate-y-10 flex flex-wrap justify-center gap-6 mt-10">
+                    <a href="#research" class="magnetic-btn btn-press group relative px-8 py-4 bg-[var(--text-primary)] text-[var(--bg-color)] rounded-full font-bold overflow-hidden transition-all hover:scale-105 shadow-lg">
                         <span class="relative z-10 flex items-center gap-2">View Projects <i data-feather="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"></i></span>
                     </a>
-                    <a href="https://drive.google.com/file/d/1Ti58tEKvOFAB2KChTGhPDp8eMoQ61iiZ/view?usp=sharing" download="Kasi_Viswanath_Vegisetti_Resume.pdf" class="magnetic-btn glass px-8 py-4 rounded-full font-semibold text-white hover:bg-white/10 transition-all duration-300 flex items-center gap-2">
+                    <a href="https://drive.google.com/file/d/1Ti58tEKvOFAB2KChTGhPDp8eMoQ61iiZ/view?usp=sharing" download="Kasi_Viswanath_Vegisetti_Resume.pdf" class="magnetic-btn btn-press glass px-8 py-4 rounded-full font-semibold text-[var(--text-primary)] hover:bg-white/10 transition-all duration-300 flex items-center gap-2">
                         <i class="w-4 h-4"></i> Open Resume
                     </a>
                 </div>
             </div>
             
-            <!-- Scroll Indicator -->
-            <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2 opacity-50 hover:opacity-100 transition-opacity duration-300 cursor-pointer animate-float">
-                <span class="text-[10px] uppercase tracking-widest text-gray-500">Scroll</span>
-                <div class="w-[1px] h-10 bg-gradient-to-b from-gray-500 to-transparent"></div>
-            </div>
+            <!-- Removed the Scroll indicator div here as requested -->
         </section>
 
-        <!-- (Rest of the sections remain identical, just ensuring smooth performance) -->
-        <section id="about" class="py-32 px-4 relative overflow-hidden bg-dark-900">
+        <!-- About Section -->
+        <section id="about" class="section py-32 px-4 relative overflow-hidden">
             <div class="container mx-auto">
-                <div class="text-center mb-24" data-aos="fade-up">
-                    <h2 class="text-3xl md:text-4xl font-bold inline-block bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-200 to-gray-500 tracking-tight">
+                <div class="text-center mb-24 section-heading opacity-0">
+                    <h2 class="text-3xl md:text-4xl font-bold inline-block bg-clip-text text-transparent bg-gradient-to-r from-[var(--text-primary)] via-gray-400 to-gray-500 tracking-tight">
                         About The Engineer
                     </h2>
                     <div class="h-1 w-24 bg-gradient-to-r from-primary-500 to-transparent mx-auto mt-6 rounded-full opacity-50"></div>
                 </div>
 
                 <div class="flex flex-col lg:flex-row gap-16 lg:gap-24 items-start">
-                    <div class="lg:w-1/2" data-aos="fade-right">
-                        <div class="glass rounded-3xl p-10 relative overflow-hidden group border-white/5 h-full">
+                    <div class="lg:w-1/2 section-content opacity-0 translate-y-10">
+                        <div class="glass rounded-3xl p-10 relative overflow-hidden group h-full">
                             <div class="absolute -top-32 -right-32 w-80 h-80 bg-primary-500/10 rounded-full blur-[100px] group-hover:bg-primary-500/15 transition-colors duration-700"></div>
                             
                             <div class="relative z-10">
-                                <h3 class="text-2xl font-bold text-white mb-8 flex items-center gap-4">
-                                    <div class="p-3 rounded-lg bg-white/5 border border-white/5"><i data-feather="cpu" class="text-primary-400 w-6 h-6"></i></div>
+                                <h3 class="text-2xl font-bold text-[var(--text-primary)] mb-8 flex items-center gap-4">
+                                    <div class="p-3 rounded-lg bg-[var(--bg-color)] border border-[var(--glass-border)]"><i data-feather="cpu" class="text-primary-500 w-6 h-6 icon-float"></i></div>
                                     <span>Core Competencies</span>
                                 </h3>
-                                <p class="text-gray-400 leading-relaxed mb-6 text-lg font-light">
+                                <p class="text-[var(--text-secondary)] leading-relaxed mb-6 text-lg font-light">
                                     As a <strong>Team Leader for Avanthi Research Hub (ARH)</strong>, I don't just write code; I architect systems. My passion lies in building production-ready prototypes that solve real-world problems by merging advanced algorithms with practical hardware constraints.
                                 </p>
-                                <p class="text-gray-400 leading-relaxed text-lg font-light">
-                                    I am deeply passionate about <strong>Space Technology</strong> and <strong>Physics</strong>, constantly exploring how AI can advance these fields. From optimizing transformer models for <strong>Snapdragon NPUs</strong> to wiring <strong>5.8GHz transmission systems</strong>, I thrive in the intersection of disciplines.
+                                
+                                <p class="text-[var(--text-primary)] text-sm font-mono border-l-2 border-primary-500 pl-4 mt-6 mb-8 bg-[var(--glass-bg)] p-4 rounded-r-lg">
+                                    I focus on AI that survives constraints — limited compute, real-time deadlines, and hardware noise.
                                 </p>
+
+                                <div class="space-y-4">
+                                    <h4 class="text-sm uppercase tracking-widest text-gray-500 font-bold">Engineering Philosophy</h4>
+                                    <ul class="text-[var(--text-secondary)] space-y-2 text-sm font-light">
+                                        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary-500 rounded-full"></span> Build for constraints first</li>
+                                        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary-500 rounded-full"></span> Prefer deployable systems over demos</li>
+                                        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary-500 rounded-full"></span> Optimize for signal, not hype</li>
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
-                        
-                        <div class="mt-10 flex flex-wrap gap-3">
-                            <span class="px-4 py-2.5 bg-white/5 border border-white/10 rounded-full text-sm text-gray-300 flex items-center gap-2 hover:border-primary-500/30 transition-colors cursor-default"><span class="w-1.5 h-1.5 rounded-full bg-primary-500 shadow-[0_0_10px_#a855f7]"></span> Conversational AI</span>
-                            <span class="px-4 py-2.5 bg-white/5 border border-white/10 rounded-full text-sm text-gray-300 flex items-center gap-2 hover:border-primary-500/30 transition-colors cursor-default"><span class="w-1.5 h-1.5 rounded-full bg-purple-500 shadow-[0_0_10px_#a855f7]"></span> VLSI Design</span>
-                            <span class="px-4 py-2.5 bg-white/5 border border-white/10 rounded-full text-sm text-gray-300 flex items-center gap-2 hover:border-primary-500/30 transition-colors cursor-default"><span class="w-1.5 h-1.5 rounded-full bg-secondary-500 shadow-[0_0_10px_#ec4899]"></span> Embedded Systems</span>
-                            <span class="px-4 py-2.5 bg-white/5 border border-white/10 rounded-full text-sm text-gray-300 flex items-center gap-2 hover:border-primary-500/30 transition-colors cursor-default"><span class="w-1.5 h-1.5 rounded-full bg-blue-500 shadow-[0_0_10px_#3b82f6]"></span> Edge AI (SNPE SDK)</span>
-                            <span class="px-4 py-2.5 bg-white/5 border border-white/10 rounded-full text-sm text-gray-300 flex items-center gap-2 hover:border-primary-500/30 transition-colors cursor-default"><span class="w-1.5 h-1.5 rounded-full bg-green-500 shadow-[0_0_10px_#22c55e]"></span> Space Tech</span>
                         </div>
                     </div>
 
-                    <div class="lg:w-1/2" data-aos="fade-left">
+                    <div class="lg:w-1/2 section-content opacity-0 translate-y-10" style="transition-delay: 0.2s">
                         <div class="grid grid-cols-2 gap-5">
-                            <div class="glass p-8 rounded-2xl hover:bg-white/5 transition-all duration-300 group border-white/5 hover:border-white/10">
-                                <i data-feather="code" class="text-primary-400 mb-4 group-hover:scale-110 transition-transform duration-300"></i>
-                                <h4 class="font-semibold text-white mb-2 tracking-wide">Languages</h4>
+                            <div class="glass p-8 rounded-2xl hover:bg-[var(--glass-bg)] transition-all duration-300 group">
+                                <i data-feather="code" class="text-primary-500 mb-4 group-hover:scale-110 transition-transform duration-300"></i>
+                                <h4 class="font-semibold text-[var(--text-primary)] mb-2 tracking-wide">Languages</h4>
                                 <p class="text-sm text-gray-500 font-mono">Python, C/C++, JS</p>
                             </div>
-                            <div class="glass p-8 rounded-2xl hover:bg-white/5 transition-all duration-300 group border-white/5 hover:border-white/10">
-                                <i data-feather="layers" class="text-secondary-400 mb-4 group-hover:scale-110 transition-transform duration-300"></i>
-                                <h4 class="font-semibold text-white mb-2 tracking-wide">Domains</h4>
+                            <div class="glass p-8 rounded-2xl hover:bg-[var(--glass-bg)] transition-all duration-300 group">
+                                <i data-feather="layers" class="text-secondary-500 mb-4 group-hover:scale-110 transition-transform duration-300"></i>
+                                <h4 class="font-semibold text-[var(--text-primary)] mb-2 tracking-wide">Domains</h4>
                                 <p class="text-sm text-gray-500 font-mono">VLSI, NLP, Embedded</p>
                             </div>
-                            <div class="glass p-8 rounded-2xl hover:bg-white/5 transition-all duration-300 group border-white/5 hover:border-white/10">
-                                <i data-feather="cpu" class="text-blue-400 mb-4 group-hover:scale-110 transition-transform duration-300"></i>
-                                <h4 class="font-semibold text-white mb-2 tracking-wide">Hardware</h4>
+                            <div class="glass p-8 rounded-2xl hover:bg-[var(--glass-bg)] transition-all duration-300 group">
+                                <i data-feather="cpu" class="text-blue-500 mb-4 group-hover:scale-110 transition-transform duration-300"></i>
+                                <h4 class="font-semibold text-[var(--text-primary)] mb-2 tracking-wide">Hardware</h4>
                                 <p class="text-sm text-gray-500 font-mono">Jetson, RPi, Snapdragon</p>
                             </div>
-                            <div class="glass p-8 rounded-2xl hover:bg-white/5 transition-all duration-300 group border-white/5 hover:border-white/10">
-                                <i data-feather="tool" class="text-green-400 mb-4 group-hover:scale-110 transition-transform duration-300"></i>
-                                <h4 class="font-semibold text-white mb-2 tracking-wide">Tools</h4>
+                            <div class="glass p-8 rounded-2xl hover:bg-[var(--glass-bg)] transition-all duration-300 group">
+                                <i data-feather="tool" class="text-green-500 mb-4 group-hover:scale-110 transition-transform duration-300"></i>
+                                <h4 class="font-semibold text-[var(--text-primary)] mb-2 tracking-wide">Tools</h4>
                                 <p class="text-sm text-gray-500 font-mono">Vosk, Git, Docker, ADB</p>
                             </div>
                         </div>
                         
                         <div class="mt-8 glass p-8 rounded-2xl border-l-2 border-l-primary-500 relative overflow-hidden">
                             <div class="absolute inset-0 bg-gradient-to-r from-primary-500/5 to-transparent pointer-events-none"></div>
-                            <h4 class="font-bold text-white mb-3 text-lg">Technical Highlight</h4>
-                            <p class="text-gray-400 leading-relaxed text-sm">
-                                Successfully benchmarked and optimized AI models on the <span class="text-gray-200 font-medium">Qualcomm Snapdragon X Plus NPU (45 TOPS)</span> using SNPE SDK, achieving significant inference speedups for edge deployment.
+                            <h4 class="font-bold text-[var(--text-primary)] mb-3 text-lg">Technical Highlight</h4>
+                            <p class="text-[var(--text-secondary)] leading-relaxed text-sm">
+                                Successfully benchmarked and optimized AI models on the <span class="text-[var(--text-primary)] font-medium">Qualcomm Snapdragon X Plus NPU (45 TOPS)</span> using SNPE SDK, achieving significant inference speedups for edge deployment.
                             </p>
                         </div>
                     </div>
@@ -311,189 +417,272 @@
             </div>
         </section>
 
-        <section id="research" class="py-32 px-4 bg-dark-900/50 relative">
+        <!-- Projects Section with Filter -->
+        <section id="research" class="section py-32 px-4 relative">
             <div class="container mx-auto">
-                <div class="text-center mb-24" data-aos="fade-up">
-                    <h2 class="text-3xl md:text-4xl font-bold inline-block bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-200 to-gray-500 tracking-tight">
-                        Innovations & Projects
+                <div class="text-center mb-10 section-heading opacity-0">
+                    <h2 class="text-3xl md:text-4xl font-bold inline-block bg-clip-text text-transparent bg-gradient-to-r from-[var(--text-primary)] via-gray-400 to-gray-500 tracking-tight">
+                        Innovations & Applied Systems
                     </h2>
-                    <div class="h-1 w-24 bg-gradient-to-r from-secondary-500 to-transparent mx-auto mt-6 rounded-full opacity-50"></div>
+                    <p class="text-[var(--text-secondary)] mt-4 max-w-2xl mx-auto">
+                        Curated collection of deployable AI and automation systems.
+                    </p>
+                </div>
+
+                <!-- Filter Bar -->
+                <div class="flex flex-wrap justify-center gap-3 mb-16 opacity-0" id="filter-container">
+                    <button class="filter-btn active px-5 py-2 rounded-full text-sm font-semibold transition-all bg-primary-500 text-white shadow-lg" data-filter="all">All</button>
+                    <button class="filter-btn px-5 py-2 rounded-full text-sm font-semibold transition-all glass text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-white/10" data-filter="healthcare">Healthcare</button>
+                    <button class="filter-btn px-5 py-2 rounded-full text-sm font-semibold transition-all glass text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-white/10" data-filter="research">Research</button>
+                    <button class="filter-btn px-5 py-2 rounded-full text-sm font-semibold transition-all glass text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-white/10" data-filter="systems">Systems</button>
                 </div>
                 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-24">
-                    <!-- Project 1 -->
-                    <div class="project-card glass rounded-3xl overflow-hidden group js-tilt border-white/5">
-                        <div class="h-56 bg-dark-800 relative overflow-hidden group-hover:opacity-90 transition-opacity">
-                            <div class="absolute inset-0 bg-gradient-to-br from-primary-900/40 via-dark-900 to-dark-900 opacity-60"></div>
-                            <div class="absolute inset-0 flex items-center justify-center">
-                                <i data-feather="mic" class="w-16 h-16 text-primary-400/80 group-hover:scale-110 group-hover:text-primary-300 transition-all duration-500"></i>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-24" id="projects-grid">
+                    
+                    <!-- 1. Pregnancy Diabetes -->
+                    <div class="project-card group section-content opacity-0 translate-y-10" data-category="healthcare engineering">
+                        <div class="card-content p-8">
+                             <div class="flex justify-between items-start mb-6">
+                                <div class="p-3 rounded-2xl bg-gradient-to-br from-rose-500/20 to-fuchsia-600/10 border border-rose-500/20 text-rose-400 dark:text-rose-400 text-rose-600">
+                                    <i data-feather="heart" class="w-6 h-6"></i>
+                                </div>
+                                <span class="px-3 py-1 bg-white/5 rounded-full text-[10px] font-bold tracking-widest uppercase text-gray-400 border border-white/5">ENGINEERING</span>
                             </div>
-                            <div class="absolute top-5 right-5 px-3 py-1 bg-black/40 backdrop-blur-md rounded-lg text-[10px] uppercase font-bold tracking-widest text-white border border-white/10">Automation</div>
-                        </div>
-                        <div class="p-8 flex flex-col h-[calc(100%-14rem)] bg-gradient-to-b from-transparent to-black/20">
-                            <h3 class="text-xl font-bold mb-3 text-white group-hover:text-primary-400 transition-colors">AI Personal Voice Assistant</h3>
-                            <p class="text-gray-400 mb-6 text-sm flex-grow leading-relaxed font-light">Robust Python assistant automating OS-level actions using ADB and Vosk offline speech recognition.</p>
-                            <div class="flex gap-4 mt-auto">
-                                <a href="https://github.com/Viswanath129" target="_blank" class="text-sm font-semibold text-gray-300 hover:text-white flex items-center gap-2 transition-colors group/link">
-                                    View Code <i data-feather="arrow-right" class="w-4 h-4 transition-transform group-hover/link:translate-x-1"></i>
-                                </a>
+                            <h3 class="text-xl font-bold text-[var(--text-primary)] mb-3 group-hover:text-rose-500 transition-colors">Pregnancy Diabetes Prediction</h3>
+                            <div class="mb-6 flex-grow">
+                                <p class="text-sm text-[var(--text-secondary)] mb-2"><strong class="text-rose-500">Problem:</strong> Late detection of GDM in low-resource clinics.</p>
+                                <p class="text-sm text-[var(--text-secondary)] mb-2"><strong class="text-rose-500">Outcome:</strong> Scalable screening for early intervention.</p>
                             </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 2 -->
-                    <div class="project-card glass rounded-3xl overflow-hidden group js-tilt border-white/5">
-                        <div class="h-56 bg-dark-800 relative overflow-hidden group-hover:opacity-90 transition-opacity">
-                             <div class="absolute inset-0 bg-gradient-to-br from-secondary-900/40 via-dark-900 to-dark-900 opacity-60"></div>
-                             <div class="absolute inset-0 flex items-center justify-center">
-                                <i data-feather="file-text" class="w-16 h-16 text-secondary-400/80 group-hover:scale-110 group-hover:text-secondary-300 transition-all duration-500"></i>
-                            </div>
-                            <div class="absolute top-5 right-5 px-3 py-1 bg-black/40 backdrop-blur-md rounded-lg text-[10px] uppercase font-bold tracking-widest text-white border border-white/10">NLP</div>
-                        </div>
-                        <div class="p-8 flex flex-col h-[calc(100%-14rem)] bg-gradient-to-b from-transparent to-black/20">
-                            <h3 class="text-xl font-bold mb-3 text-white group-hover:text-secondary-400 transition-colors">Resume Screening Bot</h3>
-                            <p class="text-gray-400 mb-6 text-sm flex-grow leading-relaxed font-light">Intelligent ranking tool using TF-IDF and embeddings to score candidates against job descriptions.</p>
-                            <div class="flex gap-4 mt-auto">
-                                <a href="https://github.com/Viswanath129" target="_blank" class="text-sm font-semibold text-gray-300 hover:text-white flex items-center gap-2 transition-colors group/link">
-                                    View Code <i data-feather="arrow-right" class="w-4 h-4 transition-transform group-hover/link:translate-x-1"></i>
-                                </a>
+                            <div class="mt-auto border-t border-[var(--glass-border)] pt-6 flex items-center justify-between">
+                                <button onclick="openModal('diabetes')" class="magnetic-btn text-xs font-bold text-[var(--text-primary)] hover:text-primary-500 transition-all flex items-center gap-1 hover:scale-105 origin-left duration-300">View case study <i data-feather="arrow-right" class="w-3 h-3"></i></button>
+                                <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-white/10 cursor-pointer"><i data-feather="github" class="w-4 h-4 text-gray-400"></i></div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Project 3 -->
-                    <div class="project-card glass rounded-3xl overflow-hidden group js-tilt border-white/5">
-                        <div class="h-56 bg-dark-800 relative overflow-hidden group-hover:opacity-90 transition-opacity">
-                             <div class="absolute inset-0 bg-gradient-to-br from-blue-900/40 via-dark-900 to-dark-900 opacity-60"></div>
-                             <div class="absolute inset-0 flex items-center justify-center">
-                                <i data-feather="shopping-bag" class="w-16 h-16 text-blue-400/80 group-hover:scale-110 group-hover:text-blue-300 transition-all duration-500"></i>
+                    <!-- 2. Brain Stroke -->
+                    <div class="project-card group section-content opacity-0 translate-y-10" data-category="healthcare engineering">
+                         <div class="card-content p-8">
+                             <div class="flex justify-between items-start mb-6">
+                                <div class="p-3 rounded-2xl bg-gradient-to-br from-orange-500/20 to-red-600/10 border border-orange-500/20 text-orange-600 dark:text-orange-400">
+                                    <i data-feather="activity" class="w-6 h-6"></i>
+                                </div>
+                                <span class="px-3 py-1 bg-white/5 rounded-full text-[10px] font-bold tracking-widest uppercase text-gray-400 border border-white/5">ENGINEERING</span>
                             </div>
-                            <div class="absolute top-5 right-5 px-3 py-1 bg-black/40 backdrop-blur-md rounded-lg text-[10px] uppercase font-bold tracking-widest text-white border border-white/10">Full Stack</div>
+                            <h3 class="text-xl font-bold text-[var(--text-primary)] mb-3 group-hover:text-orange-500 transition-colors">Brain Stroke Prediction</h3>
+                            <div class="mb-6 flex-grow">
+                                <p class="text-sm text-[var(--text-secondary)] mb-2"><strong class="text-orange-500">Problem:</strong> Silent indicators often ignored.</p>
+                                <p class="text-sm text-[var(--text-secondary)] mb-2"><strong class="text-orange-500">Outcome:</strong> High-recall risk estimation.</p>
+                            </div>
+                            <div class="mt-auto border-t border-[var(--glass-border)] pt-6 flex items-center justify-between">
+                                <button onclick="openModal('stroke')" class="magnetic-btn text-xs font-bold text-[var(--text-primary)] hover:text-primary-500 transition-all flex items-center gap-1 hover:scale-105 origin-left duration-300">View case study <i data-feather="arrow-right" class="w-3 h-3"></i></button>
+                                <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-white/10 cursor-pointer"><i data-feather="github" class="w-4 h-4 text-gray-400"></i></div>
+                            </div>
                         </div>
-                        <div class="p-8 flex flex-col h-[calc(100%-14rem)] bg-gradient-to-b from-transparent to-black/20">
-                            <h3 class="text-xl font-bold mb-3 text-white group-hover:text-blue-400 transition-colors">Viswanath Agencies</h3>
-                            <p class="text-gray-400 mb-6 text-sm flex-grow leading-relaxed font-light">Comprehensive digital transformation for wholesale supply. Modern inventory interface.</p>
-                            <div class="flex gap-4 mt-auto">
-                                <a href="https://github.com/Viswanath129" target="_blank" class="text-sm font-semibold text-gray-300 hover:text-white flex items-center gap-2 transition-colors group/link">
-                                    View Repo <i data-feather="arrow-right" class="w-4 h-4 transition-transform group-hover/link:translate-x-1"></i>
-                                </a>
+                    </div>
+
+                    <!-- 3. Breast Cancer (Research) -->
+                    <div class="project-card group section-content opacity-0 translate-y-10" data-category="healthcare research">
+                        <div class="card-content p-8">
+                             <div class="flex justify-between items-start mb-6">
+                                <div class="p-3 rounded-2xl bg-gradient-to-br from-pink-500/20 to-rose-600/10 border border-pink-500/20 text-pink-600 dark:text-pink-400">
+                                    <i data-feather="shield" class="w-6 h-6"></i>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <span class="text-[9px] px-2 py-1 rounded bg-pink-500/10 text-pink-500 border border-pink-500/20 font-bold tracking-wider">RESEARCH</span>
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-bold text-[var(--text-primary)] mb-3 group-hover:text-pink-500 transition-colors">Breast Cancer Prediction</h3>
+                             <div class="mb-6 flex-grow">
+                                <p class="text-sm text-[var(--text-secondary)] mb-2"><strong class="text-pink-500">Focus:</strong> Quantum ML feasibility.</p>
+                                <p class="text-sm text-[var(--text-secondary)] mb-2"><strong class="text-pink-500">Outcome:</strong> Quantified QML advantage.</p>
+                             </div>
+                            <div class="mt-auto border-t border-[var(--glass-border)] pt-6 flex items-center justify-between">
+                                <button onclick="openModal('cancer')" class="magnetic-btn text-xs font-bold text-[var(--text-primary)] hover:text-primary-500 transition-all flex items-center gap-1 hover:scale-105 origin-left duration-300">View case study <i data-feather="arrow-right" class="w-3 h-3"></i></button>
+                                <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-white/10 cursor-pointer"><i data-feather="github" class="w-4 h-4 text-gray-400"></i></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4. ClassPulse AI -->
+                    <div class="project-card group section-content opacity-0 translate-y-10" data-category="systems engineering">
+                        <div class="card-content p-8">
+                             <div class="flex justify-between items-start mb-6">
+                                <div class="p-3 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-violet-600/10 border border-indigo-500/20 text-indigo-600 dark:text-indigo-400">
+                                    <i data-feather="bar-chart-2" class="w-6 h-6"></i>
+                                </div>
+                                <span class="px-3 py-1 bg-white/5 rounded-full text-[10px] font-bold tracking-widest uppercase text-gray-400 border border-white/5">ENGINEERING</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-[var(--text-primary)] mb-3 group-hover:text-indigo-500 transition-colors">ClassPulse AI</h3>
+                             <div class="mb-6 flex-grow">
+                                <p class="text-sm text-[var(--text-secondary)] mb-2"><strong class="text-indigo-500">Problem:</strong> Lack of real-time insights.</p>
+                                <p class="text-sm text-[var(--text-secondary)] mb-2"><strong class="text-indigo-500">Outcome:</strong> Live engagement tracking.</p>
+                             </div>
+                            <div class="mt-auto border-t border-[var(--glass-border)] pt-6 flex items-center justify-between">
+                                <button onclick="openModal('classpulse')" class="magnetic-btn text-xs font-bold text-[var(--text-primary)] hover:text-primary-500 transition-all flex items-center gap-1 hover:scale-105 origin-left duration-300">View case study <i data-feather="arrow-right" class="w-3 h-3"></i></button>
+                                <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-white/10 cursor-pointer"><i data-feather="github" class="w-4 h-4 text-gray-400"></i></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 5. Resume Screening -->
+                    <div class="project-card group section-content opacity-0 translate-y-10" data-category="systems engineering">
+                        <div class="card-content p-8">
+                             <div class="flex justify-between items-start mb-6">
+                                <div class="p-3 rounded-2xl bg-gradient-to-br from-sky-500/20 to-blue-600/10 border border-sky-500/20 text-sky-600 dark:text-sky-400">
+                                    <i data-feather="file-text" class="w-6 h-6"></i>
+                                </div>
+                                <span class="px-3 py-1 bg-white/5 rounded-full text-[10px] font-bold tracking-widest uppercase text-gray-400 border border-white/5">ENGINEERING</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-[var(--text-primary)] mb-3 group-hover:text-sky-500 transition-colors">Resume Screening Bot</h3>
+                            <div class="mb-6 flex-grow">
+                                <p class="text-sm text-[var(--text-secondary)] mb-2"><strong class="text-sky-500">Approach:</strong> TF-IDF & NLP pipeline.</p>
+                                <p class="text-sm text-[var(--text-secondary)] mb-2"><strong class="text-sky-500">Impact:</strong> 70% faster shortlisting.</p>
+                            </div>
+                            <div class="mt-auto border-t border-[var(--glass-border)] pt-6 flex items-center justify-between">
+                                <button onclick="openModal('resume')" class="magnetic-btn text-xs font-bold text-[var(--text-primary)] hover:text-primary-500 transition-all flex items-center gap-1 hover:scale-105 origin-left duration-300">View case study <i data-feather="arrow-right" class="w-3 h-3"></i></button>
+                                <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-white/10 cursor-pointer"><i data-feather="github" class="w-4 h-4 text-gray-400"></i></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 6. AR Gesture Games -->
+                    <div class="project-card group section-content opacity-0 translate-y-10" data-category="systems engineering">
+                         <div class="card-content p-8">
+                             <div class="flex justify-between items-start mb-6">
+                                <div class="p-3 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-green-600/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400">
+                                    <i data-feather="camera" class="w-6 h-6"></i>
+                                </div>
+                                <span class="px-3 py-1 bg-white/5 rounded-full text-[10px] font-bold tracking-widest uppercase text-gray-400 border border-white/5">ENGINEERING</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-[var(--text-primary)] mb-3 group-hover:text-emerald-500 transition-colors">AR Gesture Games</h3>
+                            <div class="mb-6 flex-grow">
+                                <p class="text-sm text-[var(--text-secondary)] mb-2"><strong class="text-emerald-500">Approach:</strong> CV-based interaction.</p>
+                                <p class="text-sm text-[var(--text-secondary)] mb-2"><strong class="text-emerald-500">Impact:</strong> Zero-hardware gaming.</p>
+                            </div>
+                            <div class="mt-auto border-t border-[var(--glass-border)] pt-6 flex items-center justify-between">
+                                <button onclick="openModal('ar')" class="magnetic-btn text-xs font-bold text-[var(--text-primary)] hover:text-primary-500 transition-all flex items-center gap-1 hover:scale-105 origin-left duration-300">View case study <i data-feather="arrow-right" class="w-3 h-3"></i></button>
+                                <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-white/10 cursor-pointer"><i data-feather="github" class="w-4 h-4 text-gray-400"></i></div>
                             </div>
                         </div>
                     </div>
                     
-                    <!-- Project 4 (NeuroLink) -->
-                    <div class="project-card glass rounded-3xl overflow-hidden group js-tilt border-white/5">
-                        <div class="h-56 bg-dark-800 relative overflow-hidden group-hover:opacity-90 transition-opacity">
-                             <div class="absolute inset-0 bg-gradient-to-br from-green-900/40 via-dark-900 to-dark-900 opacity-60"></div>
-                             <div class="absolute inset-0 flex items-center justify-center">
-                                <i data-feather="activity" class="w-16 h-16 text-green-400/80 group-hover:scale-110 group-hover:text-green-300 transition-all duration-500"></i>
+                    <!-- 7. Academic Automation -->
+                    <div class="project-card group section-content opacity-0 translate-y-10" data-category="systems engineering">
+                        <div class="card-content p-8">
+                             <div class="flex justify-between items-start mb-6">
+                                <div class="p-3 rounded-2xl bg-gradient-to-br from-teal-500/20 to-cyan-600/10 border border-teal-500/20 text-teal-600 dark:text-teal-400">
+                                    <i data-feather="calendar" class="w-6 h-6"></i>
+                                </div>
+                                <span class="px-3 py-1 bg-white/5 rounded-full text-[10px] font-bold tracking-widest uppercase text-gray-400 border border-white/5">ENGINEERING</span>
                             </div>
-                             <div class="absolute top-5 right-5 px-3 py-1 bg-green-500/10 backdrop-blur-md rounded-lg text-[10px] uppercase font-bold tracking-widest text-green-400 border border-green-500/20">Ongoing</div>
-                        </div>
-                        <div class="p-8 flex flex-col h-[calc(100%-14rem)] bg-gradient-to-b from-transparent to-black/20">
-                            <h3 class="text-xl font-bold mb-3 text-white group-hover:text-green-400 transition-colors">NeuroLink Glasses (BCI)</h3>
-                            <p class="text-gray-400 mb-6 text-sm flex-grow leading-relaxed font-light">Experimental EEG-based wearable interface. Mapping brain signals to digital commands.</p>
-                             <div class="flex gap-4 mt-auto">
-                                <span class="text-xs font-semibold text-gray-500 flex items-center gap-2 uppercase tracking-wide">
-                                    <i data-feather="loader" class="w-3 h-3 animate-spin"></i> Research Phase
-                                </span>
+                            <h3 class="text-xl font-bold text-[var(--text-primary)] mb-3 group-hover:text-teal-500 transition-colors">Academic Suite</h3>
+                            <div class="mb-6 flex-grow">
+                                <p class="text-sm text-[var(--text-secondary)] mb-2"><strong class="text-teal-500">Problem:</strong> Scheduling conflicts.</p>
+                                <p class="text-sm text-[var(--text-secondary)] mb-2"><strong class="text-teal-500">Impact:</strong> 90% faster resolution.</p>
+                            </div>
+                            <div class="mt-auto border-t border-[var(--glass-border)] pt-6 flex items-center justify-between">
+                                <button onclick="openModal('automation')" class="magnetic-btn text-xs font-bold text-[var(--text-primary)] hover:text-primary-500 transition-all flex items-center gap-1 hover:scale-105 origin-left duration-300">View case study <i data-feather="arrow-right" class="w-3 h-3"></i></button>
+                                <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-white/10 cursor-pointer"><i data-feather="github" class="w-4 h-4 text-gray-400"></i></div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Project 5 (Vishnu) -->
-                    <div class="project-card glass rounded-3xl overflow-hidden group js-tilt border-white/5">
-                        <div class="h-56 bg-dark-800 relative overflow-hidden group-hover:opacity-90 transition-opacity">
-                             <div class="absolute inset-0 bg-gradient-to-br from-orange-900/40 via-dark-900 to-dark-900 opacity-60"></div>
-                             <div class="absolute inset-0 flex items-center justify-center">
-                                <i data-feather="shield" class="w-16 h-16 text-orange-400/80 group-hover:scale-110 group-hover:text-orange-300 transition-all duration-500"></i>
+                    <!-- 8. Project Vishnu (Flagship Research) -->
+                    <div class="project-card group flagship section-content opacity-0 translate-y-10" data-category="research systems">
+                         <div class="card-content p-8">
+                             <div class="flex justify-between items-start mb-6">
+                                <div class="p-3 rounded-2xl bg-gradient-to-br from-amber-500/20 to-yellow-600/10 border border-amber-500/20 text-amber-600 dark:text-amber-400">
+                                    <i data-feather="shield" class="w-6 h-6"></i>
+                                </div>
+                                 <div class="flex items-center gap-2">
+                                    <span class="text-[9px] px-2 py-1 rounded bg-amber-500/10 text-amber-500 border border-amber-500/20 font-bold tracking-wider">RESEARCH</span>
+                                    <span class="text-[9px] px-2 py-1 rounded bg-white/10 text-[var(--text-secondary)] border border-white/10 font-bold tracking-wider">FLAGSHIP</span>
+                                </div>
                             </div>
-                            <div class="absolute top-5 right-5 px-3 py-1 bg-black/40 backdrop-blur-md rounded-lg text-[10px] uppercase font-bold tracking-widest text-white border border-white/10">Defense Tech</div>
-                        </div>
-                        <div class="p-8 flex flex-col h-[calc(100%-14rem)] bg-gradient-to-b from-transparent to-black/20">
-                            <h3 class="text-xl font-bold mb-3 text-white group-hover:text-orange-400 transition-colors">Project Vishnu</h3>
-                            <p class="text-gray-400 mb-6 text-sm flex-grow leading-relaxed font-light">Autonomous satellite emergency capsule concept for critical fault reaction. Proposal submitted to ISRO-INSPACE and iDEX.</p>
-                             <div class="flex gap-4 mt-auto">
-                                <span class="text-xs font-semibold text-gray-500 flex items-center gap-2 uppercase tracking-wide">
-                                    <i data-feather="check" class="w-3 h-3 text-orange-500"></i> Proposal Submitted
-                                </span>
+                            <h3 class="text-xl font-bold text-[var(--text-primary)] mb-3 group-hover:text-amber-500 transition-colors">Project Vishnu</h3>
+                            <div class="mb-6 flex-grow">
+                                <p class="text-sm text-[var(--text-secondary)] mb-2"><strong class="text-amber-500">Focus:</strong> Satellite fault tolerance.</p>
+                                <p class="text-sm text-[var(--text-secondary)] mb-2"><strong class="text-amber-500">Impact:</strong> Critical mission recovery.</p>
+                            </div>
+                            <div class="mt-auto border-t border-[var(--glass-border)] pt-6 flex items-center justify-between">
+                                <button onclick="openModal('vishnu')" class="magnetic-btn text-xs font-bold text-[var(--text-primary)] hover:text-primary-500 transition-all flex items-center gap-1 hover:scale-105 origin-left duration-300">View case study <i data-feather="arrow-right" class="w-3 h-3"></i></button>
+                                <span class="text-xs font-semibold text-amber-500 flex items-center gap-2 uppercase tracking-wide"><i data-feather="check-circle" class="w-3 h-3"></i> Submitted</span>
                             </div>
                         </div>
                     </div>
-                </div>
+                    
+                    <!-- 9. NeuroLink Glasses (Flagship Research) -->
+                    <div class="project-card group flagship section-content opacity-0 translate-y-10" data-category="research">
+                         <div class="card-content p-8">
+                             <div class="flex justify-between items-start mb-6">
+                                <div class="p-3 rounded-2xl bg-gradient-to-br from-lime-500/20 to-green-600/10 border border-lime-500/20 text-lime-600 dark:text-lime-400">
+                                    <i data-feather="activity" class="w-6 h-6"></i>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <span class="text-[9px] px-2 py-1 rounded bg-lime-500/10 text-lime-500 border border-lime-500/20 font-bold tracking-wider">RESEARCH</span>
+                                    <span class="text-[9px] px-2 py-1 rounded bg-white/10 text-[var(--text-secondary)] border border-white/10 font-bold tracking-wider">FLAGSHIP</span>
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-bold text-[var(--text-primary)] mb-3 group-hover:text-lime-500 transition-colors">NeuroLink Glasses</h3>
+                            <div class="mb-6 flex-grow">
+                                <p class="text-sm text-[var(--text-secondary)] mb-2"><strong class="text-lime-500">Goal:</strong> Non-invasive assistive BCI.</p>
+                                <p class="text-sm text-[var(--text-secondary)] mb-2"><strong class="text-lime-500">Outcome:</strong> Mind-to-digital bridge.</p>
+                            </div>
+                             <div class="mt-auto border-t border-[var(--glass-border)] pt-6 flex items-center justify-between">
+                                <button onclick="openModal('neurolink')" class="magnetic-btn text-xs font-bold text-[var(--text-primary)] hover:text-primary-500 transition-all flex items-center gap-1 hover:scale-105 origin-left duration-300">View case study <i data-feather="arrow-right" class="w-3 h-3"></i></button>
+                                <span class="text-xs font-semibold text-lime-500 flex items-center gap-2 uppercase tracking-wide"><i data-feather="loader" class="w-3 h-3 animate-spin"></i> In Progress</span>
+                            </div>
+                        </div>
+                    </div>
 
-                <!-- Achievements -->
-                <div class="max-w-5xl mx-auto">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div class="glass p-8 rounded-2xl border-l-4 border-yellow-500 hover:bg-white/5 transition-all group" data-aos="fade-up">
-                            <div class="flex justify-between items-start">
-                                <div>
-                                    <h4 class="text-xl font-bold text-white mb-2 group-hover:text-yellow-400 transition-colors">Top Performer</h4>
-                                    <p class="text-sm text-gray-400">Bhartiya Antariksha Hackathon 2025 - ISRO</p>
-                                </div>
-                                <div class="p-3 bg-yellow-500/10 rounded-full">
-                                    <i data-feather="award" class="text-yellow-500 w-6 h-6"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="glass p-8 rounded-2xl border-l-4 border-primary-500 hover:bg-white/5 transition-all group" data-aos="fade-up" data-aos-delay="100">
-                            <div class="flex justify-between items-start">
-                                <div>
-                                    <h4 class="text-xl font-bold text-white mb-2 group-hover:text-primary-400 transition-colors">Student Innovation Ambassador</h4>
-                                    <p class="text-sm text-gray-400">Avanthi Research Hub</p>
-                                </div>
-                                <div class="p-3 bg-primary-500/10 rounded-full">
-                                    <i data-feather="star" class="text-primary-500 w-6 h-6"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- (Journey & Contact sections remain the same optimized versions) -->
-        <section id="resume" class="py-32 px-4 bg-dark-900 relative">
+        <!-- Journey Section -->
+        <section id="resume" class="section py-32 px-4 relative">
             <div class="container mx-auto max-w-4xl">
-                 <div class="text-center mb-20" data-aos="fade-up">
-                    <h2 class="text-3xl md:text-4xl font-bold inline-block bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-200 to-gray-500 tracking-tight">
+                 <div class="text-center mb-20 section-heading opacity-0">
+                    <h2 class="text-3xl md:text-4xl font-bold inline-block bg-clip-text text-transparent bg-gradient-to-r from-[var(--text-primary)] via-gray-400 to-gray-500 tracking-tight">
                         Journey & Education
                     </h2>
                     <div class="h-1 w-24 bg-gradient-to-r from-primary-500 to-transparent mx-auto mt-6 rounded-full opacity-50"></div>
                 </div>
                 
-                <div class="flex justify-center mb-16" data-aos="fade-up">
-                    <div class="glass p-1.5 rounded-full flex space-x-2 bg-dark-800/80 backdrop-blur-md border border-white/5">
-                        <button data-tab="experience" class="tab-button active font-semibold px-8 py-3 rounded-full text-sm tracking-wide transition-all">Experience</button>
-                        <button data-tab="education" class="tab-button font-semibold px-8 py-3 rounded-full text-sm text-gray-400 tracking-wide hover:text-white transition-all">Education</button>
+                <div class="flex justify-center mb-16 section-content opacity-0">
+                    <div class="glass p-1.5 rounded-full flex space-x-2 bg-white/5 backdrop-blur-md border border-white/5">
+                        <button data-tab="experience" class="tab-button active font-semibold px-8 py-3 rounded-full text-sm tracking-wide transition-all bg-[var(--text-primary)] text-[var(--bg-color)] shadow-md">Experience</button>
+                        <button data-tab="education" class="tab-button font-semibold px-8 py-3 rounded-full text-sm text-[var(--text-secondary)] tracking-wide hover:text-[var(--text-primary)] transition-all">Education</button>
                     </div>
                 </div>
 
-                <div class="relative min-h-[300px]">
+                <div class="relative min-h-[300px] section-content opacity-0">
                     <!-- Experience Tab -->
-                    <div id="experience" class="tab-content" data-aos="fade-in">
-                        <div class="relative pl-10 border-l border-white/5 space-y-16">
+                    <div id="experience" class="tab-content">
+                        <div class="relative pl-10 border-l border-[var(--glass-border)] space-y-16">
                             <!-- Gradient Line Overlay -->
                             <div class="absolute left-[-1px] top-0 bottom-0 w-[2px] bg-gradient-to-b from-primary-500 via-purple-500/20 to-transparent"></div>
                             
                             <div class="relative group">
-                                <span class="absolute -left-[45px] top-2 h-4 w-4 rounded-full border-2 border-primary-500 bg-dark-900 group-hover:scale-125 transition-transform duration-300 shadow-[0_0_10px_#a855f7]"></span>
+                                <span class="absolute -left-[45px] top-2 h-4 w-4 rounded-full border-2 border-primary-500 bg-[var(--bg-color)] group-hover:scale-125 transition-transform duration-300 shadow-[0_0_10px_#a855f7]"></span>
                                 <div class="glass p-8 rounded-3xl hover:border-primary-500/30 transition-colors duration-300 relative overflow-hidden">
-                                    <div class="absolute top-0 right-0 p-6 opacity-10"><i data-feather="briefcase" class="w-24 h-24 text-white"></i></div>
+                                    <div class="absolute top-0 right-0 p-6 opacity-10"><i data-feather="briefcase" class="w-24 h-24 text-[var(--text-primary)]"></i></div>
                                     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 relative z-10">
                                         <div>
-                                            <h3 class="text-2xl font-bold text-white mb-1">Team Leader</h3>
-                                            <p class="text-primary-400 font-medium text-lg">Avanthi Research Hub (ARH)</p>
+                                            <h3 class="text-2xl font-bold text-[var(--text-primary)] mb-1">Team Leader</h3>
+                                            <p class="text-primary-500 font-medium text-lg">Avanthi Research Hub (ARH)</p>
                                         </div>
-                                        <span class="mt-2 sm:mt-0 px-4 py-1.5 bg-white/5 rounded-full text-xs text-gray-400 border border-white/10 font-mono">Aug 2025 - Present</span>
+                                        <span class="mt-2 sm:mt-0 px-4 py-1.5 bg-white/5 rounded-full text-xs text-gray-500 border border-white/10 font-mono">Aug 2025 - Present</span>
                                     </div>
-                                    <p class="text-gray-300 leading-relaxed mb-6 text-base font-light border-b border-white/5 pb-4">
+                                    <p class="text-[var(--text-secondary)] leading-relaxed mb-6 text-base font-light border-b border-[var(--glass-border)] pb-4">
                                         Spearheading R&D initiatives for AI/ML prototypes, focusing on bridging theoretical models with embedded deployment.
                                     </p>
+
                                     <ul class="space-y-3 relative z-10">
-                                        <li class="flex items-start gap-3 text-sm text-gray-400"><i data-feather="chevron-right" class="w-4 h-4 text-primary-500 mt-0.5"></i> <span>Mentored students on <strong>NLP & Conversational AI</strong> models.</span></li>
-                                        <li class="flex items-start gap-3 text-sm text-gray-400"><i data-feather="chevron-right" class="w-4 h-4 text-primary-500 mt-0.5"></i> <span>Coordinated proposals for <strong>iDEX (DRDO) & ISRO-INSPACE</strong>.</span></li>
-                                        <li class="flex items-start gap-3 text-sm text-gray-400"><i data-feather="chevron-right" class="w-4 h-4 text-primary-500 mt-0.5"></i> <span>Conducted model evaluation and performance tuning for edge devices.</span></li>
+                                        <li class="flex items-start gap-3 text-sm text-[var(--text-secondary)]"><i data-feather="chevron-right" class="w-4 h-4 text-primary-500 mt-0.5"></i> <span>Mentored students on <strong>NLP & Conversational AI</strong> models.</span></li>
+                                        <li class="flex items-start gap-3 text-sm text-[var(--text-secondary)]"><i data-feather="chevron-right" class="w-4 h-4 text-primary-500 mt-0.5"></i> <span>Coordinated proposals for <strong>iDEX (DRDO) & ISRO-INSPACE</strong>.</span></li>
+                                        <li class="flex items-start gap-3 text-sm text-[var(--text-secondary)]"><i data-feather="chevron-right" class="w-4 h-4 text-primary-500 mt-0.5"></i> <span>Conducted model evaluation and performance tuning for edge devices.</span></li>
                                     </ul>
                                 </div>
                             </div>
@@ -501,52 +690,52 @@
                     </div>
                     
                     <!-- Education Tab -->
-                    <div id="education" class="tab-content hidden" data-aos="fade-in">
-                         <div class="relative pl-10 border-l border-white/5 space-y-16">
+                    <div id="education" class="tab-content hidden">
+                         <div class="relative pl-10 border-l border-[var(--glass-border)] space-y-16">
                              <div class="absolute left-[-1px] top-0 bottom-0 w-[2px] bg-gradient-to-b from-secondary-500 via-primary-500/20 to-transparent"></div>
 
                             <!-- B.Tech -->
                             <div class="relative group">
-                                <span class="absolute -left-[45px] top-2 h-4 w-4 rounded-full border-2 border-secondary-500 bg-dark-900 group-hover:scale-125 transition-transform duration-300 shadow-[0_0_10px_#ec4899]"></span>
+                                <span class="absolute -left-[45px] top-2 h-4 w-4 rounded-full border-2 border-secondary-500 bg-[var(--bg-color)] group-hover:scale-125 transition-transform duration-300 shadow-[0_0_10px_#ec4899]"></span>
                                 <div class="glass p-8 rounded-3xl hover:border-secondary-500/30 transition-colors duration-300">
                                     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
                                         <div>
-                                            <h3 class="text-2xl font-bold text-white mb-1">B.Tech in Electronics & Communication</h3>
-                                            <p class="text-secondary-400 font-medium text-lg">Avanthi Institute of Engineering & Technology</p>
+                                            <h3 class="text-2xl font-bold text-[var(--text-primary)] mb-1">B.Tech in Electronics & Communication</h3>
+                                            <p class="text-secondary-500 font-medium text-lg">Avanthi Institute of Engineering & Technology</p>
                                         </div>
-                                        <span class="mt-2 sm:mt-0 px-4 py-1.5 bg-white/5 rounded-full text-xs text-gray-400 border border-white/10 font-mono">2022 - 2026 (Expected)</span>
+                                        <span class="mt-2 sm:mt-0 px-4 py-1.5 bg-white/5 rounded-full text-xs text-gray-500 border border-white/10 font-mono">2022 - 2026 (Expected)</span>
                                     </div>
-                                    <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-green-500/10 text-green-400 text-xs font-bold rounded-full mb-6 border border-green-500/20">
+                                    <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-green-500/10 text-green-500 text-xs font-bold rounded-full mb-6 border border-green-500/20">
                                         <i data-feather="award" class="w-3 h-3"></i> CGPA: 8.5/10
                                     </div>
                                     
-                                    <h4 class="text-sm font-bold text-gray-300 mb-4 uppercase tracking-wider">Key Coursework</h4>
+                                    <h4 class="text-sm font-bold text-[var(--text-secondary)] mb-4 uppercase tracking-wider">Key Coursework</h4>
                                     <div class="flex flex-wrap gap-2">
-                                        <span class="text-xs px-3 py-1.5 bg-dark-800 rounded-lg border border-white/5 text-gray-400 hover:text-white hover:border-white/20 transition-colors">Python</span>
-                                        <span class="text-xs px-3 py-1.5 bg-dark-800 rounded-lg border border-white/5 text-gray-400 hover:text-white hover:border-white/20 transition-colors">Deep Learning</span>
-                                        <span class="text-xs px-3 py-1.5 bg-dark-800 rounded-lg border border-white/5 text-gray-400 hover:text-white hover:border-white/20 transition-colors">Computer Vision</span>
-                                        <span class="text-xs px-3 py-1.5 bg-dark-800 rounded-lg border border-white/5 text-gray-400 hover:text-white hover:border-white/20 transition-colors">AI Agents</span>
-                                        <span class="text-xs px-3 py-1.5 bg-dark-800 rounded-lg border border-white/5 text-gray-400 hover:text-white hover:border-white/20 transition-colors">DSP (MATLAB)</span>
+                                        <span class="text-xs px-3 py-1.5 bg-white/5 rounded-lg border border-white/5 text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-white/20 transition-colors">Python</span>
+                                        <span class="text-xs px-3 py-1.5 bg-white/5 rounded-lg border border-white/5 text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-white/20 transition-colors">Deep Learning</span>
+                                        <span class="text-xs px-3 py-1.5 bg-white/5 rounded-lg border border-white/5 text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-white/20 transition-colors">Computer Vision</span>
+                                        <span class="text-xs px-3 py-1.5 bg-white/5 rounded-lg border border-white/5 text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-white/20 transition-colors">AI Agents</span>
+                                        <span class="text-xs px-3 py-1.5 bg-white/5 rounded-lg border border-white/5 text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-white/20 transition-colors">DSP (MATLAB)</span>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Diploma -->
                             <div class="relative group">
-                                <span class="absolute -left-[45px] top-2 h-4 w-4 rounded-full border-2 border-purple-500 bg-dark-900 group-hover:scale-125 transition-transform duration-300 shadow-[0_0_10px_#a855f7]"></span>
+                                <span class="absolute -left-[45px] top-2 h-4 w-4 rounded-full border-2 border-purple-500 bg-[var(--bg-color)] group-hover:scale-125 transition-transform duration-300 shadow-[0_0_10px_#a855f7]"></span>
                                 <div class="glass p-8 rounded-3xl hover:border-purple-500/30 transition-colors duration-300">
                                     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
                                         <div>
-                                            <h3 class="text-2xl font-bold text-white mb-1">Diploma in ECE</h3>
+                                            <h3 class="text-2xl font-bold text-[var(--text-primary)] mb-1">Diploma in ECE</h3>
                                             <p class="text-purple-400 font-medium text-lg">Divi Seema Polytechnic College</p>
                                         </div>
-                                        <span class="mt-2 sm:mt-0 px-4 py-1.5 bg-white/5 rounded-full text-xs text-gray-400 border border-white/10 font-mono">2023 - 2024</span>
+                                        <span class="mt-2 sm:mt-0 px-4 py-1.5 bg-white/5 rounded-full text-xs text-gray-500 border border-white/10 font-mono">2023 - 2024</span>
                                     </div>
-                                    <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-green-500/10 text-green-400 text-xs font-bold rounded-full mb-6 border border-green-500/20">
+                                    <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-green-500/10 text-green-500 text-xs font-bold rounded-full mb-6 border border-green-500/20">
                                         <i data-feather="award" class="w-3 h-3"></i> Percentage: 83.14%
                                     </div>
                                     
-                                    <p class="text-sm text-gray-400 leading-relaxed font-light">
+                                    <p class="text-sm text-[var(--text-secondary)] leading-relaxed font-light">
                                         Specialized in Electronics and Communication Engineering, building a strong foundation in embedded systems and circuit design.
                                     </p>
                                 </div>
@@ -557,62 +746,66 @@
             </div>
         </section>
 
-        <section id="contact" class="py-32 px-4 bg-dark-900 relative overflow-hidden">
-            <div class="absolute inset-0 grid-overlay z-0 opacity-20 pointer-events-none"></div>
+        <section id="contact" class="section py-32 px-4 relative overflow-hidden">
             <div class="container mx-auto relative z-10">
-                <div class="text-center mb-24" data-aos="fade-up">
-                    <h2 class="text-3xl md:text-4xl font-bold inline-block bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-200 to-gray-500 tracking-tight">
+                <div class="text-center mb-24 section-heading opacity-0">
+                    <h2 class="text-3xl md:text-4xl font-bold inline-block bg-clip-text text-transparent bg-gradient-to-r from-[var(--text-primary)] via-gray-400 to-gray-500 tracking-tight">
                         Get In Touch
                     </h2>
                     <div class="h-1 w-24 bg-gradient-to-r from-primary-500 to-transparent mx-auto mt-6 rounded-full opacity-50"></div>
                 </div>
                 
-                <div class="max-w-5xl mx-auto glass rounded-3xl p-10 lg:p-14 shadow-2xl js-tilt border-white/5" data-tilt-axis="x">
+                <div class="max-w-5xl mx-auto glass rounded-3xl p-10 lg:p-14 shadow-2xl section-content opacity-0">
                     <div class="flex flex-col lg:flex-row gap-16">
                         <div class="lg:w-1/2">
-                            <h3 class="text-3xl font-bold text-white mb-6">Let's Collaborate</h3>
-                            <p class="text-gray-400 mb-10 leading-relaxed font-light text-lg">
+                            <h3 class="text-3xl font-bold text-[var(--text-primary)] mb-2">Let's Collaborate</h3>
+                            <p class="text-xs text-gray-500 mb-6 font-mono border-l-2 border-primary-500 pl-3">
+                                Interested in thesis collaborations, applied AI research, and early-stage deep-tech projects.
+                            </p>
+                            <p class="text-[var(--text-secondary)] mb-2 leading-relaxed font-light text-lg">
                                 Open to research collaborations, freelance projects, and AI development opportunities.
                             </p>
+                            <p class="text-xs font-mono text-green-500 mb-10 flex items-center gap-2"><span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span> Typical reply time: &lt; 24 hrs</p>
+                            
                             <div class="space-y-8">
-                                <a href="mailto:kasiviswanath129@gmail.com" class="flex items-center gap-5 group p-4 rounded-2xl hover:bg-white/5 transition-colors border border-transparent hover:border-white/5">
-                                    <div class="w-14 h-14 rounded-xl bg-primary-500/10 flex items-center justify-center text-primary-400 group-hover:bg-primary-500 group-hover:text-white transition-all duration-300 shadow-[0_0_15px_rgba(168,85,247,0.1)]"><i data-feather="mail" class="w-6 h-6"></i></div>
+                                <a href="mailto:kasiviswanath129@gmail.com" class="flex items-center gap-5 group p-4 rounded-2xl hover:bg-white/5 transition-colors border border-transparent hover:border-white/5 btn-press">
+                                    <div class="w-14 h-14 rounded-xl bg-primary-500/10 flex items-center justify-center text-primary-500 group-hover:bg-primary-500 group-hover:text-white transition-all duration-300 shadow-[0_0_15px_rgba(168,85,247,0.1)]"><i data-feather="mail" class="w-6 h-6"></i></div>
                                     <div>
-                                        <h4 class="font-bold text-white text-base">Email</h4>
-                                        <p class="text-gray-400 text-sm font-mono mt-1">kasiviswanath129@gmail.com</p>
+                                        <h4 class="font-bold text-[var(--text-primary)] text-base">Email</h4>
+                                        <p class="text-[var(--text-secondary)] text-sm font-mono mt-1">kasiviswanath129@gmail.com</p>
                                     </div>
                                 </a>
                                 <div class="flex items-center gap-5 group p-4 rounded-2xl hover:bg-white/5 transition-colors border border-transparent hover:border-white/5">
-                                    <div class="w-14 h-14 rounded-xl bg-secondary-500/10 flex items-center justify-center text-secondary-400 group-hover:bg-secondary-500 group-hover:text-white transition-all duration-300 shadow-[0_0_15px_rgba(236,72,153,0.1)]"><i data-feather="map-pin" class="w-6 h-6"></i></div>
+                                    <div class="w-14 h-14 rounded-xl bg-secondary-500/10 flex items-center justify-center text-secondary-500 group-hover:bg-secondary-500 group-hover:text-white transition-all duration-300 shadow-[0_0_15px_rgba(236,72,153,0.1)]"><i data-feather="map-pin" class="w-6 h-6"></i></div>
                                     <div>
-                                        <h4 class="font-bold text-white text-base">Location</h4>
-                                        <p class="text-gray-400 text-sm font-mono mt-1">Tuni, Andhra Pradesh, India</p>
+                                        <h4 class="font-bold text-[var(--text-primary)] text-base">Location</h4>
+                                        <p class="text-[var(--text-secondary)] text-sm font-mono mt-1">Tuni, Andhra Pradesh, India</p>
                                     </div>
                                 </div>
                                 <div class="flex items-center gap-5 group p-4 rounded-2xl hover:bg-white/5 transition-colors border border-transparent hover:border-white/5">
-                                    <div class="w-14 h-14 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-400 group-hover:bg-blue-500 group-hover:text-white transition-all duration-300 shadow-[0_0_15px_rgba(59,130,246,0.1)]"><i data-feather="phone" class="w-6 h-6"></i></div>
+                                    <div class="w-14 h-14 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-500 group-hover:bg-blue-500 group-hover:text-white transition-all duration-300 shadow-[0_0_15px_rgba(59,130,246,0.1)]"><i data-feather="phone" class="w-6 h-6"></i></div>
                                     <div>
-                                        <h4 class="font-bold text-white text-base">Phone</h4>
-                                        <p class="text-gray-400 text-sm font-mono mt-1">+91 9391592209</p>
+                                        <h4 class="font-bold text-[var(--text-primary)] text-base">Phone</h4>
+                                        <p class="text-[var(--text-secondary)] text-sm font-mono mt-1">+91 9391592209</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="lg:w-1/2 bg-dark-800/30 p-10 rounded-3xl border border-white/5 backdrop-blur-sm">
+                        <div class="lg:w-1/2 bg-[var(--bg-color)]/30 p-10 rounded-3xl border border-[var(--glass-border)] backdrop-blur-sm">
                              <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="space-y-8">
                                 <div class="relative group">
-                                    <input type="text" id="name" name="name" required class="modern-input w-full px-0 py-3 text-white text-lg outline-none placeholder-transparent peer" placeholder="John Doe">
-                                    <label for="name" class="absolute left-0 top-3 text-gray-500 text-base transition-all duration-300 peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-focus:-top-6 peer-focus:text-xs peer-focus:text-primary-400 peer-valid:-top-6 peer-valid:text-xs peer-valid:text-gray-400">Name</label>
+                                    <input type="text" id="name" name="name" required class="modern-input w-full px-0 py-3 text-[var(--text-primary)] text-lg outline-none placeholder-transparent peer" placeholder="John Doe">
+                                    <label for="name" class="absolute left-0 top-3 text-gray-500 text-base transition-all duration-300 peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-focus:-top-6 peer-focus:text-xs peer-focus:text-primary-500 peer-valid:-top-6 peer-valid:text-xs peer-valid:text-gray-400">Name</label>
                                 </div>
                                 <div class="relative group">
-                                    <input type="email" id="email" name="email" required class="modern-input w-full px-0 py-3 text-white text-lg outline-none placeholder-transparent peer" placeholder="john@example.com">
-                                    <label for="email" class="absolute left-0 top-3 text-gray-500 text-base transition-all duration-300 peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-focus:-top-6 peer-focus:text-xs peer-focus:text-primary-400 peer-valid:-top-6 peer-valid:text-xs peer-valid:text-gray-400">Email</label>
+                                    <input type="email" id="email" name="email" required class="modern-input w-full px-0 py-3 text-[var(--text-primary)] text-lg outline-none placeholder-transparent peer" placeholder="john@example.com">
+                                    <label for="email" class="absolute left-0 top-3 text-gray-500 text-base transition-all duration-300 peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-focus:-top-6 peer-focus:text-xs peer-focus:text-primary-500 peer-valid:-top-6 peer-valid:text-xs peer-valid:text-gray-400">Email</label>
                                 </div>
                                 <div class="relative group">
-                                    <textarea id="message" name="message" rows="4" required class="modern-input w-full px-0 py-3 text-white text-lg outline-none placeholder-transparent peer resize-none" placeholder="Message"></textarea>
-                                    <label for="message" class="absolute left-0 top-3 text-gray-500 text-base transition-all duration-300 peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-focus:-top-6 peer-focus:text-xs peer-focus:text-primary-400 peer-valid:-top-6 peer-valid:text-xs peer-valid:text-gray-400">Message</label>
+                                    <textarea id="message" name="message" rows="4" required class="modern-input w-full px-0 py-3 text-[var(--text-primary)] text-lg outline-none placeholder-transparent peer resize-none" placeholder="Message"></textarea>
+                                    <label for="message" class="absolute left-0 top-3 text-gray-500 text-base transition-all duration-300 peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-focus:-top-6 peer-focus:text-xs peer-focus:text-primary-500 peer-valid:-top-6 peer-valid:text-xs peer-valid:text-gray-400">Message</label>
                                 </div>
-                                <button type="submit" class="magnetic-btn w-full bg-white text-dark-900 px-8 py-4 rounded-xl font-bold hover:bg-gray-200 transition-all duration-300 shadow-lg mt-4">Send Message</button>
+                                <button type="submit" class="magnetic-btn btn-press w-full bg-[var(--text-primary)] text-[var(--bg-color)] px-8 py-4 rounded-xl font-bold hover:bg-gray-400 transition-all duration-300 shadow-lg mt-4">Send Message</button>
                             </form>
                         </div>
                     </div>
@@ -621,118 +814,381 @@
         </section>
     </main>
 
-    <footer class="py-12 px-4 border-t border-white/5 bg-dark-900 relative z-10">
+    <footer class="py-12 px-4 border-t border-[var(--glass-border)] bg-[var(--bg-color)] relative z-10">
         <div class="container mx-auto">
             <div class="flex flex-col md:flex-row justify-between items-center text-center md:text-left">
                 <div class="mb-8 md:mb-0">
-                    <h3 class="text-2xl font-bold text-white tracking-tight">Kasi Viswanath</h3>
-                    <p class="text-gray-500 mt-2 text-sm uppercase tracking-[0.2em] font-medium">AI Engineer • Researcher</p>
+                    <h3 class="text-2xl font-bold text-[var(--text-primary)] tracking-tight">Kasi Viswanath</h3>
+                    <p class="text-gray-500 mt-2 text-sm uppercase tracking-[0.2em] font-medium">AI Systems • Edge Intelligence • Applied Research</p>
                 </div>
                 <div class="flex space-x-8">
-                    <a href="https://github.com/Viswanath129" target="_blank" class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-all duration-300"><i data-feather="github" class="w-5 h-5"></i></a>
-                    <a href="https://www.linkedin.com/in/kasiviswanath-ece/" target="_blank" class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300"><i data-feather="linkedin" class="w-5 h-5"></i></a>
-                    <a href="https://x.com/Viswanath443?t=PdYCdL35d-zbSWdHI95KVw&s=09" class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:bg-sky-500/20 hover:text-sky-400 transition-all duration-300"><i data-feather="twitter" class="w-5 h-5"></i></a>
+                    <a href="https://github.com/Viswanath129" target="_blank" class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-all duration-300 btn-press"><i data-feather="github" class="w-5 h-5"></i></a>
+                    <a href="https://www.linkedin.com/in/kasiviswanath-ece/" target="_blank" class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 btn-press"><i data-feather="linkedin" class="w-5 h-5"></i></a>
+                    <a href="https://x.com/Viswanath443?t=PdYCdL35d-zbSWdHI95KVw&s=09" class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:bg-sky-500/20 hover:text-sky-400 transition-all duration-300 btn-press"><i data-feather="twitter" class="w-5 h-5"></i></a>
                 </div>
             </div>
-            <div class="border-t border-white/5 mt-10 pt-8 text-center text-gray-600 text-xs font-mono">
-                <p>&copy; <span id="current-year">2025</span> Kasi Viswanath Vegisetti. All Rights Reserved.</p>
+            <div class="border-t border-[var(--glass-border)] mt-10 pt-8 text-center text-gray-500 text-xs font-mono">
+                <p>&copy; <span id="current-year">2026</span> Kasi Viswanath Vegisetti. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
 
+    <!-- Case Study Modal Structure -->
+    <div id="modal-overlay" class="modal-overlay" aria-hidden="true">
+        <div class="modal-container relative">
+            <button id="modal-close" class="absolute top-4 right-4 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors z-20">
+                <i data-feather="x" class="w-5 h-5 text-[var(--text-primary)]"></i>
+            </button>
+            <div id="modal-content" class="p-8 md:p-12 text-[var(--text-primary)]">
+                <!-- Content Injected via JS -->
+            </div>
+        </div>
+    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // 1. Initialize Lenis (Ultra Smooth Scroll)
-            const lenis = new Lenis({
-                duration: 1.2,
-                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-                direction: 'vertical',
-                gestureDirection: 'vertical',
-                smooth: true,
-                mouseMultiplier: 1,
-                smoothTouch: false,
-                touchMultiplier: 2,
-            });
-
-            function raf(time) {
-                lenis.raf(time);
-                requestAnimationFrame(raf);
-            }
-            requestAnimationFrame(raf);
-
-            // 2. Initialize AOS (Backup animation)
-            AOS.init({ duration: 1000, easing: 'ease-out-cubic', once: false });
-
-            // 3. Initialize Feather Icons
+            // 1. Feather Icons
             feather.replace();
 
-            // 4. Initialize Typed.js
-            if (typeof Typed !== 'undefined') {
-                new Typed('#typed-subtitle', {
-                    strings: ['Conversational AI', 'Intelligent Agents', 'Edge Computing Solutions'],
-                    typeSpeed: 40, backSpeed: 30, backDelay: 2000, loop: true,
-                    smartBackspace: true
-                });
+            // 2. Mobile Logic: Remove Heavy Blobs on Small Screens
+            if (window.innerWidth < 768) {
+                document.querySelectorAll('.bg-blob').forEach(b => b.remove());
             }
 
-            // 5. GSAP Hero Animations
-            gsap.registerPlugin(ScrollTrigger);
-            const tl = gsap.timeline({ defaults: { ease: "power3.out", duration: 1.2 } });
-            tl.to(".gsap-hero", { y: 0, opacity: 1, stagger: 0.15, delay: 0.2 });
+            // 3. Theme Toggle Logic (Performance Optimized)
+            const themeBtn = document.getElementById('theme-toggle');
+            const themeBtnMobile = document.getElementById('theme-toggle-mobile');
+            const htmlElement = document.documentElement;
+            
+            function toggleTheme() {
+                // Prevent layout thrashing during theme switch
+                document.body.classList.add('no-transition');
+                
+                const isLight = htmlElement.getAttribute('data-theme') === 'light';
+                htmlElement.setAttribute('data-theme', isLight ? 'dark' : 'light');
+                htmlElement.classList.toggle('dark', !isLight);
+                localStorage.setItem('theme', isLight ? 'dark' : 'light');
 
-            // 6. Magnetic Buttons Effect
+                // Re-enable transitions after paint
+                setTimeout(() => document.body.classList.remove('no-transition'), 50);
+            }
+
+            // Init theme
+            const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+            htmlElement.setAttribute('data-theme', savedTheme);
+            if(savedTheme === 'dark') htmlElement.classList.add('dark');
+
+            themeBtn.addEventListener('click', toggleTheme);
+            themeBtnMobile.addEventListener('click', toggleTheme);
+
+            // 4. GSAP Hero Animations
+            gsap.registerPlugin(ScrollTrigger, TextPlugin);
+            const isLowSpec = window.innerWidth < 768 || (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4);
+
+            const tl = gsap.timeline({ defaults: { ease: "power3.out", duration: 1.2 } });
+            tl.to(".gsap-hero", { y: 0, opacity: 1, stagger: 0.1, delay: 0.2 });
+
+            // Semantic Text Animation
+            const phrases = ["Embedded Intelligence", "Edge Computing", "Conversational AI"];
+            let phraseIndex = 0;
+            const subtitleEl = document.getElementById('semantic-subtitle');
+            
+            function animateSubtitle() {
+                gsap.to(subtitleEl, {
+                    duration: 0.8, opacity: 0, y: -10,
+                    onComplete: () => {
+                        subtitleEl.textContent = phrases[phraseIndex];
+                        phraseIndex = (phraseIndex + 1) % phrases.length;
+                        gsap.to(subtitleEl, { duration: 0.8, opacity: 1, y: 0 });
+                    }
+                });
+            }
+            setInterval(animateSubtitle, 3000);
+
+            // 5. GSAP Batching (Performance Win)
+            if (!isLowSpec) {
+                ScrollTrigger.batch(".section-heading", {
+                    start: "top 85%",
+                    onEnter: batch => gsap.to(batch, {opacity: 1, y: 0, duration: 0.8, stagger: 0.15, overwrite: true})
+                });
+                
+                ScrollTrigger.batch(".section-content", {
+                    start: "top 80%",
+                    onEnter: batch => gsap.to(batch, {opacity: 1, y: 0, duration: 0.8, stagger: 0.15, overwrite: true})
+                });
+                
+                // Filter Fade In
+                gsap.to("#filter-container", {
+                    scrollTrigger: { trigger: "#research", start: "top 70%" },
+                    opacity: 1, y: 0, duration: 0.6
+                });
+            } else {
+                gsap.set(".section-heading, .section-content, #filter-container", { opacity: 1, y: 0 });
+            }
+
+            // 6. Project Filtering Logic
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const projectCards = document.querySelectorAll('.project-card');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(b => {
+                        b.classList.remove('bg-primary-500', 'text-white', 'shadow-lg');
+                        b.classList.add('glass', 'text-[var(--text-secondary)]');
+                    });
+                    btn.classList.remove('glass', 'text-[var(--text-secondary)]');
+                    btn.classList.add('bg-primary-500', 'text-white', 'shadow-lg');
+
+                    const filterValue = btn.getAttribute('data-filter');
+                    
+                    projectCards.forEach(card => {
+                        const categories = card.getAttribute('data-category');
+                        if (filterValue === 'all' || categories.includes(filterValue)) {
+                            card.style.display = 'flex';
+                            gsap.fromTo(card, {opacity: 0, scale: 0.9}, {opacity: 1, scale: 1, duration: 0.4});
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                    setTimeout(() => ScrollTrigger.refresh(), 500);
+                });
+            });
+
+            // 7. Spotlight Effect Logic (Throttled for Performance)
+            let lastMove = 0;
+            document.querySelectorAll('.project-card').forEach(card => {
+                card.addEventListener('mousemove', e => {
+                    const now = performance.now();
+                    if (now - lastMove < 33) return; // ~30fps throttle
+                    lastMove = now;
+
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    card.style.setProperty('--mouse-x', `${x}px`);
+                    card.style.setProperty('--mouse-y', `${y}px`);
+                });
+            });
+
+            // 8. Magnetic Buttons (Scoped to Home only)
             const magneticBtns = document.querySelectorAll('.magnetic-btn');
             magneticBtns.forEach(btn => {
                 btn.addEventListener('mousemove', function(e) {
                     const rect = btn.getBoundingClientRect();
                     const x = e.clientX - rect.left - rect.width / 2;
                     const y = e.clientY - rect.top - rect.height / 2;
-                    btn.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`;
+                    btn.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px) scale(1.05)`;
                 });
                 btn.addEventListener('mouseleave', function() {
-                    btn.style.transform = 'translate(0px, 0px)';
+                    btn.style.transform = 'translate(0px, 0px) scale(1)';
                 });
             });
 
-            // 7. Header Scroll Effect
-            const header = document.getElementById('header');
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) header.classList.add('scrolled');
-                else header.classList.remove('scrolled');
+            // 9. Directional Tab Switching
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const tabId = button.dataset.tab;
+                    const isEducation = tabId === 'education';
+                    
+                    tabButtons.forEach(btn => {
+                        btn.classList.remove('active', 'bg-[var(--text-primary)]', 'text-[var(--bg-color)]', 'shadow-md');
+                        btn.classList.add('text-[var(--text-secondary)]');
+                    });
+                    button.classList.add('active', 'bg-[var(--text-primary)]', 'text-[var(--bg-color)]', 'shadow-md');
+                    button.classList.remove('text-[var(--text-secondary)]');
+
+                    tabContents.forEach(content => {
+                        content.classList.add('hidden');
+                    });
+                    
+                    const activeContent = document.getElementById(tabId);
+                    activeContent.classList.remove('hidden');
+                    
+                    const xOffset = isEducation ? 20 : -20;
+                    gsap.fromTo(activeContent, 
+                        { x: xOffset, opacity: 0 }, 
+                        { x: 0, opacity: 1, duration: 0.4, ease: "power2.out" }
+                    );
+                });
             });
 
-            // 8. Mobile Menu Logic
+            // 10. Case Study Modal Logic
+            const caseStudies = {
+                diabetes: {
+                    title: "Pregnancy Diabetes Prediction System",
+                    subtitle: "Healthcare AI · Applied ML",
+                    content: `
+                        <h4 class="text-lg font-bold mb-2 text-primary-500">Overview</h4>
+                        <p class="mb-6 font-light">A machine learning system designed to identify early risk of gestational diabetes using clinical and demographic data, with a focus on deployment feasibility in low-resource healthcare environments.</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                            <div>
+                                <h4 class="font-bold mb-2">Problem</h4>
+                                <p class="text-sm text-[var(--text-secondary)]">Gestational Diabetes Mellitus is often diagnosed late, increasing the risk of maternal and fetal complications due to delayed intervention.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-2">Constraints</h4>
+                                <p class="text-sm text-[var(--text-secondary)]">Highly imbalanced medical datasets, need for model interpretability for clinicians, and low compute availability in primary healthcare centers.</p>
+                            </div>
+                        </div>
+
+                        <h4 class="font-bold mb-3">System Architecture</h4>
+                        <ul class="list-disc pl-5 mb-6 text-sm text-[var(--text-secondary)] space-y-1">
+                            <li>Data preprocessing and normalization pipeline</li>
+                            <li>Clinically relevant feature selection</li>
+                            <li>Lightweight ML classifiers optimized for generalization</li>
+                        </ul>
+
+                        <h4 class="font-bold mb-3">Outcome & Impact</h4>
+                        <ul class="list-disc pl-5 mb-6 text-sm text-[var(--text-secondary)] space-y-1">
+                            <li>Enables early risk screening instead of reactive diagnosis</li>
+                            <li>Scalable for large populations</li>
+                            <li>Suitable for deployment in low-resource clinical settings</li>
+                        </ul>
+                    `
+                },
+                stroke: {
+                    title: "Brain Stroke Prediction",
+                    subtitle: "Predictive Analytics · Healthcare",
+                    content: `
+                        <h4 class="text-lg font-bold mb-2 text-primary-500">Overview</h4>
+                        <p class="mb-6 font-light">A high-recall predictive model designed to estimate stroke risk based on lifestyle and health parameters, acting as an early warning system.</p>
+                        <h4 class="font-bold mb-2">Architectural Focus</h4>
+                        <p class="text-sm text-[var(--text-secondary)] mb-6">Prioritized <strong>Recall</strong> over Precision to ensure potential risk cases are never missed, a critical requirement for medical screening tools.</p>
+                        <h4 class="font-bold mb-3">Key Outcome</h4>
+                        <p class="text-sm text-[var(--text-secondary)]">Successfully identifies asymptomatic risk factors, allowing for preventative lifestyle changes before clinical onset.</p>
+                    `
+                },
+                cancer: {
+                    title: "Breast Cancer Prediction (Quantum ML)",
+                    subtitle: "Deep Learning · Research",
+                    content: `
+                        <h4 class="text-lg font-bold mb-2 text-primary-500">Overview</h4>
+                        <p class="mb-6 font-light">An exploratory research project comparing classical Deep Learning architectures against experimental Quantum Machine Learning (QML) approaches for high-dimensional medical data.</p>
+                        <h4 class="font-bold mb-2">Research Question</h4>
+                        <p class="text-sm text-[var(--text-secondary)] mb-6">Can quantum-enhanced feature spaces provide better separability for complex oncology datasets compared to classical non-linear activations?</p>
+                        <h4 class="font-bold mb-3">Methodology</h4>
+                        <p class="text-sm text-[var(--text-secondary)]">Benchmarked Pytorch-based neural networks against hybrid quantum-classical networks, focusing on convergence speed and feature extraction efficiency.</p>
+                    `
+                },
+                classpulse: {
+                    title: "ClassPulse AI",
+                    subtitle: "EdTech · Real-time Analytics",
+                    content: `
+                        <h4 class="text-lg font-bold mb-2 text-primary-500">Overview</h4>
+                        <p class="mb-6 font-light">An intelligent classroom analytics system that transforms raw behavioral data into actionable insights for educators.</p>
+                        <h4 class="font-bold mb-2">System Design</h4>
+                        <p class="text-sm text-[var(--text-secondary)] mb-6">Built a privacy-aware pipeline to process aggregate student engagement metrics without compromising individual identity.</p>
+                        <h4 class="font-bold mb-3">Impact</h4>
+                        <p class="text-sm text-[var(--text-secondary)]">Provides educators with a real-time "pulse" of the classroom, enabling dynamic curriculum adjustment based on engagement levels.</p>
+                    `
+                },
+                resume: {
+                    title: "Resume Screening Bot",
+                    subtitle: "NLP · Intelligent Automation",
+                    content: `
+                        <h4 class="text-lg font-bold mb-2 text-primary-500">Overview</h4>
+                        <p class="mb-6 font-light">An NLP-based automation tool that ranks resumes by semantically matching candidate profiles against job descriptions.</p>
+                        <h4 class="font-bold mb-2">Key Engineering</h4>
+                        <p class="text-sm text-[var(--text-secondary)] mb-6">Implemented TF-IDF vectorization and cosine similarity scoring to go beyond keyword matching, understanding context and relevance.</p>
+                        <h4 class="font-bold mb-3">Efficiency Gain</h4>
+                        <p class="text-sm text-[var(--text-secondary)]">Reduces manual shortlisting time by approximately 70% for large-volume recruitment drives.</p>
+                    `
+                },
+                ar: {
+                    title: "AR Gesture Games",
+                    subtitle: "Computer Vision · HCI",
+                    content: `
+                        <h4 class="text-lg font-bold mb-2 text-primary-500">Overview</h4>
+                        <p class="mb-6 font-light">A suite of immersive games controlled entirely via hand gestures, eliminating the need for physical controllers or specialized hardware.</p>
+                        <h4 class="font-bold mb-2">Technical Challenge</h4>
+                        <p class="text-sm text-[var(--text-secondary)] mb-6">Achieving real-time (< 30ms latency) hand tracking on consumer-grade webcams using OpenCV and MediaPipe.</p>
+                        <h4 class="font-bold mb-3">Outcome</h4>
+                        <p class="text-sm text-[var(--text-secondary)]">Created accessible, zero-hardware gaming interfaces suitable for public displays and casual interaction.</p>
+                    `
+                },
+                automation: {
+                    title: "Academic Automation Suite",
+                    subtitle: "Logic Scheduling · Database Systems",
+                    content: `
+                        <h4 class="text-lg font-bold mb-2 text-primary-500">Overview</h4>
+                        <p class="mb-6 font-light">A unified platform for academic management, featuring a conflict-free timetable generator and digital attendance tracking.</p>
+                        <h4 class="font-bold mb-2">Algorithm Design</h4>
+                        <p class="text-sm text-[var(--text-secondary)] mb-6">Developed a constraint-satisfaction algorithm to handle multiple resource locks (rooms, faculty, time slots) simultaneously.</p>
+                        <h4 class="font-bold mb-3">Result</h4>
+                        <p class="text-sm text-[var(--text-secondary)]">Reduced the administrative workload for semester scheduling by 90%, eliminating manual conflict resolution.</p>
+                    `
+                },
+                vishnu: {
+                    title: "Project Vishnu",
+                    subtitle: "Defense Tech · Autonomous Systems",
+                    content: `
+                        <h4 class="text-lg font-bold mb-2 text-amber-500">Overview (Flagship)</h4>
+                        <p class="mb-6 font-light">An autonomous satellite emergency capsule designed to separate and preserve critical data/payloads in the event of a catastrophic satellite failure.</p>
+                        <h4 class="font-bold mb-2">Core Innovation</h4>
+                        <p class="text-sm text-[var(--text-secondary)] mb-6">A decentralized "Black Box" architecture that triggers independently of the main satellite bus, ensuring survivability even during total power loss.</p>
+                        <h4 class="font-bold mb-3">Status</h4>
+                        <p class="text-sm text-[var(--text-secondary)]">Proposal submitted to ISRO-INSPACE and iDEX (DRDO). Validated theoretical fault-tolerance models.</p>
+                    `
+                },
+                neurolink: {
+                    title: "NeuroLink Glasses",
+                    subtitle: "BCI · Assistive Tech",
+                    content: `
+                        <h4 class="text-lg font-bold mb-2 text-lime-500">Overview (Flagship)</h4>
+                        <p class="mb-6 font-light">An experimental Brain-Computer Interface (BCI) wearable designed to map EEG signals to digital commands for motor-impaired assistance.</p>
+                        <h4 class="font-bold mb-2">Research Focus</h4>
+                        <p class="text-sm text-[var(--text-secondary)] mb-6">Signal processing techniques to isolate intent from high-noise non-invasive EEG data in real-time environments.</p>
+                        <h4 class="font-bold mb-3">Goal</h4>
+                        <p class="text-sm text-[var(--text-secondary)]">To create a low-cost, non-invasive bridge between neural activity and smart home devices.</p>
+                    `
+                }
+            };
+
+            const modal = document.getElementById('modal-overlay');
+            const modalContent = document.getElementById('modal-content');
+            const closeBtn = document.getElementById('modal-close');
+
+            window.openModal = function(projectId) {
+                const data = caseStudies[projectId];
+                if (!data) return;
+
+                modalContent.innerHTML = `
+                    <h2 class="text-3xl font-bold mb-1">${data.title}</h2>
+                    <p class="text-[var(--text-secondary)] text-sm mb-8 font-mono">${data.subtitle}</p>
+                    <div class="modal-body">${data.content}</div>
+                `;
+                
+                modal.classList.add('active');
+                document.body.classList.add('modal-open');
+            };
+
+            function closeModal() {
+                modal.classList.remove('active');
+                document.body.classList.remove('modal-open');
+            }
+
+            closeBtn.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeModal();
+            });
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
+            });
+
+            // Mobile Menu
             const menuBtn = document.getElementById('mobile-menu-btn');
             const mobileMenu = document.getElementById('mobile-menu');
             menuBtn.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
 
-            // 9. Tab Switching Logic
-            const tabButtons = document.querySelectorAll('.tab-button');
-            const tabContents = document.querySelectorAll('.tab-content');
-            tabButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const tabId = button.dataset.tab;
-                    
-                    // Reset all buttons
-                    tabButtons.forEach(btn => {
-                        btn.classList.remove('active', 'text-white');
-                        btn.classList.add('text-gray-400');
-                    });
-                    
-                    // Activate clicked button
-                    button.classList.add('active', 'text-white');
-                    button.classList.remove('text-gray-400');
-
-                    // Switch content
-                    tabContents.forEach(content => {
-                        if (content.id === tabId) {
-                            content.classList.remove('hidden');
-                            gsap.fromTo(content, {opacity: 0, y: 10}, {opacity: 1, y: 0, duration: 0.4}); // Smooth fade in
-                        } else {
-                            content.classList.add('hidden');
-                        }
-                    });
-                });
+            // Header Scroll
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) header.classList.add('scrolled');
+                else header.classList.remove('scrolled');
             });
 
             document.getElementById('current-year').textContent = new Date().getFullYear();
