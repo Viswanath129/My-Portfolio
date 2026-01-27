@@ -1,38 +1,43 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kasi Viswanath - AI Systems Engineer</title>
-    <meta name="description" content="Portfolio of Kasi Viswanath Vegisetti, an AI Systems Engineer specializing in Edge Intelligence, Research Prototypes, and Space-grade Automation.">
-    
+    <meta name="description"
+        content="Portfolio of Kasi Viswanath Vegisetti, an AI Systems Engineer specializing in Edge Intelligence, Research Prototypes, and Space-grade Automation.">
+
     <!-- Design & Fonts -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
     <!-- Added 'K' to the favicon so it shows up -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>K</text></svg>">
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>K</text></svg>">
 
     <!-- Animation Libraries (GSAP) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
-    
+
     <!-- Utilities -->
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
 
     <script>
         tailwind.config = {
-            darkMode: 'class', 
+            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
                         dark: { 900: '#020617', 800: '#0f172a', 700: '#1e293b' },
-                        primary: { 500: '#c084fc', 400: '#d8b4fe', 600: '#a855f7' }, 
-                        secondary: { 500: '#f472b6', 400: '#fbcfe8' } 
+                        primary: { 500: '#c084fc', 400: '#d8b4fe', 600: '#a855f7' },
+                        secondary: { 500: '#f472b6', 400: '#fbcfe8' }
                     },
-                    fontFamily: { 
+                    fontFamily: {
                         sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-                        mono: ['"JetBrains Mono"', 'monospace'] 
+                        mono: ['"JetBrains Mono"', 'monospace']
                     },
                     animation: {
                         'blob': 'blob 10s infinite',
@@ -81,51 +86,60 @@
         }
 
         /* Performance Optimization: Disable transitions during theme switch */
-        .no-transition, .no-transition * {
+        .no-transition,
+        .no-transition * {
             transition: none !important;
         }
 
-        body { 
-            background-color: var(--bg-color); 
-            color: var(--text-primary); 
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
             transition: background-color 0.5s ease, color 0.5s ease;
-            overflow-x: hidden; 
+            overflow-x: hidden;
         }
-        
+
         /* Glassmorphism Classes using Variables */
-        .glass { 
+        .glass {
             background: var(--glass-bg);
-            border: 1px solid var(--glass-border); 
-            backdrop-filter: blur(16px); 
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             box-shadow: var(--glass-shadow);
             transition: background 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
         }
-        
-        .project-card { 
+
+        .project-card {
             position: relative;
             background: var(--card-bg);
             border: 1px solid var(--glass-border);
             border-radius: 1.5rem;
             overflow: hidden;
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s ease, box-shadow 0.3s ease; /* More elastic transition */
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s ease, box-shadow 0.3s ease;
+            /* More elastic transition */
             height: 100%;
             display: flex;
             flex-direction: column;
-            will-change: transform; /* Performance optimization */
+            will-change: transform;
+            /* Performance optimization */
         }
 
         .project-card:hover {
-            transform: translateY(-10px) scale(1.03); /* Auto enlarge (Scale) + Lift */
-            border-color: rgba(168, 85, 247, 0.4); /* Primary color hint */
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); /* Deeper shadow */
-            z-index: 20; /* Ensure it sits on top of neighbors */
+            transform: translateY(-10px) scale(1.03);
+            /* Auto enlarge (Scale) + Lift */
+            border-color: rgba(168, 85, 247, 0.4);
+            /* Primary color hint */
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            /* Deeper shadow */
+            z-index: 20;
+            /* Ensure it sits on top of neighbors */
         }
 
         /* Flagship Card Style */
         .project-card.flagship {
-            border: 1px solid rgba(255, 215, 0, 0.3); /* Subtle gold hint */
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            /* Subtle gold hint */
         }
+
         .project-card.flagship:hover {
             border-color: rgba(255, 215, 0, 0.6);
             box-shadow: 0 20px 40px -5px rgba(255, 215, 0, 0.1);
@@ -136,19 +150,27 @@
             content: "";
             position: absolute;
             inset: 0;
-            background: radial-gradient(
-                800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-                var(--accent-glow),
-                transparent 40%
-            );
+            background: radial-gradient(800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+                    var(--accent-glow),
+                    transparent 40%);
             opacity: 0;
             transition: opacity 0.5s;
             pointer-events: none !important;
-            z-index: 2; 
+            z-index: 2;
         }
-        .project-card:hover::after { opacity: 1; }
 
-        .card-content { position: relative; z-index: 10; pointer-events: auto; height: 100%; display: flex; flex-direction: column; }
+        .project-card:hover::after {
+            opacity: 1;
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 10;
+            pointer-events: auto;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
 
         /* Modal Styles */
         .modal-overlay {
@@ -165,8 +187,12 @@
             justify-content: center;
             padding: 1rem;
         }
-        .modal-overlay.active { opacity: 1; pointer-events: auto; }
-        
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
         .modal-container {
             background: var(--bg-color);
             border: 1px solid var(--glass-border);
@@ -180,8 +206,14 @@
             position: relative;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
-        .modal-overlay.active .modal-container { transform: scale(1) translateY(0); }
-        body.modal-open { overflow: hidden; }
+
+        .modal-overlay.active .modal-container {
+            transform: scale(1) translateY(0);
+        }
+
+        body.modal-open {
+            overflow: hidden;
+        }
 
         /* Typography & Utilities */
         .logo-gradient-text {
@@ -190,22 +222,40 @@
             background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        
-        .nav-link { position: relative; font-weight: 500; font-size: 0.95rem; color: var(--text-secondary); transition: color 0.3s; }
-        .nav-link:hover { color: var(--text-primary); }
-        .nav-link::after { 
-            content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1.5px; 
-            background: linear-gradient(90deg, #a855f7, #ec4899); 
+
+        .nav-link {
+            position: relative;
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1.5px;
+            background: linear-gradient(90deg, #a855f7, #ec4899);
             transition: width 0.3s ease;
         }
-        .nav-link:hover::after { width: 100%; }
-        
-        #header.scrolled { 
-            background-color: var(--glass-bg); 
-            backdrop-filter: blur(12px); 
-            border-bottom: 1px solid var(--glass-border); 
+
+        .nav-link:hover::after {
+            width: 100%;
         }
-        
+
+        #header.scrolled {
+            background-color: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
         /* Modern Inputs */
         .modern-input {
             background: transparent;
@@ -213,31 +263,179 @@
             color: var(--text-primary);
             transition: all 0.3s ease;
         }
+
         .modern-input:focus {
             border-bottom-color: #a855f7;
             background: linear-gradient(180deg, transparent, var(--accent-glow));
         }
-        .modern-input::placeholder { color: transparent; }
+
+        .modern-input::placeholder {
+            color: transparent;
+        }
 
         /* Scrollbar */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: var(--bg-color); }
-        ::-webkit-scrollbar-thumb { background: #475569; border-radius: 3px; }
-        
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 3px;
+        }
+
         /* Blobs - OPTIMIZED: Reduced blur from 80px to 40px */
-        .bg-blob { position: absolute; filter: blur(40px); opacity: var(--blob-opacity); animation: blob 10s infinite; transition: opacity 0.5s ease; }
-        .blob-1 { top: -10%; left: -10%; width: 500px; height: 500px; background: #4c1d95; animation-delay: 0s; }
-        .blob-2 { top: 20%; right: -10%; width: 400px; height: 400px; background: #831843; animation-delay: 2s; }
-        .blob-3 { bottom: -10%; left: 20%; width: 600px; height: 600px; background: #1e1b4b; animation-delay: 4s; }
+        .bg-blob {
+            position: absolute;
+            filter: blur(40px);
+            opacity: var(--blob-opacity);
+            animation: blob 10s infinite;
+            transition: opacity 0.5s ease;
+        }
+
+        .blob-1 {
+            top: -10%;
+            left: -10%;
+            width: 500px;
+            height: 500px;
+            background: #4c1d95;
+            animation-delay: 0s;
+        }
+
+        .blob-2 {
+            top: 20%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: #831843;
+            animation-delay: 2s;
+        }
+
+        .blob-3 {
+            bottom: -10%;
+            left: 20%;
+            width: 600px;
+            height: 600px;
+            background: #1e1b4b;
+            animation-delay: 4s;
+        }
 
         /* Smooth Hide/Show for Filters */
-        .project-card.hidden { display: none; }
-        
+        .project-card.hidden {
+            display: none;
+        }
+
         /* Micro-interactions */
-        .btn-press:active { transform: scale(0.98); }
-        .icon-float { animation: float 4s ease-in-out infinite; }
+        .btn-press:active {
+            transform: scale(0.98);
+        }
+
+        .icon-float {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        /* Cursor for Typewriter */
+        .cursor {
+            display: inline-block;
+            width: 2px;
+            background-color: #a855f7;
+            animation: blink 1s step-end infinite;
+        }
+
+        /* Back to Top Button */
+        #back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--glass-shadow);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(20px);
+        }
+
+        #back-to-top.visible {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+
+        .back-to-top-icon {
+            width: 14px;
+            transition: transform 0.3s;
+        }
+
+        .back-to-top-icon path {
+            fill: var(--text-primary);
+        }
+
+        #back-to-top:hover {
+            width: 140px;
+            border-radius: 50px;
+            background-color: #a855f7;
+            border-color: rgba(168, 85, 247, 0.4);
+            box-shadow: 0 10px 20px -5px rgba(168, 85, 247, 0.3);
+        }
+
+        #back-to-top:hover .back-to-top-icon {
+            transform: translateY(-200%);
+        }
+
+        #back-to-top::before {
+            position: absolute;
+            bottom: -20px;
+            content: "Back to Top";
+            color: white;
+            font-size: 0px;
+            transition: all 0.3s;
+            font-weight: 700;
+        }
+
+        #back-to-top:hover::before {
+            font-size: 13px;
+            opacity: 1;
+            bottom: unset;
+        }
+
+        @media (max-width: 768px) {
+            #back-to-top {
+                bottom: 20px;
+                right: 20px;
+            }
+
+            #back-to-top:hover {
+                width: 50px;
+                border-radius: 50%;
+            }
+
+            #back-to-top:hover::before {
+                display: none;
+            }
+
+            #back-to-top:hover .back-to-top-icon {
+                transform: none;
+            }
+        }
     </style>
 </head>
+
 <body class="font-sans antialiased selection:bg-primary-500/30 selection:text-primary-600">
 
     <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
@@ -245,7 +443,7 @@
             <div class="flex items-center justify-between h-20">
                 <a href="#home" class="text-2xl font-bold tracking-tight relative group flex items-center gap-1">
                     <span class="logo-gradient-text">Kasi</span>
-                    <span class="text-primary transition-colors duration-300">Viswanath</span>
+                    <span class="logo-gradient-text">Viswanath</span>
                 </a>
                 <nav class="hidden md:flex items-center space-x-10">
                     <a href="#home" class="nav-link">Home</a>
@@ -253,16 +451,19 @@
                     <a href="#research" class="nav-link">Projects</a>
                     <a href="#resume" class="nav-link">Experience</a>
                     <a href="#contact" class="nav-link">Contact</a>
-                    
+
                     <!-- Theme Toggle -->
-                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors btn-press ml-4" aria-label="Toggle Theme">
+                    <button id="theme-toggle"
+                        class="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors btn-press ml-4"
+                        aria-label="Toggle Theme">
                         <i data-feather="moon" class="w-5 h-5 text-gray-500 dark:hidden"></i>
                         <i data-feather="sun" class="w-5 h-5 text-yellow-400 hidden dark:block"></i>
                     </button>
                 </nav>
-                
+
                 <div class="flex items-center gap-4 md:hidden">
-                    <button id="theme-toggle-mobile" class="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors">
+                    <button id="theme-toggle-mobile"
+                        class="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors">
                         <i data-feather="moon" class="w-5 h-5 text-gray-500 dark:hidden"></i>
                         <i data-feather="sun" class="w-5 h-5 text-yellow-400 hidden dark:block"></i>
                     </button>
@@ -273,7 +474,8 @@
             </div>
         </div>
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden absolute top-20 left-0 w-full glass border-b border-gray-800 transition-all duration-300">
+        <div id="mobile-menu"
+            class="hidden md:hidden absolute top-20 left-0 w-full glass border-b border-gray-800 transition-all duration-300">
             <nav class="flex flex-col items-center space-y-6 py-10">
                 <a href="#home" class="nav-link text-lg">Home</a>
                 <a href="#about" class="nav-link text-lg">About</a>
@@ -285,41 +487,49 @@
     </header>
 
     <main>
-        <section id="home" class="hero-bg min-h-screen flex items-center justify-center relative px-4 py-20 overflow-hidden">
+        <section id="home"
+            class="hero-bg min-h-screen flex items-center justify-center relative px-4 py-20 overflow-hidden">
             <div class="bg-gradient-mesh">
                 <div class="bg-blob blob-1"></div>
                 <div class="bg-blob blob-2"></div>
                 <div class="bg-blob blob-3"></div>
             </div>
-            
+
             <div class="container mx-auto text-center relative z-10 flex flex-col items-center">
-                
+
                 <!-- Status Badge -->
                 <div class="gsap-hero opacity-0 translate-y-10 mb-10">
-                    <div class="inline-flex items-center gap-3 px-5 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-gray-500 dark:text-gray-300 text-xs font-semibold uppercase tracking-widest hover:bg-white/10 transition-all cursor-default shadow-sm">
+                    <div
+                        class="inline-flex items-center gap-3 px-5 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-gray-500 dark:text-gray-300 text-xs font-semibold uppercase tracking-widest hover:bg-white/10 transition-all cursor-default shadow-sm">
                         <span class="relative flex h-2 w-2">
-                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                          <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                            <span
+                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
                         </span>
                         <span>Available for Research & Collaboration</span>
                     </div>
                 </div>
 
                 <!-- Adjusted font sizes: text-5xl on mobile, scaling up to 9xl -->
-                <h1 class="gsap-hero opacity-0 translate-y-10 text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter leading-[1.1] mb-8 font-sans text-primary">
+                <h1
+                    class="gsap-hero opacity-0 translate-y-10 text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter leading-[1.1] mb-8 font-sans text-primary">
                     <span class="block mb-2 text-[var(--text-primary)]">Hello, I'm</span>
                     <span class="inline-block logo-gradient-text">Kasi</span>
                     <span class="inline-block logo-gradient-text">Viswanath</span>
                 </h1>
 
-                <!-- Semantic Motion Subtitle -->
-                <div class="gsap-hero opacity-0 translate-y-10 h-8 flex items-center justify-center gap-2 mb-8">
+                <!-- Semantic Motion Subtitle with Typewriter -->
+                <div class="gsap-hero opacity-0 translate-y-10 h-12 flex items-center justify-center gap-2 mb-8">
                     <span class="text-xl md:text-2xl text-gray-400 font-light">Architecting</span>
-                    <span id="semantic-subtitle" class="text-xl md:text-2xl font-medium text-[var(--text-primary)]">Intelligent Systems</span>
+                    <span
+                        class="text-xl md:text-2xl font-medium text-[var(--text-primary)] min-w-[240px] text-left relative">
+                        <span id="semantic-subtitle"></span><span class="cursor"></span>
+                    </span>
                 </div>
 
                 <!-- Strategic Positioning -->
-                <div class="gsap-hero opacity-0 translate-y-10 border-t border-[var(--glass-border)] pt-6 mt-2 max-w-2xl mx-auto">
+                <div
+                    class="gsap-hero opacity-0 translate-y-10 border-t border-[var(--glass-border)] pt-6 mt-2 max-w-2xl mx-auto">
                     <p class="text-base md:text-lg text-[var(--text-primary)] tracking-wide font-medium">
                         Designing AI systems that survive <span class="text-primary-500">real-world constraints</span>
                     </p>
@@ -327,89 +537,126 @@
                         Edge Intelligence • NLP • Embedded Systems
                     </p>
                 </div>
-                
+
                 <div class="gsap-hero opacity-0 translate-y-10 flex flex-wrap justify-center gap-6 mt-10">
-                    <a href="#research" class="magnetic-btn btn-press group relative px-8 py-4 bg-[var(--text-primary)] text-[var(--bg-color)] rounded-full font-bold overflow-hidden transition-all hover:scale-105 shadow-lg">
-                        <span class="relative z-10 flex items-center gap-2">View Projects <i data-feather="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"></i></span>
+                    <a href="#research"
+                        class="magnetic-btn btn-press group relative px-8 py-4 bg-[var(--text-primary)] text-[var(--bg-color)] rounded-full font-bold overflow-hidden transition-all hover:scale-105 shadow-lg">
+                        <span class="relative z-10 flex items-center gap-2">View Projects <i data-feather="arrow-right"
+                                class="w-4 h-4 transition-transform group-hover:translate-x-1"></i></span>
                     </a>
-                    <a href="https://drive.google.com/file/d/1Ti58tEKvOFAB2KChTGhPDp8eMoQ61iiZ/view?usp=sharing" download="Kasi_Viswanath_Vegisetti_Resume.pdf" class="magnetic-btn btn-press glass px-8 py-4 rounded-full font-semibold text-[var(--text-primary)] hover:bg-white/10 transition-all duration-300 flex items-center gap-2">
-                        <i class="w-4 h-4"></i> Open Resume
+                    <a href="https://drive.google.com/file/d/1Ti58tEKvOFAB2KChTGhPDp8eMoQ61iiZ/view?usp=sharing"
+                        target="_blank"
+                        class="magnetic-btn btn-press glass px-8 py-4 rounded-full font-semibold text-[var(--text-primary)] hover:bg-white/10 transition-all duration-300 flex items-center gap-2">
+                        <i data-feather="external-link" class="w-4 h-4"></i> Open Resume
                     </a>
                 </div>
             </div>
-            
-            <!-- Removed the Scroll indicator div here as requested -->
+
         </section>
 
         <!-- About Section -->
         <section id="about" class="section py-32 px-4 relative overflow-hidden">
             <div class="container mx-auto">
                 <div class="text-center mb-24 section-heading opacity-0">
-                    <h2 class="text-3xl md:text-4xl font-bold inline-block bg-clip-text text-transparent bg-gradient-to-r from-[var(--text-primary)] via-gray-400 to-gray-500 tracking-tight">
+                    <h2
+                        class="text-3xl md:text-4xl font-bold inline-block bg-clip-text text-transparent bg-gradient-to-r from-[var(--text-primary)] via-gray-400 to-gray-500 tracking-tight">
                         About The Engineer
                     </h2>
-                    <div class="h-1 w-24 bg-gradient-to-r from-primary-500 to-transparent mx-auto mt-6 rounded-full opacity-50"></div>
+                    <div
+                        class="h-1 w-24 bg-gradient-to-r from-primary-500 to-transparent mx-auto mt-6 rounded-full opacity-50">
+                    </div>
                 </div>
 
                 <div class="flex flex-col lg:flex-row gap-16 lg:gap-24 items-start">
                     <div class="lg:w-1/2 section-content opacity-0 translate-y-10">
                         <div class="glass rounded-3xl p-10 relative overflow-hidden group h-full">
-                            <div class="absolute -top-32 -right-32 w-80 h-80 bg-primary-500/10 rounded-full blur-[100px] group-hover:bg-primary-500/15 transition-colors duration-700"></div>
-                            
+                            <div
+                                class="absolute -top-32 -right-32 w-80 h-80 bg-primary-500/10 rounded-full blur-[100px] group-hover:bg-primary-500/15 transition-colors duration-700">
+                            </div>
+
                             <div class="relative z-10">
                                 <h3 class="text-2xl font-bold text-[var(--text-primary)] mb-8 flex items-center gap-4">
-                                    <div class="p-3 rounded-lg bg-[var(--bg-color)] border border-[var(--glass-border)]"><i data-feather="cpu" class="text-primary-500 w-6 h-6 icon-float"></i></div>
+                                    <div
+                                        class="p-3 rounded-lg bg-[var(--bg-color)] border border-[var(--glass-border)]">
+                                        <i data-feather="cpu" class="text-primary-500 w-6 h-6 icon-float"></i>
+                                    </div>
                                     <span>Core Competencies</span>
                                 </h3>
                                 <p class="text-[var(--text-secondary)] leading-relaxed mb-6 text-lg font-light">
-                                    As a <strong>Team Leader for Avanthi Research Hub (ARH)</strong>, I don't just write code; I architect systems. My passion lies in building production-ready prototypes that solve real-world problems by merging advanced algorithms with practical hardware constraints.
+                                    As a <strong>Team Leader for Avanthi Research Hub (ARH)</strong>, I don't just write
+                                    code; I architect systems. My passion lies in building production-ready prototypes
+                                    that solve real-world problems by merging advanced algorithms with practical
+                                    hardware constraints.
                                 </p>
-                                
-                                <p class="text-[var(--text-primary)] text-sm font-mono border-l-2 border-primary-500 pl-4 mt-6 mb-8 bg-[var(--glass-bg)] p-4 rounded-r-lg">
-                                    I focus on AI that survives constraints — limited compute, real-time deadlines, and hardware noise.
+
+                                <p
+                                    class="text-[var(--text-primary)] text-sm font-mono border-l-2 border-primary-500 pl-4 mt-6 mb-8 bg-[var(--glass-bg)] p-4 rounded-r-lg">
+                                    I focus on AI that survives constraints — limited compute, real-time deadlines, and
+                                    hardware noise.
                                 </p>
 
                                 <div class="space-y-4">
-                                    <h4 class="text-sm uppercase tracking-widest text-gray-500 font-bold">Engineering Philosophy</h4>
+                                    <h4 class="text-sm uppercase tracking-widest text-gray-500 font-bold">Engineering
+                                        Philosophy</h4>
                                     <ul class="text-[var(--text-secondary)] space-y-2 text-sm font-light">
-                                        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary-500 rounded-full"></span> Build for constraints first</li>
-                                        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary-500 rounded-full"></span> Prefer deployable systems over demos</li>
-                                        <li class="flex items-center gap-2"><span class="w-1 h-1 bg-primary-500 rounded-full"></span> Optimize for signal, not hype</li>
+                                        <li class="flex items-center gap-2"><span
+                                                class="w-1 h-1 bg-primary-500 rounded-full"></span> Build for
+                                            constraints first</li>
+                                        <li class="flex items-center gap-2"><span
+                                                class="w-1 h-1 bg-primary-500 rounded-full"></span> Prefer deployable
+                                            systems over demos</li>
+                                        <li class="flex items-center gap-2"><span
+                                                class="w-1 h-1 bg-primary-500 rounded-full"></span> Optimize for signal,
+                                            not hype</li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="lg:w-1/2 section-content opacity-0 translate-y-10" style="transition-delay: 0.2s">
+                    <div class="lg:w-1/2 section-content opacity-0 translate-y-10">
                         <div class="grid grid-cols-2 gap-5">
-                            <div class="glass p-8 rounded-2xl hover:bg-[var(--glass-bg)] transition-all duration-300 group">
-                                <i data-feather="code" class="text-primary-500 mb-4 group-hover:scale-110 transition-transform duration-300"></i>
+                            <div
+                                class="glass p-8 rounded-2xl hover:bg-[var(--glass-bg)] transition-all duration-300 group">
+                                <i data-feather="code"
+                                    class="text-primary-500 mb-4 group-hover:scale-110 transition-transform duration-300"></i>
                                 <h4 class="font-semibold text-[var(--text-primary)] mb-2 tracking-wide">Languages</h4>
-                                <p class="text-sm text-gray-500 font-mono">Python, C/C++, JS</p>
+                                <p class="text-sm text-gray-500 font-mono">Python, C, C++, Java</p>
                             </div>
-                            <div class="glass p-8 rounded-2xl hover:bg-[var(--glass-bg)] transition-all duration-300 group">
-                                <i data-feather="layers" class="text-secondary-500 mb-4 group-hover:scale-110 transition-transform duration-300"></i>
+                            <div
+                                class="glass p-8 rounded-2xl hover:bg-[var(--glass-bg)] transition-all duration-300 group">
+                                <i data-feather="layers"
+                                    class="text-secondary-500 mb-4 group-hover:scale-110 transition-transform duration-300"></i>
                                 <h4 class="font-semibold text-[var(--text-primary)] mb-2 tracking-wide">Domains</h4>
-                                <p class="text-sm text-gray-500 font-mono">VLSI, NLP, Embedded</p>
+                                <p class="text-sm text-gray-500 font-mono">NLP, Machine Learning, Embedded Systems</p>
                             </div>
-                            <div class="glass p-8 rounded-2xl hover:bg-[var(--glass-bg)] transition-all duration-300 group">
-                                <i data-feather="cpu" class="text-blue-500 mb-4 group-hover:scale-110 transition-transform duration-300"></i>
+                            <div
+                                class="glass p-8 rounded-2xl hover:bg-[var(--glass-bg)] transition-all duration-300 group">
+                                <i data-feather="cpu"
+                                    class="text-blue-500 mb-4 group-hover:scale-110 transition-transform duration-300"></i>
                                 <h4 class="font-semibold text-[var(--text-primary)] mb-2 tracking-wide">Hardware</h4>
-                                <p class="text-sm text-gray-500 font-mono">Jetson, RPi, Snapdragon</p>
+                                <p class="text-sm text-gray-500 font-mono">Arduino, ESP32, RPi, Snapdragon</p>
                             </div>
-                            <div class="glass p-8 rounded-2xl hover:bg-[var(--glass-bg)] transition-all duration-300 group">
-                                <i data-feather="tool" class="text-green-500 mb-4 group-hover:scale-110 transition-transform duration-300"></i>
+                            <div
+                                class="glass p-8 rounded-2xl hover:bg-[var(--glass-bg)] transition-all duration-300 group">
+                                <i data-feather="tool"
+                                    class="text-green-500 mb-4 group-hover:scale-110 transition-transform duration-300"></i>
                                 <h4 class="font-semibold text-[var(--text-primary)] mb-2 tracking-wide">Tools</h4>
                                 <p class="text-sm text-gray-500 font-mono">Vosk, Git, Docker, ADB</p>
                             </div>
                         </div>
-                        
-                        <div class="mt-8 glass p-8 rounded-2xl border-l-2 border-l-primary-500 relative overflow-hidden">
-                            <div class="absolute inset-0 bg-gradient-to-r from-primary-500/5 to-transparent pointer-events-none"></div>
+
+                        <div
+                            class="mt-8 glass p-8 rounded-2xl border-l-2 border-l-primary-500 relative overflow-hidden">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-r from-primary-500/5 to-transparent pointer-events-none">
+                            </div>
                             <h4 class="font-bold text-[var(--text-primary)] mb-3 text-lg">Technical Highlight</h4>
                             <p class="text-[var(--text-secondary)] leading-relaxed text-sm">
-                                Successfully benchmarked and optimized AI models on the <span class="text-[var(--text-primary)] font-medium">Qualcomm Snapdragon X Plus NPU (45 TOPS)</span> using SNPE SDK, achieving significant inference speedups for edge deployment.
+                                Successfully benchmarked and optimized AI models on the <span
+                                    class="text-[var(--text-primary)] font-medium">Qualcomm Snapdragon X Plus NPU (45
+                                    TOPS)</span> using SNPE SDK, achieving significant inference speedups for edge
+                                deployment.
                             </p>
                         </div>
                     </div>
@@ -421,7 +668,8 @@
         <section id="research" class="section py-32 px-4 relative">
             <div class="container mx-auto">
                 <div class="text-center mb-10 section-heading opacity-0">
-                    <h2 class="text-3xl md:text-4xl font-bold inline-block bg-clip-text text-transparent bg-gradient-to-r from-[var(--text-primary)] via-gray-400 to-gray-500 tracking-tight">
+                    <h2
+                        class="text-3xl md:text-4xl font-bold inline-block bg-clip-text text-transparent bg-gradient-to-r from-[var(--text-primary)] via-gray-400 to-gray-500 tracking-tight">
                         Innovations & Applied Systems
                     </h2>
                     <p class="text-[var(--text-secondary)] mt-4 max-w-2xl mx-auto">
@@ -431,207 +679,409 @@
 
                 <!-- Filter Bar -->
                 <div class="flex flex-wrap justify-center gap-3 mb-16 opacity-0" id="filter-container">
-                    <button class="filter-btn active px-5 py-2 rounded-full text-sm font-semibold transition-all bg-primary-500 text-white shadow-lg" data-filter="all">All</button>
-                    <button class="filter-btn px-5 py-2 rounded-full text-sm font-semibold transition-all glass text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-white/10" data-filter="healthcare">Healthcare</button>
-                    <button class="filter-btn px-5 py-2 rounded-full text-sm font-semibold transition-all glass text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-white/10" data-filter="research">Research</button>
-                    <button class="filter-btn px-5 py-2 rounded-full text-sm font-semibold transition-all glass text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-white/10" data-filter="systems">Systems</button>
+                    <button
+                        class="filter-btn active px-5 py-2 rounded-full text-sm font-semibold transition-colors duration-300 bg-primary-500 text-white shadow-lg"
+                        data-filter="all">All</button>
+                    <button
+                        class="filter-btn px-5 py-2 rounded-full text-sm font-semibold transition-colors duration-300 glass text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-white/10"
+                        data-filter="healthcare">Healthcare</button>
+                    <button
+                        class="filter-btn px-5 py-2 rounded-full text-sm font-semibold transition-colors duration-300 glass text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-white/10"
+                        data-filter="research">Research</button>
+                    <button
+                        class="filter-btn px-5 py-2 rounded-full text-sm font-semibold transition-colors duration-300 glass text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-white/10"
+                        data-filter="systems">Systems</button>
                 </div>
-                
+
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-24" id="projects-grid">
-                    
+
                     <!-- 1. Pregnancy Diabetes -->
-                    <div class="project-card group section-content opacity-0 translate-y-10" data-category="healthcare engineering">
+                    <div class="project-card group section-content opacity-0 translate-y-10"
+                        data-category="healthcare engineering">
                         <div class="card-content p-8">
-                             <div class="flex justify-between items-start mb-6">
-                                <div class="p-3 rounded-2xl bg-gradient-to-br from-rose-500/20 to-fuchsia-600/10 border border-rose-500/20 text-rose-400 dark:text-rose-400 text-rose-600">
+                            <div class="flex justify-between items-start mb-6">
+                                <div
+                                    class="p-3 rounded-2xl bg-gradient-to-br from-rose-500/20 to-fuchsia-600/10 border border-rose-500/20 text-rose-400 dark:text-rose-400 text-rose-600">
                                     <i data-feather="heart" class="w-6 h-6"></i>
                                 </div>
-                                <span class="px-3 py-1 bg-white/5 rounded-full text-[10px] font-bold tracking-widest uppercase text-gray-400 border border-white/5">ENGINEERING</span>
+                                <span
+                                    class="px-3 py-1 bg-white/5 rounded-full text-[10px] font-bold tracking-widest uppercase text-gray-400 border border-white/5">HEALTHCARE</span>
                             </div>
-                            <h3 class="text-xl font-bold text-[var(--text-primary)] mb-3 group-hover:text-rose-500 transition-colors">Pregnancy Diabetes Prediction</h3>
+                            <h3
+                                class="text-xl font-bold text-[var(--text-primary)] mb-3 group-hover:text-rose-500 transition-colors">
+                                Pregnancy Diabetes Prediction</h3>
                             <div class="mb-6 flex-grow">
-                                <p class="text-sm text-[var(--text-secondary)] mb-2"><strong class="text-rose-500">Problem:</strong> Late detection of GDM in low-resource clinics.</p>
-                                <p class="text-sm text-[var(--text-secondary)] mb-2"><strong class="text-rose-500">Outcome:</strong> Scalable screening for early intervention.</p>
+                                <p class="text-sm text-[var(--text-secondary)] mb-2"><strong
+                                        class="text-rose-500">Problem:</strong> Late detection of Gestational Diabetes
+                                    in low-resource clinics.</p>
+                                <p class="text-sm text-[var(--text-secondary)] mb-4"><strong
+                                        class="text-rose-500">Solution:</strong> Built a lightweight ML screening model
+                                    using clinical features for early-risk prediction.</p>
+                                <p class="text-[10px] text-gray-500 font-mono tracking-wider"><span
+                                        class="text-rose-500/70">TECH:</span> Python, Scikit-learn, Pandas, ML
+                                    Classification</p>
                             </div>
-                            <div class="mt-auto border-t border-[var(--glass-border)] pt-6 flex items-center justify-between">
-                                <button onclick="openModal('diabetes')" class="magnetic-btn text-xs font-bold text-[var(--text-primary)] hover:text-primary-500 transition-all flex items-center gap-1 hover:scale-105 origin-left duration-300">View case study <i data-feather="arrow-right" class="w-3 h-3"></i></button>
-                                <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-white/10 cursor-pointer"><i data-feather="github" class="w-4 h-4 text-gray-400"></i></div>
+                            <div
+                                class="mt-auto border-t border-[var(--glass-border)] pt-6 flex items-center justify-between">
+                                <button onclick="openModal('diabetes')"
+                                    class="magnetic-btn text-xs font-bold text-[var(--text-primary)] hover:text-primary-500 transition-all flex items-center gap-1 hover:scale-105 origin-left duration-300">View
+                                    case study <i data-feather="arrow-right" class="w-3 h-3"></i></button>
+                                <a href="https://github.com/Viswanath129" target="_blank"
+                                    class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-white/10 cursor-pointer"><i
+                                        data-feather="github" class="w-4 h-4 text-gray-400"></i></a>
                             </div>
                         </div>
                     </div>
 
                     <!-- 2. Brain Stroke -->
-                    <div class="project-card group section-content opacity-0 translate-y-10" data-category="healthcare engineering">
-                         <div class="card-content p-8">
-                             <div class="flex justify-between items-start mb-6">
-                                <div class="p-3 rounded-2xl bg-gradient-to-br from-orange-500/20 to-red-600/10 border border-orange-500/20 text-orange-600 dark:text-orange-400">
+                    <div class="project-card group section-content opacity-0 translate-y-10"
+                        data-category="healthcare engineering">
+                        <div class="card-content p-8">
+                            <div class="flex justify-between items-start mb-6">
+                                <div
+                                    class="p-3 rounded-2xl bg-gradient-to-br from-orange-500/20 to-red-600/10 border border-orange-500/20 text-orange-600 dark:text-orange-400">
                                     <i data-feather="activity" class="w-6 h-6"></i>
                                 </div>
-                                <span class="px-3 py-1 bg-white/5 rounded-full text-[10px] font-bold tracking-widest uppercase text-gray-400 border border-white/5">ENGINEERING</span>
+                                <span
+                                    class="px-3 py-1 bg-white/5 rounded-full text-[10px] font-bold tracking-widest uppercase text-gray-400 border border-white/5">HEALTHCARE</span>
                             </div>
-                            <h3 class="text-xl font-bold text-[var(--text-primary)] mb-3 group-hover:text-orange-500 transition-colors">Brain Stroke Prediction</h3>
+                            <h3
+                                class="text-xl font-bold text-[var(--text-primary)] mb-3 group-hover:text-orange-500 transition-colors">
+                                Brain Stroke Prediction</h3>
                             <div class="mb-6 flex-grow">
-                                <p class="text-sm text-[var(--text-secondary)] mb-2"><strong class="text-orange-500">Problem:</strong> Silent indicators often ignored.</p>
-                                <p class="text-sm text-[var(--text-secondary)] mb-2"><strong class="text-orange-500">Outcome:</strong> High-recall risk estimation.</p>
+                                <p class="text-sm text-[var(--text-secondary)] mb-2"><strong
+                                        class="text-orange-500">Problem:</strong> Hidden lifestyle indicators of stroke
+                                    often go unnoticed.</p>
+                                <p class="text-sm text-[var(--text-secondary)] mb-4"><strong
+                                        class="text-orange-500">Solution:</strong> Designed a high-recall predictive
+                                    model prioritizing early risk detection.</p>
+                                <p class="text-[10px] text-gray-500 font-mono tracking-wider"><span
+                                        class="text-orange-500/70">TECH:</span> Python, Scikit-learn, Data
+                                    Preprocessing, ML Models</p>
                             </div>
-                            <div class="mt-auto border-t border-[var(--glass-border)] pt-6 flex items-center justify-between">
-                                <button onclick="openModal('stroke')" class="magnetic-btn text-xs font-bold text-[var(--text-primary)] hover:text-primary-500 transition-all flex items-center gap-1 hover:scale-105 origin-left duration-300">View case study <i data-feather="arrow-right" class="w-3 h-3"></i></button>
-                                <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-white/10 cursor-pointer"><i data-feather="github" class="w-4 h-4 text-gray-400"></i></div>
+                            <div
+                                class="mt-auto border-t border-[var(--glass-border)] pt-6 flex items-center justify-between">
+                                <button onclick="openModal('stroke')"
+                                    class="magnetic-btn text-xs font-bold text-[var(--text-primary)] hover:text-primary-500 transition-all flex items-center gap-1 hover:scale-105 origin-left duration-300">View
+                                    case study <i data-feather="arrow-right" class="w-3 h-3"></i></button>
+                                <a href="https://github.com/Viswanath129" target="_blank"
+                                    class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-white/10 cursor-pointer"><i
+                                        data-feather="github" class="w-4 h-4 text-gray-400"></i></a>
                             </div>
                         </div>
                     </div>
 
                     <!-- 3. Breast Cancer (Research) -->
-                    <div class="project-card group section-content opacity-0 translate-y-10" data-category="healthcare research">
+                    <div class="project-card group section-content opacity-0 translate-y-10"
+                        data-category="healthcare research">
                         <div class="card-content p-8">
-                             <div class="flex justify-between items-start mb-6">
-                                <div class="p-3 rounded-2xl bg-gradient-to-br from-pink-500/20 to-rose-600/10 border border-pink-500/20 text-pink-600 dark:text-pink-400">
+                            <div class="flex justify-between items-start mb-6">
+                                <div
+                                    class="p-3 rounded-2xl bg-gradient-to-br from-pink-500/20 to-rose-600/10 border border-pink-500/20 text-pink-600 dark:text-pink-400">
                                     <i data-feather="shield" class="w-6 h-6"></i>
                                 </div>
                                 <div class="flex items-center gap-2">
-                                    <span class="text-[9px] px-2 py-1 rounded bg-pink-500/10 text-pink-500 border border-pink-500/20 font-bold tracking-wider">RESEARCH</span>
+                                    <span
+                                        class="text-[9px] px-2 py-1 rounded bg-pink-500/10 text-pink-500 border border-pink-500/20 font-bold tracking-wider">RESEARCH</span>
                                 </div>
                             </div>
-                            <h3 class="text-xl font-bold text-[var(--text-primary)] mb-3 group-hover:text-pink-500 transition-colors">Breast Cancer Prediction</h3>
-                             <div class="mb-6 flex-grow">
-                                <p class="text-sm text-[var(--text-secondary)] mb-2"><strong class="text-pink-500">Focus:</strong> Quantum ML feasibility.</p>
-                                <p class="text-sm text-[var(--text-secondary)] mb-2"><strong class="text-pink-500">Outcome:</strong> Quantified QML advantage.</p>
-                             </div>
-                            <div class="mt-auto border-t border-[var(--glass-border)] pt-6 flex items-center justify-between">
-                                <button onclick="openModal('cancer')" class="magnetic-btn text-xs font-bold text-[var(--text-primary)] hover:text-primary-500 transition-all flex items-center gap-1 hover:scale-105 origin-left duration-300">View case study <i data-feather="arrow-right" class="w-3 h-3"></i></button>
-                                <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-white/10 cursor-pointer"><i data-feather="github" class="w-4 h-4 text-gray-400"></i></div>
+                            <h3
+                                class="text-xl font-bold text-[var(--text-primary)] mb-3 group-hover:text-pink-500 transition-colors">
+                                Breast Cancer Prediction</h3>
+                            <div class="mb-6 flex-grow">
+                                <p class="text-sm text-[var(--text-secondary)] mb-2"><strong
+                                        class="text-pink-500">Problem:</strong> Classical ML struggles with
+                                    high-dimensional oncology data.</p>
+                                <p class="text-sm text-[var(--text-secondary)] mb-4"><strong
+                                        class="text-pink-500">Solution:</strong> Compared Deep Learning with hybrid
+                                    Quantum ML models to test feature separability.</p>
+                                <p class="text-[10px] text-gray-500 font-mono tracking-wider"><span
+                                        class="text-pink-500/70">TECH:</span> Python, PyTorch, Qiskit, Neural Networks
+                                </p>
+                            </div>
+                            <div
+                                class="mt-auto border-t border-[var(--glass-border)] pt-6 flex items-center justify-between">
+                                <button onclick="openModal('cancer')"
+                                    class="magnetic-btn text-xs font-bold text-[var(--text-primary)] hover:text-primary-500 transition-all flex items-center gap-1 hover:scale-105 origin-left duration-300">View
+                                    case study <i data-feather="arrow-right" class="w-3 h-3"></i></button>
+                                <a href="https://github.com/Viswanath129" target="_blank"
+                                    class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-white/10 cursor-pointer"><i
+                                        data-feather="github" class="w-4 h-4 text-gray-400"></i></a>
                             </div>
                         </div>
                     </div>
 
                     <!-- 4. ClassPulse AI -->
-                    <div class="project-card group section-content opacity-0 translate-y-10" data-category="systems engineering">
+                    <div class="project-card group section-content opacity-0 translate-y-10"
+                        data-category="systems engineering">
                         <div class="card-content p-8">
-                             <div class="flex justify-between items-start mb-6">
-                                <div class="p-3 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-violet-600/10 border border-indigo-500/20 text-indigo-600 dark:text-indigo-400">
+                            <div class="flex justify-between items-start mb-6">
+                                <div
+                                    class="p-3 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-violet-600/10 border border-indigo-500/20 text-indigo-600 dark:text-indigo-400">
                                     <i data-feather="bar-chart-2" class="w-6 h-6"></i>
                                 </div>
-                                <span class="px-3 py-1 bg-white/5 rounded-full text-[10px] font-bold tracking-widest uppercase text-gray-400 border border-white/5">ENGINEERING</span>
+                                <span
+                                    class="px-3 py-1 bg-white/5 rounded-full text-[10px] font-bold tracking-widest uppercase text-gray-400 border border-white/5">ENGINEERING</span>
                             </div>
-                            <h3 class="text-xl font-bold text-[var(--text-primary)] mb-3 group-hover:text-indigo-500 transition-colors">ClassPulse AI</h3>
-                             <div class="mb-6 flex-grow">
-                                <p class="text-sm text-[var(--text-secondary)] mb-2"><strong class="text-indigo-500">Problem:</strong> Lack of real-time insights.</p>
-                                <p class="text-sm text-[var(--text-secondary)] mb-2"><strong class="text-indigo-500">Outcome:</strong> Live engagement tracking.</p>
-                             </div>
-                            <div class="mt-auto border-t border-[var(--glass-border)] pt-6 flex items-center justify-between">
-                                <button onclick="openModal('classpulse')" class="magnetic-btn text-xs font-bold text-[var(--text-primary)] hover:text-primary-500 transition-all flex items-center gap-1 hover:scale-105 origin-left duration-300">View case study <i data-feather="arrow-right" class="w-3 h-3"></i></button>
-                                <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-white/10 cursor-pointer"><i data-feather="github" class="w-4 h-4 text-gray-400"></i></div>
+                            <h3
+                                class="text-xl font-bold text-[var(--text-primary)] mb-3 group-hover:text-indigo-500 transition-colors">
+                                ClassPulse AI</h3>
+                            <div class="mb-6 flex-grow">
+                                <p class="text-sm text-[var(--text-secondary)] mb-2"><strong
+                                        class="text-indigo-500">Problem:</strong> Teachers lack real-time insight into
+                                    classroom engagement.</p>
+                                <p class="text-sm text-[var(--text-secondary)] mb-4"><strong
+                                        class="text-indigo-500">Solution:</strong> Built a privacy-aware analytics
+                                    pipeline converting behavior signals into engagement metrics.</p>
+                                <p class="text-[10px] text-gray-500 font-mono tracking-wider"><span
+                                        class="text-indigo-500/70">TECH:</span> Python, OpenCV, Data Analytics,
+                                    Visualization, Fast API</p>
+                            </div>
+                            <div
+                                class="mt-auto border-t border-[var(--glass-border)] pt-6 flex items-center justify-between">
+                                <button onclick="openModal('classpulse')"
+                                    class="magnetic-btn text-xs font-bold text-[var(--text-primary)] hover:text-primary-500 transition-all flex items-center gap-1 hover:scale-105 origin-left duration-300">View
+                                    case study <i data-feather="arrow-right" class="w-3 h-3"></i></button>
+                                <a href="https://github.com/Viswanath129" target="_blank"
+                                    class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-white/10 cursor-pointer"><i
+                                        data-feather="github" class="w-4 h-4 text-gray-400"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Synergy 2K26 -->
+                    <div class="project-card group section-content opacity-0 translate-y-10"
+                        data-category="systems engineering">
+                        <div class="card-content p-8">
+                            <div class="flex justify-between items-start mb-6">
+                                <div
+                                    class="p-3 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-blue-600/10 border border-cyan-500/20 text-cyan-600 dark:text-cyan-400">
+                                    <i data-feather="zap" class="w-6 h-6"></i>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <span
+                                        class="px-3 py-1 bg-white/5 rounded-full text-[10px] font-bold tracking-widest uppercase text-gray-400 border border-white/5">PRODUCTION</span>
+                                </div>
+                            </div>
+                            <h3
+                                class="text-xl font-bold text-[var(--text-primary)] mb-3 group-hover:text-cyan-500 transition-colors">
+                                Synergy 2K26 Platform</h3>
+                            <div class="mb-6 flex-grow">
+                                <p class="text-sm text-[var(--text-secondary)] mb-2"><strong
+                                        class="text-cyan-500">Problem:</strong> Manual handling of event registrations
+                                    and coordination for a tech fest.</p>
+                                <p class="text-sm text-[var(--text-secondary)] mb-4"><strong
+                                        class="text-cyan-500">Solution:</strong> Developed and deployed a centralized
+                                    web platform for registrations and participant flow.</p>
+                                <p class="text-[10px] text-gray-500 font-mono tracking-wider"><span
+                                        class="text-cyan-500/70">TECH:</span> HTML, CSS, JavaScript, Vercel, Responsive
+                                    UI</p>
+                            </div>
+                            <div
+                                class="mt-auto border-t border-[var(--glass-border)] pt-6 flex items-center justify-between">
+                                <button onclick="openModal('synergy')"
+                                    class="magnetic-btn text-xs font-bold text-[var(--text-primary)] hover:text-primary-500 transition-all flex items-center gap-1 hover:scale-105 origin-left duration-300">View
+                                    case study <i data-feather="arrow-right" class="w-3 h-3"></i></button>
+                                <a href="https://synergy2k26.vercel.app/" target="_blank"
+                                    class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-white/10 cursor-pointer"><i
+                                        data-feather="external-link" class="w-4 h-4 text-gray-400"></i></a>
                             </div>
                         </div>
                     </div>
 
                     <!-- 5. Resume Screening -->
-                    <div class="project-card group section-content opacity-0 translate-y-10" data-category="systems engineering">
+                    <div class="project-card group section-content opacity-0 translate-y-10"
+                        data-category="systems engineering">
                         <div class="card-content p-8">
-                             <div class="flex justify-between items-start mb-6">
-                                <div class="p-3 rounded-2xl bg-gradient-to-br from-sky-500/20 to-blue-600/10 border border-sky-500/20 text-sky-600 dark:text-sky-400">
+                            <div class="flex justify-between items-start mb-6">
+                                <div
+                                    class="p-3 rounded-2xl bg-gradient-to-br from-sky-500/20 to-blue-600/10 border border-sky-500/20 text-sky-600 dark:text-sky-400">
                                     <i data-feather="file-text" class="w-6 h-6"></i>
                                 </div>
-                                <span class="px-3 py-1 bg-white/5 rounded-full text-[10px] font-bold tracking-widest uppercase text-gray-400 border border-white/5">ENGINEERING</span>
+                                <span
+                                    class="px-3 py-1 bg-white/5 rounded-full text-[10px] font-bold tracking-widest uppercase text-gray-400 border border-white/5">ENGINEERING</span>
                             </div>
-                            <h3 class="text-xl font-bold text-[var(--text-primary)] mb-3 group-hover:text-sky-500 transition-colors">Resume Screening Bot</h3>
+                            <h3
+                                class="text-xl font-bold text-[var(--text-primary)] mb-3 group-hover:text-sky-500 transition-colors">
+                                Resume Screening Bot</h3>
                             <div class="mb-6 flex-grow">
-                                <p class="text-sm text-[var(--text-secondary)] mb-2"><strong class="text-sky-500">Approach:</strong> TF-IDF & NLP pipeline.</p>
-                                <p class="text-sm text-[var(--text-secondary)] mb-2"><strong class="text-sky-500">Impact:</strong> 70% faster shortlisting.</p>
+                                <p class="text-sm text-[var(--text-secondary)] mb-2"><strong
+                                        class="text-sky-500">Problem:</strong> Manual resume shortlisting is slow and
+                                    inconsistent.</p>
+                                <p class="text-sm text-[var(--text-secondary)] mb-4"><strong
+                                        class="text-sky-500">Solution:</strong> Created an NLP pipeline using TF-IDF and
+                                    cosine similarity for semantic ranking.</p>
+                                <p class="text-[10px] text-gray-500 font-mono tracking-wider"><span
+                                        class="text-sky-500/70">TECH:</span> Python, NLP, Scikit-learn, TF-IDF,
+                                    Streamlit</p>
                             </div>
-                            <div class="mt-auto border-t border-[var(--glass-border)] pt-6 flex items-center justify-between">
-                                <button onclick="openModal('resume')" class="magnetic-btn text-xs font-bold text-[var(--text-primary)] hover:text-primary-500 transition-all flex items-center gap-1 hover:scale-105 origin-left duration-300">View case study <i data-feather="arrow-right" class="w-3 h-3"></i></button>
-                                <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-white/10 cursor-pointer"><i data-feather="github" class="w-4 h-4 text-gray-400"></i></div>
+                            <div
+                                class="mt-auto border-t border-[var(--glass-border)] pt-6 flex items-center justify-between">
+                                <button onclick="openModal('resume')"
+                                    class="magnetic-btn text-xs font-bold text-[var(--text-primary)] hover:text-primary-500 transition-all flex items-center gap-1 hover:scale-105 origin-left duration-300">View
+                                    case study <i data-feather="arrow-right" class="w-3 h-3"></i></button>
+                                <a href="https://github.com/Viswanath129" target="_blank"
+                                    class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-white/10 cursor-pointer"><i
+                                        data-feather="github" class="w-4 h-4 text-gray-400"></i></a>
                             </div>
                         </div>
                     </div>
 
                     <!-- 6. AR Gesture Games -->
-                    <div class="project-card group section-content opacity-0 translate-y-10" data-category="systems engineering">
-                         <div class="card-content p-8">
-                             <div class="flex justify-between items-start mb-6">
-                                <div class="p-3 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-green-600/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400">
+                    <div class="project-card group section-content opacity-0 translate-y-10"
+                        data-category="systems engineering">
+                        <div class="card-content p-8">
+                            <div class="flex justify-between items-start mb-6">
+                                <div
+                                    class="p-3 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-green-600/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400">
                                     <i data-feather="camera" class="w-6 h-6"></i>
                                 </div>
-                                <span class="px-3 py-1 bg-white/5 rounded-full text-[10px] font-bold tracking-widest uppercase text-gray-400 border border-white/5">ENGINEERING</span>
+                                <span
+                                    class="px-3 py-1 bg-white/5 rounded-full text-[10px] font-bold tracking-widest uppercase text-gray-400 border border-white/5">ENGINEERING</span>
                             </div>
-                            <h3 class="text-xl font-bold text-[var(--text-primary)] mb-3 group-hover:text-emerald-500 transition-colors">AR Gesture Games</h3>
+                            <h3
+                                class="text-xl font-bold text-[var(--text-primary)] mb-3 group-hover:text-emerald-500 transition-colors">
+                                AR Gesture Games</h3>
                             <div class="mb-6 flex-grow">
-                                <p class="text-sm text-[var(--text-secondary)] mb-2"><strong class="text-emerald-500">Approach:</strong> CV-based interaction.</p>
-                                <p class="text-sm text-[var(--text-secondary)] mb-2"><strong class="text-emerald-500">Impact:</strong> Zero-hardware gaming.</p>
+                                <p class="text-sm text-[var(--text-secondary)] mb-2"><strong
+                                        class="text-emerald-500">Problem:</strong> Gaming requires external controllers
+                                    or hardware.</p>
+                                <p class="text-sm text-[var(--text-secondary)] mb-4"><strong
+                                        class="text-emerald-500">Solution:</strong> Built gesture-controlled games using
+                                    real-time hand tracking via webcam.</p>
+                                <p class="text-[10px] text-gray-500 font-mono tracking-wider"><span
+                                        class="text-emerald-500/70">TECH:</span> Python, OpenCV, MediaPipe, Computer
+                                    Vision</p>
                             </div>
-                            <div class="mt-auto border-t border-[var(--glass-border)] pt-6 flex items-center justify-between">
-                                <button onclick="openModal('ar')" class="magnetic-btn text-xs font-bold text-[var(--text-primary)] hover:text-primary-500 transition-all flex items-center gap-1 hover:scale-105 origin-left duration-300">View case study <i data-feather="arrow-right" class="w-3 h-3"></i></button>
-                                <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-white/10 cursor-pointer"><i data-feather="github" class="w-4 h-4 text-gray-400"></i></div>
+                            <div
+                                class="mt-auto border-t border-[var(--glass-border)] pt-6 flex items-center justify-between">
+                                <button onclick="openModal('ar')"
+                                    class="magnetic-btn text-xs font-bold text-[var(--text-primary)] hover:text-primary-500 transition-all flex items-center gap-1 hover:scale-105 origin-left duration-300">View
+                                    case study <i data-feather="arrow-right" class="w-3 h-3"></i></button>
+                                <a href="https://github.com/Viswanath129" target="_blank"
+                                    class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-white/10 cursor-pointer"><i
+                                        data-feather="github" class="w-4 h-4 text-gray-400"></i></a>
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- 7. Academic Automation -->
-                    <div class="project-card group section-content opacity-0 translate-y-10" data-category="systems engineering">
+                    <div class="project-card group section-content opacity-0 translate-y-10"
+                        data-category="systems engineering">
                         <div class="card-content p-8">
-                             <div class="flex justify-between items-start mb-6">
-                                <div class="p-3 rounded-2xl bg-gradient-to-br from-teal-500/20 to-cyan-600/10 border border-teal-500/20 text-teal-600 dark:text-teal-400">
+                            <div class="flex justify-between items-start mb-6">
+                                <div
+                                    class="p-3 rounded-2xl bg-gradient-to-br from-teal-500/20 to-cyan-600/10 border border-teal-500/20 text-teal-600 dark:text-teal-400">
                                     <i data-feather="calendar" class="w-6 h-6"></i>
                                 </div>
-                                <span class="px-3 py-1 bg-white/5 rounded-full text-[10px] font-bold tracking-widest uppercase text-gray-400 border border-white/5">ENGINEERING</span>
+                                <span
+                                    class="px-3 py-1 bg-white/5 rounded-full text-[10px] font-bold tracking-widest uppercase text-gray-400 border border-white/5">ENGINEERING</span>
                             </div>
-                            <h3 class="text-xl font-bold text-[var(--text-primary)] mb-3 group-hover:text-teal-500 transition-colors">Academic Suite</h3>
+                            <h3
+                                class="text-xl font-bold text-[var(--text-primary)] mb-3 group-hover:text-teal-500 transition-colors">
+                                Academic Suite</h3>
                             <div class="mb-6 flex-grow">
-                                <p class="text-sm text-[var(--text-secondary)] mb-2"><strong class="text-teal-500">Problem:</strong> Scheduling conflicts.</p>
-                                <p class="text-sm text-[var(--text-secondary)] mb-2"><strong class="text-teal-500">Impact:</strong> 90% faster resolution.</p>
+                                <p class="text-sm text-[var(--text-secondary)] mb-2"><strong
+                                        class="text-teal-500">Problem:</strong> Manual timetable creation causes
+                                    frequent scheduling conflicts.</p>
+                                <p class="text-sm text-[var(--text-secondary)] mb-4"><strong
+                                        class="text-teal-500">Solution:</strong> Designed a constraint-based scheduling
+                                    system handling rooms, faculty, and slots.</p>
+                                <p class="text-[10px] text-gray-500 font-mono tracking-wider"><span
+                                        class="text-teal-500/70">TECH:</span> Python, Logic Algorithms</p>
                             </div>
-                            <div class="mt-auto border-t border-[var(--glass-border)] pt-6 flex items-center justify-between">
-                                <button onclick="openModal('automation')" class="magnetic-btn text-xs font-bold text-[var(--text-primary)] hover:text-primary-500 transition-all flex items-center gap-1 hover:scale-105 origin-left duration-300">View case study <i data-feather="arrow-right" class="w-3 h-3"></i></button>
-                                <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-white/10 cursor-pointer"><i data-feather="github" class="w-4 h-4 text-gray-400"></i></div>
+                            <div
+                                class="mt-auto border-t border-[var(--glass-border)] pt-6 flex items-center justify-between">
+                                <button onclick="openModal('automation')"
+                                    class="magnetic-btn text-xs font-bold text-[var(--text-primary)] hover:text-primary-500 transition-all flex items-center gap-1 hover:scale-105 origin-left duration-300">View
+                                    case study <i data-feather="arrow-right" class="w-3 h-3"></i></button>
+                                <a href="https://github.com/Viswanath129" target="_blank"
+                                    class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-white/10 cursor-pointer"><i
+                                        data-feather="github" class="w-4 h-4 text-gray-400"></i></a>
                             </div>
                         </div>
                     </div>
 
                     <!-- 8. Project Vishnu (Flagship Research) -->
-                    <div class="project-card group flagship section-content opacity-0 translate-y-10" data-category="research systems">
-                         <div class="card-content p-8">
-                             <div class="flex justify-between items-start mb-6">
-                                <div class="p-3 rounded-2xl bg-gradient-to-br from-amber-500/20 to-yellow-600/10 border border-amber-500/20 text-amber-600 dark:text-amber-400">
+                    <div class="project-card group flagship section-content opacity-0 translate-y-10"
+                        data-category="research systems">
+                        <div class="card-content p-8">
+                            <div class="flex justify-between items-start mb-6">
+                                <div
+                                    class="p-3 rounded-2xl bg-gradient-to-br from-amber-500/20 to-yellow-600/10 border border-amber-500/20 text-amber-600 dark:text-amber-400">
                                     <i data-feather="shield" class="w-6 h-6"></i>
                                 </div>
-                                 <div class="flex items-center gap-2">
-                                    <span class="text-[9px] px-2 py-1 rounded bg-amber-500/10 text-amber-500 border border-amber-500/20 font-bold tracking-wider">RESEARCH</span>
-                                    <span class="text-[9px] px-2 py-1 rounded bg-white/10 text-[var(--text-secondary)] border border-white/10 font-bold tracking-wider">FLAGSHIP</span>
+                                <div class="flex items-center gap-2">
+                                    <span
+                                        class="text-[9px] px-2 py-1 rounded bg-amber-500/10 text-amber-500 border border-amber-500/20 font-bold tracking-wider">RESEARCH</span>
+                                    <span
+                                        class="text-[9px] px-2 py-1 rounded bg-white/10 text-[var(--text-secondary)] border border-white/10 font-bold tracking-wider">FLAGSHIP</span>
                                 </div>
                             </div>
-                            <h3 class="text-xl font-bold text-[var(--text-primary)] mb-3 group-hover:text-amber-500 transition-colors">Project Vishnu</h3>
+                            <h3
+                                class="text-xl font-bold text-[var(--text-primary)] mb-3 group-hover:text-amber-500 transition-colors">
+                                Project Vishnu</h3>
                             <div class="mb-6 flex-grow">
-                                <p class="text-sm text-[var(--text-secondary)] mb-2"><strong class="text-amber-500">Focus:</strong> Satellite fault tolerance.</p>
-                                <p class="text-sm text-[var(--text-secondary)] mb-2"><strong class="text-amber-500">Impact:</strong> Critical mission recovery.</p>
+                                <p class="text-sm text-[var(--text-secondary)] mb-2"><strong
+                                        class="text-amber-500">Problem:</strong> Satellite missions lose critical data
+                                    during catastrophic failure.</p>
+                                <p class="text-sm text-[var(--text-secondary)] mb-4"><strong
+                                        class="text-amber-500">Solution:</strong> Proposed an autonomous safety capsule
+                                    acting as an independent "black box".</p>
+                                <p class="text-[10px] text-gray-500 font-mono tracking-wider"><span
+                                        class="text-amber-500/70">TECH:</span> Embedded Design, AI Logic,
+                                    Fault-Tolerance</p>
                             </div>
-                            <div class="mt-auto border-t border-[var(--glass-border)] pt-6 flex items-center justify-between">
-                                <button onclick="openModal('vishnu')" class="magnetic-btn text-xs font-bold text-[var(--text-primary)] hover:text-primary-500 transition-all flex items-center gap-1 hover:scale-105 origin-left duration-300">View case study <i data-feather="arrow-right" class="w-3 h-3"></i></button>
-                                <span class="text-xs font-semibold text-amber-500 flex items-center gap-2 uppercase tracking-wide"><i data-feather="check-circle" class="w-3 h-3"></i> Submitted</span>
+                            <div
+                                class="mt-auto border-t border-[var(--glass-border)] pt-6 flex items-center justify-between">
+                                <button onclick="openModal('vishnu')"
+                                    class="magnetic-btn text-xs font-bold text-[var(--text-primary)] hover:text-primary-500 transition-all flex items-center gap-1 hover:scale-105 origin-left duration-300">View
+                                    case study <i data-feather="arrow-right" class="w-3 h-3"></i></button>
+                                <span
+                                    class="text-xs font-semibold text-amber-500 flex items-center gap-2 uppercase tracking-wide"><i
+                                        data-feather="check-circle" class="w-3 h-3"></i> Submitted</span>
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- 9. NeuroLink Glasses (Flagship Research) -->
-                    <div class="project-card group flagship section-content opacity-0 translate-y-10" data-category="research">
-                         <div class="card-content p-8">
-                             <div class="flex justify-between items-start mb-6">
-                                <div class="p-3 rounded-2xl bg-gradient-to-br from-lime-500/20 to-green-600/10 border border-lime-500/20 text-lime-600 dark:text-lime-400">
+                    <div class="project-card group flagship section-content opacity-0 translate-y-10"
+                        data-category="research">
+                        <div class="card-content p-8">
+                            <div class="flex justify-between items-start mb-6">
+                                <div
+                                    class="p-3 rounded-2xl bg-gradient-to-br from-lime-500/20 to-green-600/10 border border-lime-500/20 text-lime-600 dark:text-lime-400">
                                     <i data-feather="activity" class="w-6 h-6"></i>
                                 </div>
                                 <div class="flex items-center gap-2">
-                                    <span class="text-[9px] px-2 py-1 rounded bg-lime-500/10 text-lime-500 border border-lime-500/20 font-bold tracking-wider">RESEARCH</span>
-                                    <span class="text-[9px] px-2 py-1 rounded bg-white/10 text-[var(--text-secondary)] border border-white/10 font-bold tracking-wider">FLAGSHIP</span>
+                                    <span
+                                        class="text-[9px] px-2 py-1 rounded bg-lime-500/10 text-lime-500 border border-lime-500/20 font-bold tracking-wider">RESEARCH</span>
+                                    <span
+                                        class="text-[9px] px-2 py-1 rounded bg-white/10 text-[var(--text-secondary)] border border-white/10 font-bold tracking-wider">FLAGSHIP</span>
                                 </div>
                             </div>
-                            <h3 class="text-xl font-bold text-[var(--text-primary)] mb-3 group-hover:text-lime-500 transition-colors">NeuroLink Glasses</h3>
+                            <h3
+                                class="text-xl font-bold text-[var(--text-primary)] mb-3 group-hover:text-lime-500 transition-colors">
+                                NeuroLink Glasses</h3>
                             <div class="mb-6 flex-grow">
-                                <p class="text-sm text-[var(--text-secondary)] mb-2"><strong class="text-lime-500">Goal:</strong> Non-invasive assistive BCI.</p>
-                                <p class="text-sm text-[var(--text-secondary)] mb-2"><strong class="text-lime-500">Outcome:</strong> Mind-to-digital bridge.</p>
+                                <p class="text-sm text-[var(--text-secondary)] mb-2"><strong
+                                        class="text-lime-500">Problem:</strong> Motor-impaired users cannot easily
+                                    control digital devices.</p>
+                                <p class="text-sm text-[var(--text-secondary)] mb-4"><strong
+                                        class="text-lime-500">Solution:</strong> Designed an EEG-based wearable mapping
+                                    brain signals to digital commands.</p>
+                                <p class="text-[10px] text-gray-500 font-mono tracking-wider"><span
+                                        class="text-lime-500/70">TECH:</span> EEG Sensors, Signal Processing, Python,
+                                    Embedded AI</p>
                             </div>
-                             <div class="mt-auto border-t border-[var(--glass-border)] pt-6 flex items-center justify-between">
-                                <button onclick="openModal('neurolink')" class="magnetic-btn text-xs font-bold text-[var(--text-primary)] hover:text-primary-500 transition-all flex items-center gap-1 hover:scale-105 origin-left duration-300">View case study <i data-feather="arrow-right" class="w-3 h-3"></i></button>
-                                <span class="text-xs font-semibold text-lime-500 flex items-center gap-2 uppercase tracking-wide"><i data-feather="loader" class="w-3 h-3 animate-spin"></i> In Progress</span>
+                            <div
+                                class="mt-auto border-t border-[var(--glass-border)] pt-6 flex items-center justify-between">
+                                <button onclick="openModal('neurolink')"
+                                    class="magnetic-btn text-xs font-bold text-[var(--text-primary)] hover:text-primary-500 transition-all flex items-center gap-1 hover:scale-105 origin-left duration-300">View
+                                    case study <i data-feather="arrow-right" class="w-3 h-3"></i></button>
+                                <span
+                                    class="text-xs font-semibold text-lime-500 flex items-center gap-2 uppercase tracking-wide"><i
+                                        data-feather="loader" class="w-3 h-3 animate-spin"></i> In Progress</span>
                             </div>
                         </div>
                     </div>
@@ -643,17 +1093,23 @@
         <!-- Journey Section -->
         <section id="resume" class="section py-32 px-4 relative">
             <div class="container mx-auto max-w-4xl">
-                 <div class="text-center mb-20 section-heading opacity-0">
-                    <h2 class="text-3xl md:text-4xl font-bold inline-block bg-clip-text text-transparent bg-gradient-to-r from-[var(--text-primary)] via-gray-400 to-gray-500 tracking-tight">
+                <div class="text-center mb-20 section-heading opacity-0">
+                    <h2
+                        class="text-3xl md:text-4xl font-bold inline-block bg-clip-text text-transparent bg-gradient-to-r from-[var(--text-primary)] via-gray-400 to-gray-500 tracking-tight">
                         Journey & Education
                     </h2>
-                    <div class="h-1 w-24 bg-gradient-to-r from-primary-500 to-transparent mx-auto mt-6 rounded-full opacity-50"></div>
+                    <div
+                        class="h-1 w-24 bg-gradient-to-r from-primary-500 to-transparent mx-auto mt-6 rounded-full opacity-50">
+                    </div>
                 </div>
-                
+
                 <div class="flex justify-center mb-16 section-content opacity-0">
-                    <div class="glass p-1.5 rounded-full flex space-x-2 bg-white/5 backdrop-blur-md border border-white/5">
-                        <button data-tab="experience" class="tab-button active font-semibold px-8 py-3 rounded-full text-sm tracking-wide transition-all bg-[var(--text-primary)] text-[var(--bg-color)] shadow-md">Experience</button>
-                        <button data-tab="education" class="tab-button font-semibold px-8 py-3 rounded-full text-sm text-[var(--text-secondary)] tracking-wide hover:text-[var(--text-primary)] transition-all">Education</button>
+                    <div
+                        class="glass p-1.5 rounded-full flex space-x-2 bg-white/5 backdrop-blur-md border border-white/5">
+                        <button data-tab="experience"
+                            class="tab-button active font-semibold px-8 py-3 rounded-full text-sm tracking-wide transition-colors duration-300 bg-[var(--text-primary)] text-[var(--bg-color)] shadow-md">Experience</button>
+                        <button data-tab="education"
+                            class="tab-button font-semibold px-8 py-3 rounded-full text-sm text-[var(--text-secondary)] tracking-wide hover:text-[var(--text-primary)] transition-colors duration-300">Education</button>
                     </div>
                 </div>
 
@@ -662,81 +1118,128 @@
                     <div id="experience" class="tab-content">
                         <div class="relative pl-10 border-l border-[var(--glass-border)] space-y-16">
                             <!-- Gradient Line Overlay -->
-                            <div class="absolute left-[-1px] top-0 bottom-0 w-[2px] bg-gradient-to-b from-primary-500 via-purple-500/20 to-transparent"></div>
-                            
+                            <div
+                                class="absolute left-[-1px] top-0 bottom-0 w-[2px] bg-gradient-to-b from-primary-500 via-purple-500/20 to-transparent">
+                            </div>
+
                             <div class="relative group">
-                                <span class="absolute -left-[45px] top-2 h-4 w-4 rounded-full border-2 border-primary-500 bg-[var(--bg-color)] group-hover:scale-125 transition-transform duration-300 shadow-[0_0_10px_#a855f7]"></span>
-                                <div class="glass p-8 rounded-3xl hover:border-primary-500/30 transition-colors duration-300 relative overflow-hidden">
-                                    <div class="absolute top-0 right-0 p-6 opacity-10"><i data-feather="briefcase" class="w-24 h-24 text-[var(--text-primary)]"></i></div>
-                                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 relative z-10">
+                                <span
+                                    class="absolute -left-[45px] top-2 h-4 w-4 rounded-full border-2 border-primary-500 bg-[var(--bg-color)] group-hover:scale-125 transition-transform duration-300 shadow-[0_0_10px_#a855f7]"></span>
+                                <div
+                                    class="glass p-8 rounded-3xl hover:border-primary-500/30 transition-colors duration-300 relative overflow-hidden">
+                                    <div
+                                        class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 relative z-10">
                                         <div>
-                                            <h3 class="text-2xl font-bold text-[var(--text-primary)] mb-1">Team Leader</h3>
-                                            <p class="text-primary-500 font-medium text-lg">Avanthi Research Hub (ARH)</p>
+                                            <h3 class="text-2xl font-bold text-[var(--text-primary)] mb-1">Team Leader
+                                            </h3>
+                                            <p class="text-primary-500 font-medium text-lg">Avanthi Research Hub (ARH)
+                                            </p>
                                         </div>
-                                        <span class="mt-2 sm:mt-0 px-4 py-1.5 bg-white/5 rounded-full text-xs text-gray-500 border border-white/10 font-mono">Aug 2025 - Present</span>
+                                        <span
+                                            class="mt-2 sm:mt-0 px-4 py-1.5 bg-white/5 rounded-full text-xs text-gray-500 border border-white/10 font-mono">Aug
+                                            2025 - Present</span>
                                     </div>
-                                    <p class="text-[var(--text-secondary)] leading-relaxed mb-6 text-base font-light border-b border-[var(--glass-border)] pb-4">
-                                        Spearheading R&D initiatives for AI/ML prototypes, focusing on bridging theoretical models with embedded deployment.
+                                    <p
+                                        class="text-[var(--text-secondary)] leading-relaxed mb-6 text-base font-light border-b border-[var(--glass-border)] pb-4">
+                                        Spearheading R&D initiatives for AI/ML prototypes, focusing on bridging
+                                        theoretical models with embedded deployment.
                                     </p>
 
                                     <ul class="space-y-3 relative z-10">
-                                        <li class="flex items-start gap-3 text-sm text-[var(--text-secondary)]"><i data-feather="chevron-right" class="w-4 h-4 text-primary-500 mt-0.5"></i> <span>Mentored students on <strong>NLP & Conversational AI</strong> models.</span></li>
-                                        <li class="flex items-start gap-3 text-sm text-[var(--text-secondary)]"><i data-feather="chevron-right" class="w-4 h-4 text-primary-500 mt-0.5"></i> <span>Coordinated proposals for <strong>iDEX (DRDO) & ISRO-INSPACE</strong>.</span></li>
-                                        <li class="flex items-start gap-3 text-sm text-[var(--text-secondary)]"><i data-feather="chevron-right" class="w-4 h-4 text-primary-500 mt-0.5"></i> <span>Conducted model evaluation and performance tuning for edge devices.</span></li>
+                                        <li class="flex items-start gap-3 text-sm text-[var(--text-secondary)]"><i
+                                                data-feather="chevron-right"
+                                                class="w-4 h-4 text-primary-500 mt-0.5"></i> <span>Mentored students on
+                                                <strong>NLP & Conversational AI</strong> models.</span></li>
+                                        <li class="flex items-start gap-3 text-sm text-[var(--text-secondary)]"><i
+                                                data-feather="chevron-right"
+                                                class="w-4 h-4 text-primary-500 mt-0.5"></i> <span>Coordinated proposals
+                                                for <strong>iDEX (DRDO) & ISRO-INSPACE</strong>.</span></li>
+                                        <li class="flex items-start gap-3 text-sm text-[var(--text-secondary)]"><i
+                                                data-feather="chevron-right"
+                                                class="w-4 h-4 text-primary-500 mt-0.5"></i> <span>Conducted model
+                                                evaluation and performance tuning for edge devices.</span></li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- Education Tab -->
                     <div id="education" class="tab-content hidden">
-                         <div class="relative pl-10 border-l border-[var(--glass-border)] space-y-16">
-                             <div class="absolute left-[-1px] top-0 bottom-0 w-[2px] bg-gradient-to-b from-secondary-500 via-primary-500/20 to-transparent"></div>
+                        <div class="relative pl-10 border-l border-[var(--glass-border)] space-y-16">
+                            <div
+                                class="absolute left-[-1px] top-0 bottom-0 w-[2px] bg-gradient-to-b from-secondary-500 via-primary-500/20 to-transparent">
+                            </div>
 
                             <!-- B.Tech -->
                             <div class="relative group">
-                                <span class="absolute -left-[45px] top-2 h-4 w-4 rounded-full border-2 border-secondary-500 bg-[var(--bg-color)] group-hover:scale-125 transition-transform duration-300 shadow-[0_0_10px_#ec4899]"></span>
-                                <div class="glass p-8 rounded-3xl hover:border-secondary-500/30 transition-colors duration-300">
+                                <span
+                                    class="absolute -left-[45px] top-2 h-4 w-4 rounded-full border-2 border-secondary-500 bg-[var(--bg-color)] group-hover:scale-125 transition-transform duration-300 shadow-[0_0_10px_#ec4899]"></span>
+                                <div
+                                    class="glass p-8 rounded-3xl hover:border-secondary-500/30 transition-colors duration-300">
                                     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
                                         <div>
-                                            <h3 class="text-2xl font-bold text-[var(--text-primary)] mb-1">B.Tech in Electronics & Communication</h3>
-                                            <p class="text-secondary-500 font-medium text-lg">Avanthi Institute of Engineering & Technology</p>
+                                            <h3 class="text-2xl font-bold text-[var(--text-primary)] mb-1">B.Tech in
+                                                Electronics & Communication</h3>
+                                            <p class="text-secondary-500 font-medium text-lg">Avanthi Institute of
+                                                Engineering & Technology</p>
                                         </div>
-                                        <span class="mt-2 sm:mt-0 px-4 py-1.5 bg-white/5 rounded-full text-xs text-gray-500 border border-white/10 font-mono">2022 - 2026 (Expected)</span>
+                                        <span
+                                            class="mt-2 sm:mt-0 px-4 py-1.5 bg-white/5 rounded-full text-xs text-gray-500 border border-white/10 font-mono">2024-25
+                                            -- 2026-27 (Expected)</span>
                                     </div>
-                                    <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-green-500/10 text-green-500 text-xs font-bold rounded-full mb-6 border border-green-500/20">
+                                    <div
+                                        class="inline-flex items-center gap-2 px-4 py-1.5 bg-green-500/10 text-green-500 text-xs font-bold rounded-full mb-6 border border-green-500/20">
                                         <i data-feather="award" class="w-3 h-3"></i> CGPA: 8.5/10
                                     </div>
-                                    
-                                    <h4 class="text-sm font-bold text-[var(--text-secondary)] mb-4 uppercase tracking-wider">Key Coursework</h4>
+
+                                    <h4
+                                        class="text-sm font-bold text-[var(--text-secondary)] mb-4 uppercase tracking-wider">
+                                        Key Coursework</h4>
                                     <div class="flex flex-wrap gap-2">
-                                        <span class="text-xs px-3 py-1.5 bg-white/5 rounded-lg border border-white/5 text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-white/20 transition-colors">Python</span>
-                                        <span class="text-xs px-3 py-1.5 bg-white/5 rounded-lg border border-white/5 text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-white/20 transition-colors">Deep Learning</span>
-                                        <span class="text-xs px-3 py-1.5 bg-white/5 rounded-lg border border-white/5 text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-white/20 transition-colors">Computer Vision</span>
-                                        <span class="text-xs px-3 py-1.5 bg-white/5 rounded-lg border border-white/5 text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-white/20 transition-colors">AI Agents</span>
-                                        <span class="text-xs px-3 py-1.5 bg-white/5 rounded-lg border border-white/5 text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-white/20 transition-colors">DSP (MATLAB)</span>
+                                        <span
+                                            class="text-xs px-3 py-1.5 bg-white/5 rounded-lg border border-white/5 text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-white/20 transition-colors">Python</span>
+                                        <span
+                                            class="text-xs px-3 py-1.5 bg-white/5 rounded-lg border border-white/5 text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-white/20 transition-colors">Deep
+                                            Learning</span>
+                                        <span
+                                            class="text-xs px-3 py-1.5 bg-white/5 rounded-lg border border-white/5 text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-white/20 transition-colors">Computer
+                                            Vision</span>
+                                        <span
+                                            class="text-xs px-3 py-1.5 bg-white/5 rounded-lg border border-white/5 text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-white/20 transition-colors">AI
+                                            Agents</span>
+                                        <span
+                                            class="text-xs px-3 py-1.5 bg-white/5 rounded-lg border border-white/5 text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-white/20 transition-colors">DSP
+                                            (MATLAB)</span>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Diploma -->
                             <div class="relative group">
-                                <span class="absolute -left-[45px] top-2 h-4 w-4 rounded-full border-2 border-purple-500 bg-[var(--bg-color)] group-hover:scale-125 transition-transform duration-300 shadow-[0_0_10px_#a855f7]"></span>
-                                <div class="glass p-8 rounded-3xl hover:border-purple-500/30 transition-colors duration-300">
+                                <span
+                                    class="absolute -left-[45px] top-2 h-4 w-4 rounded-full border-2 border-purple-500 bg-[var(--bg-color)] group-hover:scale-125 transition-transform duration-300 shadow-[0_0_10px_#a855f7]"></span>
+                                <div
+                                    class="glass p-8 rounded-3xl hover:border-purple-500/30 transition-colors duration-300">
                                     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
                                         <div>
-                                            <h3 class="text-2xl font-bold text-[var(--text-primary)] mb-1">Diploma in ECE</h3>
-                                            <p class="text-purple-400 font-medium text-lg">Divi Seema Polytechnic College</p>
+                                            <h3 class="text-2xl font-bold text-[var(--text-primary)] mb-1">Diploma in
+                                                ECE</h3>
+                                            <p class="text-purple-400 font-medium text-lg">Divi Seema Polytechnic
+                                                College</p>
                                         </div>
-                                        <span class="mt-2 sm:mt-0 px-4 py-1.5 bg-white/5 rounded-full text-xs text-gray-500 border border-white/10 font-mono">2023 - 2024</span>
+                                        <span
+                                            class="mt-2 sm:mt-0 px-4 py-1.5 bg-white/5 rounded-full text-xs text-gray-500 border border-white/10 font-mono">2021-22
+                                            -- 2023-24</span>
                                     </div>
-                                    <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-green-500/10 text-green-500 text-xs font-bold rounded-full mb-6 border border-green-500/20">
+                                    <div
+                                        class="inline-flex items-center gap-2 px-4 py-1.5 bg-green-500/10 text-green-500 text-xs font-bold rounded-full mb-6 border border-green-500/20">
                                         <i data-feather="award" class="w-3 h-3"></i> Percentage: 83.14%
                                     </div>
-                                    
+
                                     <p class="text-sm text-[var(--text-secondary)] leading-relaxed font-light">
-                                        Specialized in Electronics and Communication Engineering, building a strong foundation in embedded systems and circuit design.
+                                        Specialized in Electronics and Communication Engineering, building a strong
+                                        foundation in embedded systems and circuit design.
                                     </p>
                                 </div>
                             </div>
@@ -749,63 +1252,98 @@
         <section id="contact" class="section py-32 px-4 relative overflow-hidden">
             <div class="container mx-auto relative z-10">
                 <div class="text-center mb-24 section-heading opacity-0">
-                    <h2 class="text-3xl md:text-4xl font-bold inline-block bg-clip-text text-transparent bg-gradient-to-r from-[var(--text-primary)] via-gray-400 to-gray-500 tracking-tight">
+                    <h2
+                        class="text-3xl md:text-4xl font-bold inline-block bg-clip-text text-transparent bg-gradient-to-r from-[var(--text-primary)] via-gray-400 to-gray-500 tracking-tight">
                         Get In Touch
                     </h2>
-                    <div class="h-1 w-24 bg-gradient-to-r from-primary-500 to-transparent mx-auto mt-6 rounded-full opacity-50"></div>
+                    <div
+                        class="h-1 w-24 bg-gradient-to-r from-primary-500 to-transparent mx-auto mt-6 rounded-full opacity-50">
+                    </div>
                 </div>
-                
+
                 <div class="max-w-5xl mx-auto glass rounded-3xl p-10 lg:p-14 shadow-2xl section-content opacity-0">
                     <div class="flex flex-col lg:flex-row gap-16">
                         <div class="lg:w-1/2">
                             <h3 class="text-3xl font-bold text-[var(--text-primary)] mb-2">Let's Collaborate</h3>
                             <p class="text-xs text-gray-500 mb-6 font-mono border-l-2 border-primary-500 pl-3">
-                                Interested in thesis collaborations, applied AI research, and early-stage deep-tech projects.
+                                Interested in thesis collaborations, applied AI research, and early-stage deep-tech
+                                projects.
                             </p>
                             <p class="text-[var(--text-secondary)] mb-2 leading-relaxed font-light text-lg">
                                 Open to research collaborations, freelance projects, and AI development opportunities.
                             </p>
-                            <p class="text-xs font-mono text-green-500 mb-10 flex items-center gap-2"><span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span> Typical reply time: &lt; 24 hrs</p>
-                            
+                            <p class="text-xs font-mono text-green-500 mb-10 flex items-center gap-2"><span
+                                    class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span> Typical reply time:
+                                &lt; 24 hrs</p>
+
                             <div class="space-y-8">
-                                <a href="mailto:kasiviswanath129@gmail.com" class="flex items-center gap-5 group p-4 rounded-2xl hover:bg-white/5 transition-colors border border-transparent hover:border-white/5 btn-press">
-                                    <div class="w-14 h-14 rounded-xl bg-primary-500/10 flex items-center justify-center text-primary-500 group-hover:bg-primary-500 group-hover:text-white transition-all duration-300 shadow-[0_0_15px_rgba(168,85,247,0.1)]"><i data-feather="mail" class="w-6 h-6"></i></div>
+                                <a href="mailto:kasiviswanath129@gmail.com"
+                                    class="flex items-center gap-5 group p-4 rounded-2xl hover:bg-white/5 transition-colors border border-transparent hover:border-white/5 btn-press">
+                                    <div
+                                        class="w-14 h-14 rounded-xl bg-primary-500/10 flex items-center justify-center text-primary-500 group-hover:bg-primary-500 group-hover:text-white transition-all duration-300 shadow-[0_0_15px_rgba(168,85,247,0.1)]">
+                                        <i data-feather="mail" class="w-6 h-6"></i>
+                                    </div>
                                     <div>
                                         <h4 class="font-bold text-[var(--text-primary)] text-base">Email</h4>
-                                        <p class="text-[var(--text-secondary)] text-sm font-mono mt-1">kasiviswanath129@gmail.com</p>
+                                        <p class="text-[var(--text-secondary)] text-sm font-mono mt-1">
+                                            kasiviswanath129@gmail.com</p>
                                     </div>
                                 </a>
-                                <div class="flex items-center gap-5 group p-4 rounded-2xl hover:bg-white/5 transition-colors border border-transparent hover:border-white/5">
-                                    <div class="w-14 h-14 rounded-xl bg-secondary-500/10 flex items-center justify-center text-secondary-500 group-hover:bg-secondary-500 group-hover:text-white transition-all duration-300 shadow-[0_0_15px_rgba(236,72,153,0.1)]"><i data-feather="map-pin" class="w-6 h-6"></i></div>
+                                <div
+                                    class="flex items-center gap-5 group p-4 rounded-2xl hover:bg-white/5 transition-colors border border-transparent hover:border-white/5">
+                                    <div
+                                        class="w-14 h-14 rounded-xl bg-secondary-500/10 flex items-center justify-center text-secondary-500 group-hover:bg-secondary-500 group-hover:text-white transition-all duration-300 shadow-[0_0_15px_rgba(236,72,153,0.1)]">
+                                        <i data-feather="map-pin" class="w-6 h-6"></i>
+                                    </div>
                                     <div>
                                         <h4 class="font-bold text-[var(--text-primary)] text-base">Location</h4>
-                                        <p class="text-[var(--text-secondary)] text-sm font-mono mt-1">Tuni, Andhra Pradesh, India</p>
+                                        <p class="text-[var(--text-secondary)] text-sm font-mono mt-1">Tuni, Andhra
+                                            Pradesh, India</p>
                                     </div>
                                 </div>
-                                <div class="flex items-center gap-5 group p-4 rounded-2xl hover:bg-white/5 transition-colors border border-transparent hover:border-white/5">
-                                    <div class="w-14 h-14 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-500 group-hover:bg-blue-500 group-hover:text-white transition-all duration-300 shadow-[0_0_15px_rgba(59,130,246,0.1)]"><i data-feather="phone" class="w-6 h-6"></i></div>
+                                <div
+                                    class="flex items-center gap-5 group p-4 rounded-2xl hover:bg-white/5 transition-colors border border-transparent hover:border-white/5">
+                                    <div
+                                        class="w-14 h-14 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-500 group-hover:bg-blue-500 group-hover:text-white transition-all duration-300 shadow-[0_0_15px_rgba(59,130,246,0.1)]">
+                                        <i data-feather="phone" class="w-6 h-6"></i>
+                                    </div>
                                     <div>
                                         <h4 class="font-bold text-[var(--text-primary)] text-base">Phone</h4>
-                                        <p class="text-[var(--text-secondary)] text-sm font-mono mt-1">+91 9391592209</p>
+                                        <p class="text-[var(--text-secondary)] text-sm font-mono mt-1">+91 9391592209
+                                        </p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="lg:w-1/2 bg-[var(--bg-color)]/30 p-10 rounded-3xl border border-[var(--glass-border)] backdrop-blur-sm">
-                             <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="space-y-8">
+                        <div
+                            class="lg:w-1/2 bg-[var(--bg-color)]/30 p-10 rounded-3xl border border-[var(--glass-border)] backdrop-blur-sm">
+                            <!-- Important: Replace with your actual Formspree ID -->
+                            <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="space-y-8"
+                                id="contact-form">
                                 <div class="relative group">
-                                    <input type="text" id="name" name="name" required class="modern-input w-full px-0 py-3 text-[var(--text-primary)] text-lg outline-none placeholder-transparent peer" placeholder="John Doe">
-                                    <label for="name" class="absolute left-0 top-3 text-gray-500 text-base transition-all duration-300 peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-focus:-top-6 peer-focus:text-xs peer-focus:text-primary-500 peer-valid:-top-6 peer-valid:text-xs peer-valid:text-gray-400">Name</label>
+                                    <input type="text" id="name" name="name" required
+                                        class="modern-input w-full px-0 py-3 text-[var(--text-primary)] text-lg outline-none placeholder-transparent peer"
+                                        placeholder="John Doe">
+                                    <label for="name"
+                                        class="absolute left-0 top-3 text-gray-500 text-base transition-all duration-300 peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-focus:-top-6 peer-focus:text-xs peer-focus:text-primary-500 peer-valid:-top-6 peer-valid:text-xs peer-valid:text-gray-400">Name</label>
                                 </div>
                                 <div class="relative group">
-                                    <input type="email" id="email" name="email" required class="modern-input w-full px-0 py-3 text-[var(--text-primary)] text-lg outline-none placeholder-transparent peer" placeholder="john@example.com">
-                                    <label for="email" class="absolute left-0 top-3 text-gray-500 text-base transition-all duration-300 peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-focus:-top-6 peer-focus:text-xs peer-focus:text-primary-500 peer-valid:-top-6 peer-valid:text-xs peer-valid:text-gray-400">Email</label>
+                                    <input type="email" id="email" name="email" required
+                                        class="modern-input w-full px-0 py-3 text-[var(--text-primary)] text-lg outline-none placeholder-transparent peer"
+                                        placeholder="john@example.com">
+                                    <label for="email"
+                                        class="absolute left-0 top-3 text-gray-500 text-base transition-all duration-300 peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-focus:-top-6 peer-focus:text-xs peer-focus:text-primary-500 peer-valid:-top-6 peer-valid:text-xs peer-valid:text-gray-400">Email</label>
                                 </div>
                                 <div class="relative group">
-                                    <textarea id="message" name="message" rows="4" required class="modern-input w-full px-0 py-3 text-[var(--text-primary)] text-lg outline-none placeholder-transparent peer resize-none" placeholder="Message"></textarea>
-                                    <label for="message" class="absolute left-0 top-3 text-gray-500 text-base transition-all duration-300 peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-focus:-top-6 peer-focus:text-xs peer-focus:text-primary-500 peer-valid:-top-6 peer-valid:text-xs peer-valid:text-gray-400">Message</label>
+                                    <textarea id="message" name="message" rows="4" required
+                                        class="modern-input w-full px-0 py-3 text-[var(--text-primary)] text-lg outline-none placeholder-transparent peer resize-none"
+                                        placeholder="Message"></textarea>
+                                    <label for="message"
+                                        class="absolute left-0 top-3 text-gray-500 text-base transition-all duration-300 peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-focus:-top-6 peer-focus:text-xs peer-focus:text-primary-500 peer-valid:-top-6 peer-valid:text-xs peer-valid:text-gray-400">Message</label>
                                 </div>
-                                <button type="submit" class="magnetic-btn btn-press w-full bg-[var(--text-primary)] text-[var(--bg-color)] px-8 py-4 rounded-xl font-bold hover:bg-gray-400 transition-all duration-300 shadow-lg mt-4">Send Message</button>
+                                <button type="submit"
+                                    class="magnetic-btn btn-press w-full bg-[var(--text-primary)] text-[var(--bg-color)] px-8 py-4 rounded-xl font-bold hover:bg-gray-400 transition-all duration-300 shadow-lg mt-4">Send
+                                    Message</button>
                             </form>
                         </div>
                     </div>
@@ -819,12 +1357,19 @@
             <div class="flex flex-col md:flex-row justify-between items-center text-center md:text-left">
                 <div class="mb-8 md:mb-0">
                     <h3 class="text-2xl font-bold text-[var(--text-primary)] tracking-tight">Kasi Viswanath</h3>
-                    <p class="text-gray-500 mt-2 text-sm uppercase tracking-[0.2em] font-medium">AI Systems • Edge Intelligence • Applied Research</p>
+                    <p class="text-gray-500 mt-2 text-sm uppercase tracking-[0.2em] font-medium">AI Systems • Edge
+                        Intelligence • Applied Research</p>
                 </div>
                 <div class="flex space-x-8">
-                    <a href="https://github.com/Viswanath129" target="_blank" class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-all duration-300 btn-press"><i data-feather="github" class="w-5 h-5"></i></a>
-                    <a href="https://www.linkedin.com/in/kasiviswanath-ece/" target="_blank" class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 btn-press"><i data-feather="linkedin" class="w-5 h-5"></i></a>
-                    <a href="https://x.com/Viswanath443?t=PdYCdL35d-zbSWdHI95KVw&s=09" class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:bg-sky-500/20 hover:text-sky-400 transition-all duration-300 btn-press"><i data-feather="twitter" class="w-5 h-5"></i></a>
+                    <a href="https://github.com/Viswanath129" target="_blank"
+                        class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-all duration-300 btn-press"><i
+                            data-feather="github" class="w-5 h-5"></i></a>
+                    <a href="https://www.linkedin.com/in/kasiviswanath-ece/" target="_blank"
+                        class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 btn-press"><i
+                            data-feather="linkedin" class="w-5 h-5"></i></a>
+                    <a href="https://x.com/Viswanath443?t=PdYCdL35d-zbSWdHI95KVw&s=09"
+                        class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:bg-sky-500/20 hover:text-sky-400 transition-all duration-300 btn-press"><i
+                            data-feather="twitter" class="w-5 h-5"></i></a>
                 </div>
             </div>
             <div class="border-t border-[var(--glass-border)] mt-10 pt-8 text-center text-gray-500 text-xs font-mono">
@@ -834,9 +1379,10 @@
     </footer>
 
     <!-- Case Study Modal Structure -->
-    <div id="modal-overlay" class="modal-overlay" aria-hidden="true">
+    <div id="modal-overlay" class="modal-overlay" aria-hidden="true" role="dialog" aria-modal="true">
         <div class="modal-container relative">
-            <button id="modal-close" class="absolute top-4 right-4 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors z-20">
+            <button id="modal-close"
+                class="absolute top-4 right-4 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors z-20">
                 <i data-feather="x" class="w-5 h-5 text-[var(--text-primary)]"></i>
             </button>
             <div id="modal-content" class="p-8 md:p-12 text-[var(--text-primary)]">
@@ -845,88 +1391,83 @@
         </div>
     </div>
 
+    <button id="back-to-top" aria-label="Back to Top">
+        <svg class="back-to-top-icon" viewBox="0 0 384 512">
+            <path
+                d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z">
+            </path>
+        </svg>
+    </button>
+
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // 1. Feather Icons
             feather.replace();
 
-            // 2. Mobile Logic: Remove Heavy Blobs on Small Screens
+            // 2. Mobile Logic
             if (window.innerWidth < 768) {
                 document.querySelectorAll('.bg-blob').forEach(b => b.remove());
             }
 
-            // 3. Theme Toggle Logic (Performance Optimized)
+            // 3. Theme Toggle
             const themeBtn = document.getElementById('theme-toggle');
             const themeBtnMobile = document.getElementById('theme-toggle-mobile');
             const htmlElement = document.documentElement;
-            
+
             function toggleTheme() {
-                // Prevent layout thrashing during theme switch
                 document.body.classList.add('no-transition');
-                
                 const isLight = htmlElement.getAttribute('data-theme') === 'light';
                 htmlElement.setAttribute('data-theme', isLight ? 'dark' : 'light');
                 htmlElement.classList.toggle('dark', !isLight);
                 localStorage.setItem('theme', isLight ? 'dark' : 'light');
-
-                // Re-enable transitions after paint
                 setTimeout(() => document.body.classList.remove('no-transition'), 50);
             }
 
-            // Init theme
             const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
             htmlElement.setAttribute('data-theme', savedTheme);
-            if(savedTheme === 'dark') htmlElement.classList.add('dark');
+            if (savedTheme === 'dark') htmlElement.classList.add('dark');
 
             themeBtn.addEventListener('click', toggleTheme);
             themeBtnMobile.addEventListener('click', toggleTheme);
 
-            // 4. GSAP Hero Animations
+            // 4. GSAP Hero & Typewriter Effect (FIXED)
             gsap.registerPlugin(ScrollTrigger, TextPlugin);
-            const isLowSpec = window.innerWidth < 768 || (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4);
 
             const tl = gsap.timeline({ defaults: { ease: "power3.out", duration: 1.2 } });
             tl.to(".gsap-hero", { y: 0, opacity: 1, stagger: 0.1, delay: 0.2 });
 
-            // Semantic Text Animation
-            const phrases = ["Embedded Intelligence", "Edge Computing", "Conversational AI"];
-            let phraseIndex = 0;
-            const subtitleEl = document.getElementById('semantic-subtitle');
-            
-            function animateSubtitle() {
-                gsap.to(subtitleEl, {
-                    duration: 0.8, opacity: 0, y: -10,
-                    onComplete: () => {
-                        subtitleEl.textContent = phrases[phraseIndex];
-                        phraseIndex = (phraseIndex + 1) % phrases.length;
-                        gsap.to(subtitleEl, { duration: 0.8, opacity: 1, y: 0 });
-                    }
-                });
-            }
-            setInterval(animateSubtitle, 3000);
+            // Typewriter Logic
+            const words = ["Intelligent Systems", "Edge Computing", "Real-world AI"];
+            let cursor = gsap.to('.cursor', { opacity: 0, ease: "power2.inOut", repeat: -1 });
+            let masterTl = gsap.timeline({ repeat: -1, repeatDelay: 1 });
 
-            // 5. GSAP Batching (Performance Win)
-            if (!isLowSpec) {
-                ScrollTrigger.batch(".section-heading", {
-                    start: "top 85%",
-                    onEnter: batch => gsap.to(batch, {opacity: 1, y: 0, duration: 0.8, stagger: 0.15, overwrite: true})
-                });
-                
-                ScrollTrigger.batch(".section-content", {
-                    start: "top 80%",
-                    onEnter: batch => gsap.to(batch, {opacity: 1, y: 0, duration: 0.8, stagger: 0.15, overwrite: true})
-                });
-                
-                // Filter Fade In
-                gsap.to("#filter-container", {
-                    scrollTrigger: { trigger: "#research", start: "top 70%" },
-                    opacity: 1, y: 0, duration: 0.6
-                });
-            } else {
-                gsap.set(".section-heading, .section-content, #filter-container", { opacity: 1, y: 0 });
-            }
+            words.forEach(word => {
+                let tl = gsap.timeline({ repeat: 1, yoyo: true, repeatDelay: 1.5 });
+                tl.to('#semantic-subtitle', { duration: 1, text: word, ease: "none" });
+                masterTl.add(tl);
+            });
 
-            // 6. Project Filtering Logic
+            // 5. Scroll Animations (FIXED: Smoother Batching)
+            // Clean up CSS conflicts
+            gsap.set(".section-heading, .section-content", { opacity: 0, y: 30 });
+
+            ScrollTrigger.batch(".section-heading", {
+                start: "top 85%",
+                onEnter: batch => gsap.to(batch, { opacity: 1, y: 0, duration: 1, stagger: 0.2, ease: "power3.out", overwrite: true })
+            });
+
+            ScrollTrigger.batch(".section-content", {
+                start: "top 80%",
+                onEnter: batch => gsap.to(batch, { opacity: 1, y: 0, duration: 1, stagger: 0.2, ease: "power3.out", overwrite: true })
+            });
+
+            // Filter Fade In
+            gsap.to("#filter-container", {
+                scrollTrigger: { trigger: "#research", start: "top 75%" },
+                opacity: 1, y: 0, duration: 0.8
+            });
+
+            // 6. Project Filtering
             const filterBtns = document.querySelectorAll('.filter-btn');
             const projectCards = document.querySelectorAll('.project-card');
 
@@ -940,59 +1481,56 @@
                     btn.classList.add('bg-primary-500', 'text-white', 'shadow-lg');
 
                     const filterValue = btn.getAttribute('data-filter');
-                    
+
                     projectCards.forEach(card => {
                         const categories = card.getAttribute('data-category');
                         if (filterValue === 'all' || categories.includes(filterValue)) {
                             card.style.display = 'flex';
-                            gsap.fromTo(card, {opacity: 0, scale: 0.9}, {opacity: 1, scale: 1, duration: 0.4});
+                            gsap.fromTo(card, { opacity: 0, scale: 0.95 }, { opacity: 1, scale: 1, duration: 0.4, clearProps: "all" });
                         } else {
                             card.style.display = 'none';
                         }
                     });
-                    setTimeout(() => ScrollTrigger.refresh(), 500);
+                    ScrollTrigger.refresh();
                 });
             });
 
-            // 7. Spotlight Effect Logic (Throttled for Performance)
+            // 7. Mouse Spotlight
             let lastMove = 0;
             document.querySelectorAll('.project-card').forEach(card => {
                 card.addEventListener('mousemove', e => {
                     const now = performance.now();
-                    if (now - lastMove < 33) return; // ~30fps throttle
+                    if (now - lastMove < 20) return;
                     lastMove = now;
-
                     const rect = card.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    card.style.setProperty('--mouse-x', `${x}px`);
-                    card.style.setProperty('--mouse-y', `${y}px`);
+                    card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+                    card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
                 });
             });
 
-            // 8. Magnetic Buttons (Scoped to Home only)
+            // 8. Magnetic Buttons
             const magneticBtns = document.querySelectorAll('.magnetic-btn');
             magneticBtns.forEach(btn => {
-                btn.addEventListener('mousemove', function(e) {
+                btn.addEventListener('mousemove', function (e) {
                     const rect = btn.getBoundingClientRect();
                     const x = e.clientX - rect.left - rect.width / 2;
                     const y = e.clientY - rect.top - rect.height / 2;
                     btn.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px) scale(1.05)`;
                 });
-                btn.addEventListener('mouseleave', function() {
+                btn.addEventListener('mouseleave', function () {
                     btn.style.transform = 'translate(0px, 0px) scale(1)';
                 });
             });
 
-            // 9. Directional Tab Switching
+            // 9. Tab Switching (FIXED: Reduced Lag)
             const tabButtons = document.querySelectorAll('.tab-button');
             const tabContents = document.querySelectorAll('.tab-content');
-            
+
             tabButtons.forEach(button => {
                 button.addEventListener('click', () => {
                     const tabId = button.dataset.tab;
-                    const isEducation = tabId === 'education';
-                    
+
+                    // Button Styling
                     tabButtons.forEach(btn => {
                         btn.classList.remove('active', 'bg-[var(--text-primary)]', 'text-[var(--bg-color)]', 'shadow-md');
                         btn.classList.add('text-[var(--text-secondary)]');
@@ -1000,159 +1538,239 @@
                     button.classList.add('active', 'bg-[var(--text-primary)]', 'text-[var(--bg-color)]', 'shadow-md');
                     button.classList.remove('text-[var(--text-secondary)]');
 
+                    // Content Switching - Optimized
+                    const targetContent = document.getElementById(tabId);
+
+                    // Hide all contents immediately
                     tabContents.forEach(content => {
-                        content.classList.add('hidden');
+                        if (content !== targetContent) {
+                            content.classList.add('hidden');
+                            content.style.opacity = 0;
+                        }
                     });
-                    
-                    const activeContent = document.getElementById(tabId);
-                    activeContent.classList.remove('hidden');
-                    
-                    const xOffset = isEducation ? 20 : -20;
-                    gsap.fromTo(activeContent, 
-                        { x: xOffset, opacity: 0 }, 
-                        { x: 0, opacity: 1, duration: 0.4, ease: "power2.out" }
+
+                    // Prepare target
+                    targetContent.classList.remove('hidden');
+
+                    // Animate In (Using overwrite to kill conflicts)
+                    gsap.fromTo(targetContent,
+                        { x: 20, opacity: 0 },
+                        { x: 0, opacity: 1, duration: 0.4, ease: "power2.out", overwrite: true }
                     );
                 });
             });
 
-            // 10. Case Study Modal Logic
+            // 10. Modals
+            const modal = document.getElementById('modal-overlay');
+            const modalContent = document.getElementById('modal-content');
+            const closeBtn = document.getElementById('modal-close');
+
+            // Full Case Study Data
             const caseStudies = {
                 diabetes: {
-                    title: "Pregnancy Diabetes Prediction System",
-                    subtitle: "Healthcare AI · Applied ML",
+                    title: "Pregnancy Diabetes Prediction",
+                    subtitle: "Healthcare · Machine Learning",
                     content: `
-                        <h4 class="text-lg font-bold mb-2 text-primary-500">Overview</h4>
-                        <p class="mb-6 font-light">A machine learning system designed to identify early risk of gestational diabetes using clinical and demographic data, with a focus on deployment feasibility in low-resource healthcare environments.</p>
-                        
+                        <h4 class="text-lg font-bold mb-2 text-rose-500">Overview</h4>
+                        <p class="mb-6 font-light">A lightweight screening system designed for early detection of Gestational Diabetes in low-resource environments.</p>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                             <div>
-                                <h4 class="font-bold mb-2">Problem</h4>
-                                <p class="text-sm text-[var(--text-secondary)]">Gestational Diabetes Mellitus is often diagnosed late, increasing the risk of maternal and fetal complications due to delayed intervention.</p>
+                                <h4 class="font-bold mb-2 text-[var(--text-primary)]">Problem</h4>
+                                <p class="text-sm text-[var(--text-secondary)]">Late detection of Gestational Diabetes in resource-constrained clinics leading to complications.</p>
                             </div>
                             <div>
-                                <h4 class="font-bold mb-2">Constraints</h4>
-                                <p class="text-sm text-[var(--text-secondary)]">Highly imbalanced medical datasets, need for model interpretability for clinicians, and low compute availability in primary healthcare centers.</p>
+                                <h4 class="font-bold mb-2 text-[var(--text-primary)]">Solution</h4>
+                                <p class="text-sm text-[var(--text-secondary)]">Optimized ML screening model using clinical features for early risk prediction and easy deployment.</p>
                             </div>
                         </div>
-
-                        <h4 class="font-bold mb-3">System Architecture</h4>
-                        <ul class="list-disc pl-5 mb-6 text-sm text-[var(--text-secondary)] space-y-1">
-                            <li>Data preprocessing and normalization pipeline</li>
-                            <li>Clinically relevant feature selection</li>
-                            <li>Lightweight ML classifiers optimized for generalization</li>
-                        </ul>
-
-                        <h4 class="font-bold mb-3">Outcome & Impact</h4>
-                        <ul class="list-disc pl-5 mb-6 text-sm text-[var(--text-secondary)] space-y-1">
-                            <li>Enables early risk screening instead of reactive diagnosis</li>
-                            <li>Scalable for large populations</li>
-                            <li>Suitable for deployment in low-resource clinical settings</li>
-                        </ul>
+                        <h4 class="font-bold mb-3 text-[var(--text-primary)]">Tech Stack</h4>
+                        <p class="text-sm text-[var(--text-secondary)] font-mono bg-white/5 p-4 rounded-xl border border-white/5">Python, Scikit-learn, Pandas, ML Classification</p>
                     `
                 },
                 stroke: {
                     title: "Brain Stroke Prediction",
-                    subtitle: "Predictive Analytics · Healthcare",
+                    subtitle: "Healthcare · Predictive Analytics",
                     content: `
-                        <h4 class="text-lg font-bold mb-2 text-primary-500">Overview</h4>
-                        <p class="mb-6 font-light">A high-recall predictive model designed to estimate stroke risk based on lifestyle and health parameters, acting as an early warning system.</p>
-                        <h4 class="font-bold mb-2">Architectural Focus</h4>
-                        <p class="text-sm text-[var(--text-secondary)] mb-6">Prioritized <strong>Recall</strong> over Precision to ensure potential risk cases are never missed, a critical requirement for medical screening tools.</p>
-                        <h4 class="font-bold mb-3">Key Outcome</h4>
-                        <p class="text-sm text-[var(--text-secondary)]">Successfully identifies asymptomatic risk factors, allowing for preventative lifestyle changes before clinical onset.</p>
+                        <h4 class="text-lg font-bold mb-2 text-orange-500">Overview</h4>
+                        <p class="mb-6 font-light">A high-recall predictive model designed to identify hidden lifestyle indicators of stroke that often go unnoticed.</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                            <div>
+                                <h4 class="font-bold mb-2 text-[var(--text-primary)]">Problem</h4>
+                                <p class="text-sm text-[var(--text-secondary)]">Silent lifestyle indicators of stroke often go undetected until a clinical event occurs.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-2 text-[var(--text-primary)]">Solution</h4>
+                                <p class="text-sm text-[var(--text-secondary)]">Designed a predictive model prioritizing early risk detection over absolute precision to ensure high sensitivity.</p>
+                            </div>
+                        </div>
+                        <h4 class="font-bold mb-3 text-[var(--text-primary)]">Tech Stack</h4>
+                        <p class="text-sm text-[var(--text-secondary)] font-mono bg-white/5 p-4 rounded-xl border border-white/5">Python, Scikit-learn, Data Preprocessing, ML Models</p>
                     `
                 },
                 cancer: {
-                    title: "Breast Cancer Prediction (Quantum ML)",
+                    title: "Breast Cancer Prediction (Research)",
                     subtitle: "Deep Learning · Research",
                     content: `
-                        <h4 class="text-lg font-bold mb-2 text-primary-500">Overview</h4>
-                        <p class="mb-6 font-light">An exploratory research project comparing classical Deep Learning architectures against experimental Quantum Machine Learning (QML) approaches for high-dimensional medical data.</p>
-                        <h4 class="font-bold mb-2">Research Question</h4>
-                        <p class="text-sm text-[var(--text-secondary)] mb-6">Can quantum-enhanced feature spaces provide better separability for complex oncology datasets compared to classical non-linear activations?</p>
-                        <h4 class="font-bold mb-3">Methodology</h4>
-                        <p class="text-sm text-[var(--text-secondary)]">Benchmarked Pytorch-based neural networks against hybrid quantum-classical networks, focusing on convergence speed and feature extraction efficiency.</p>
+                        <h4 class="text-lg font-bold mb-2 text-pink-500">Overview</h4>
+                        <p class="mb-6 font-light">Exploratory research into the performance of Deep Learning versus hybrid Quantum Machine Learning (QML) models.</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                            <div>
+                                <h4 class="font-bold mb-2 text-[var(--text-primary)]">Problem</h4>
+                                <p class="text-sm text-[var(--text-secondary)]">Classical ML struggles with high-dimensional and complex oncology data patterns.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-2 text-[var(--text-primary)]">Solution</h4>
+                                <p class="text-sm text-[var(--text-secondary)]">Compared Pytorch-based neural networks with Qiskit-powered hybrid QML models to test feature separability.</p>
+                            </div>
+                        </div>
+                        <h4 class="font-bold mb-3 text-[var(--text-primary)]">Tech Stack</h4>
+                        <p class="text-sm text-[var(--text-secondary)] font-mono bg-white/5 p-4 rounded-xl border border-white/5">Python, PyTorch, Qiskit, Neural Networks</p>
                     `
                 },
                 classpulse: {
                     title: "ClassPulse AI",
-                    subtitle: "EdTech · Real-time Analytics",
+                    subtitle: "Computer Vision · EdTech",
                     content: `
-                        <h4 class="text-lg font-bold mb-2 text-primary-500">Overview</h4>
-                        <p class="mb-6 font-light">An intelligent classroom analytics system that transforms raw behavioral data into actionable insights for educators.</p>
-                        <h4 class="font-bold mb-2">System Design</h4>
-                        <p class="text-sm text-[var(--text-secondary)] mb-6">Built a privacy-aware pipeline to process aggregate student engagement metrics without compromising individual identity.</p>
-                        <h4 class="font-bold mb-3">Impact</h4>
-                        <p class="text-sm text-[var(--text-secondary)]">Provides educators with a real-time "pulse" of the classroom, enabling dynamic curriculum adjustment based on engagement levels.</p>
+                        <h4 class="text-lg font-bold mb-2 text-indigo-500">Overview</h4>
+                        <p class="mb-6 font-light">A real-time classroom analytics system designed to enhance educator insight without compromising privacy.</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                            <div>
+                                <h4 class="font-bold mb-2 text-[var(--text-primary)]">Problem</h4>
+                                <p class="text-sm text-[var(--text-secondary)]">Teachers lack real-time feedback on classroom engagement during lessons.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-2 text-[var(--text-primary)]">Solution</h4>
+                                <p class="text-sm text-[var(--text-secondary)]">Built a privacy-aware pipeline converting behavioral signs into real-time engagement metrics.</p>
+                            </div>
+                        </div>
+                        <h4 class="font-bold mb-3 text-[var(--text-primary)]">Tech Stack</h4>
+                        <p class="text-sm text-[var(--text-secondary)] font-mono bg-white/5 p-4 rounded-xl border border-white/5">Python, OpenCV, Data Analytics, Visualization, Fast API</p>
+                    `
+                },
+                synergy: {
+                    title: "Synergy 2K26 Platform",
+                    subtitle: "Production · Full Stack",
+                    content: `
+                        <h4 class="text-lg font-bold mb-2 text-cyan-500">Overview</h4>
+                        <p class="mb-6 font-light">Official web platform for the Synergy 2K26 National Tech Fest, handling live traffic and event coordination.</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                            <div>
+                                <h4 class="font-bold mb-2 text-[var(--text-primary)]">Problem</h4>
+                                <p class="text-sm text-[var(--text-secondary)]">Manual handling of 1000+ registrations and coordination led to data inconsistencies.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-2 text-[var(--text-primary)]">Solution</h4>
+                                <p class="text-sm text-[var(--text-secondary)]">Developed and deployed a centralized platform for registration, event info, and flow management.</p>
+                            </div>
+                        </div>
+                        <h4 class="font-bold mb-3 text-[var(--text-primary)]">Tech Stack</h4>
+                        <p class="text-sm text-[var(--text-secondary)] font-mono bg-white/5 p-4 rounded-xl border border-white/5">HTML, CSS, JavaScript, Vercel, Responsive UI</p>
+                        <a href="https://synergy2k26.vercel.app/" target="_blank" class="mt-6 inline-flex items-center gap-2 px-6 py-3 bg-cyan-500 text-white rounded-full font-bold hover:bg-cyan-600 transition-all duration-300 shadow-lg">Visit Live Site <i data-feather="external-link" class="w-4 h-4"></i></a>
                     `
                 },
                 resume: {
                     title: "Resume Screening Bot",
-                    subtitle: "NLP · Intelligent Automation",
+                    subtitle: "NLP · Automation",
                     content: `
-                        <h4 class="text-lg font-bold mb-2 text-primary-500">Overview</h4>
-                        <p class="mb-6 font-light">An NLP-based automation tool that ranks resumes by semantically matching candidate profiles against job descriptions.</p>
-                        <h4 class="font-bold mb-2">Key Engineering</h4>
-                        <p class="text-sm text-[var(--text-secondary)] mb-6">Implemented TF-IDF vectorization and cosine similarity scoring to go beyond keyword matching, understanding context and relevance.</p>
-                        <h4 class="font-bold mb-3">Efficiency Gain</h4>
-                        <p class="text-sm text-[var(--text-secondary)]">Reduces manual shortlisting time by approximately 70% for large-volume recruitment drives.</p>
+                        <h4 class="text-lg font-bold mb-2 text-sky-500">Overview</h4>
+                        <p class="mb-6 font-light">An automated system to streamline large-scale recruitment by ranking resumes based on semantic relevance.</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                            <div>
+                                <h4 class="font-bold mb-2 text-[var(--text-primary)]">Problem</h4>
+                                <p class="text-sm text-[var(--text-secondary)]">Manual resume shortlisting is time-consuming, slow and prone to inconsistency.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-2 text-[var(--text-primary)]">Solution</h4>
+                                <p class="text-sm text-[var(--text-secondary)]">Created an NLP pipeline using TF-IDF and cosine similarity for semantic resume ranking.</p>
+                            </div>
+                        </div>
+                        <h4 class="font-bold mb-3 text-[var(--text-primary)]">Tech Stack</h4>
+                        <p class="text-sm text-[var(--text-secondary)] font-mono bg-white/5 p-4 rounded-xl border border-white/5">Python, NLP, Scikit-learn, TF-IDF, Streamlit</p>
                     `
                 },
                 ar: {
                     title: "AR Gesture Games",
                     subtitle: "Computer Vision · HCI",
                     content: `
-                        <h4 class="text-lg font-bold mb-2 text-primary-500">Overview</h4>
-                        <p class="mb-6 font-light">A suite of immersive games controlled entirely via hand gestures, eliminating the need for physical controllers or specialized hardware.</p>
-                        <h4 class="font-bold mb-2">Technical Challenge</h4>
-                        <p class="text-sm text-[var(--text-secondary)] mb-6">Achieving real-time (< 30ms latency) hand tracking on consumer-grade webcams using OpenCV and MediaPipe.</p>
-                        <h4 class="font-bold mb-3">Outcome</h4>
-                        <p class="text-sm text-[var(--text-secondary)]">Created accessible, zero-hardware gaming interfaces suitable for public displays and casual interaction.</p>
+                        <h4 class="text-lg font-bold mb-2 text-emerald-500">Overview</h4>
+                        <p class="mb-6 font-light">Interactive gaming experience utilizing purely computer vision for control, eliminating external hardware.</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                            <div>
+                                <h4 class="font-bold mb-2 text-[var(--text-primary)]">Problem</h4>
+                                <p class="text-sm text-[var(--text-secondary)]">Standard gaming requires physical controllers which can be inaccessible or restrictive.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-2 text-[var(--text-primary)]">Solution</h4>
+                                <p class="text-sm text-[var(--text-secondary)]">Built gesture-controlled games using real-time hand tracking via consumer-grade webcams.</p>
+                            </div>
+                        </div>
+                        <h4 class="font-bold mb-3 text-[var(--text-primary)]">Tech Stack</h4>
+                        <p class="text-sm text-[var(--text-secondary)] font-mono bg-white/5 p-4 rounded-xl border border-white/5">Python, OpenCV, MediaPipe, Computer Vision</p>
                     `
                 },
                 automation: {
                     title: "Academic Automation Suite",
-                    subtitle: "Logic Scheduling · Database Systems",
+                    subtitle: "Logic · Scheduling",
                     content: `
-                        <h4 class="text-lg font-bold mb-2 text-primary-500">Overview</h4>
-                        <p class="mb-6 font-light">A unified platform for academic management, featuring a conflict-free timetable generator and digital attendance tracking.</p>
-                        <h4 class="font-bold mb-2">Algorithm Design</h4>
-                        <p class="text-sm text-[var(--text-secondary)] mb-6">Developed a constraint-satisfaction algorithm to handle multiple resource locks (rooms, faculty, time slots) simultaneously.</p>
-                        <h4 class="font-bold mb-3">Result</h4>
-                        <p class="text-sm text-[var(--text-secondary)]">Reduced the administrative workload for semester scheduling by 90%, eliminating manual conflict resolution.</p>
+                        <h4 class="text-lg font-bold mb-2 text-teal-500">Overview</h4>
+                        <p class="mb-6 font-light">A scheduling engine designed to automate the complex process of creating institutional timetables.</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                            <div>
+                                <h4 class="font-bold mb-2 text-[var(--text-primary)]">Problem</h4>
+                                <p class="text-sm text-[var(--text-secondary)]">Manual timetable creation is prone to frequent resource and scheduling conflicts.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-2 text-[var(--text-primary)]">Solution</h4>
+                                <p class="text-sm text-[var(--text-secondary)]">Designed a constraint-based scheduling system handling rooms, faculty, and time slots automagically.</p>
+                            </div>
+                        </div>
+                        <h4 class="font-bold mb-3 text-[var(--text-primary)]">Tech Stack</h4>
+                        <p class="text-sm text-[var(--text-secondary)] font-mono bg-white/5 p-4 rounded-xl border border-white/5">Python, Logic Algorithms</p>
                     `
                 },
                 vishnu: {
                     title: "Project Vishnu",
-                    subtitle: "Defense Tech · Autonomous Systems",
+                    subtitle: "Flagship Research · Aerospace",
                     content: `
                         <h4 class="text-lg font-bold mb-2 text-amber-500">Overview (Flagship)</h4>
-                        <p class="mb-6 font-light">An autonomous satellite emergency capsule designed to separate and preserve critical data/payloads in the event of a catastrophic satellite failure.</p>
-                        <h4 class="font-bold mb-2">Core Innovation</h4>
-                        <p class="text-sm text-[var(--text-secondary)] mb-6">A decentralized "Black Box" architecture that triggers independently of the main satellite bus, ensuring survivability even during total power loss.</p>
-                        <h4 class="font-bold mb-3">Status</h4>
-                        <p class="text-sm text-[var(--text-secondary)]">Proposal submitted to ISRO-INSPACE and iDEX (DRDO). Validated theoretical fault-tolerance models.</p>
+                        <p class="mb-6 font-light">An autonomous safety capsule architecture proposed to ISRO-INSPACE and iDEX (DRDO) for mission data preservation.</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                            <div>
+                                <h4 class="font-bold mb-2 text-[var(--text-primary)]">Problem</h4>
+                                <p class="text-sm text-[var(--text-secondary)]">Current satellite missions often lose all critical telemetry and payload data during failure.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-2 text-[var(--text-primary)]">Solution</h4>
+                                <p class="text-sm text-[var(--text-secondary)]">Proposed an autonomous safety capsule acting as an independent space "black box".</p>
+                            </div>
+                        </div>
+                        <h4 class="font-bold mb-3 text-[var(--text-primary)]">Tech Stack</h4>
+                        <p class="text-sm text-[var(--text-secondary)] font-mono bg-white/5 p-4 rounded-xl border border-white/5">Embedded Systems Design, AI Logic, Fault-Tolerance Modeling</p>
                     `
                 },
                 neurolink: {
                     title: "NeuroLink Glasses",
-                    subtitle: "BCI · Assistive Tech",
+                    subtitle: "Flagship Research · BCI",
                     content: `
                         <h4 class="text-lg font-bold mb-2 text-lime-500">Overview (Flagship)</h4>
-                        <p class="mb-6 font-light">An experimental Brain-Computer Interface (BCI) wearable designed to map EEG signals to digital commands for motor-impaired assistance.</p>
-                        <h4 class="font-bold mb-2">Research Focus</h4>
-                        <p class="text-sm text-[var(--text-secondary)] mb-6">Signal processing techniques to isolate intent from high-noise non-invasive EEG data in real-time environments.</p>
-                        <h4 class="font-bold mb-3">Goal</h4>
-                        <p class="text-sm text-[var(--text-secondary)]">To create a low-cost, non-invasive bridge between neural activity and smart home devices.</p>
+                        <p class="mb-6 font-light">An assistive Brain-Computer Interface (BCI) wearable designed to empower motor-impaired users.</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                            <div>
+                                <h4 class="font-bold mb-2 text-[var(--text-primary)]">Problem</h4>
+                                <p class="text-sm text-[var(--text-secondary)]">Motor-impaired users face extreme difficulty in controlling modern digital interfaces.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-2 text-[var(--text-primary)]">Solution</h4>
+                                <p class="text-sm text-[var(--text-secondary)]">Designed an EEG-based wearable mapping brain signals into direct digital commands.</p>
+                            </div>
+                        </div>
+                        <h4 class="font-bold mb-3 text-[var(--text-primary)]">Tech Stack</h4>
+                        <p class="text-sm text-[var(--text-secondary)] font-mono bg-white/5 p-4 rounded-xl border border-white/5">EEG Sensors, Signal Processing, Python, Embedded AI</p>
                     `
                 }
             };
 
-            const modal = document.getElementById('modal-overlay');
-            const modalContent = document.getElementById('modal-content');
-            const closeBtn = document.getElementById('modal-close');
-
-            window.openModal = function(projectId) {
+            window.openModal = function (projectId) {
                 const data = caseStudies[projectId];
                 if (!data) return;
 
@@ -1161,30 +1779,35 @@
                     <p class="text-[var(--text-secondary)] text-sm mb-8 font-mono">${data.subtitle}</p>
                     <div class="modal-body">${data.content}</div>
                 `;
-                
                 modal.classList.add('active');
+                modal.setAttribute('aria-hidden', 'false');
                 document.body.classList.add('modal-open');
+                // Re-replace icons for dynamic content
+                feather.replace();
             };
 
             function closeModal() {
                 modal.classList.remove('active');
+                modal.setAttribute('aria-hidden', 'true');
                 document.body.classList.remove('modal-open');
             }
 
             closeBtn.addEventListener('click', closeModal);
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) closeModal();
-            });
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
+            modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+            document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+            // Mobile Menu & Scroll
+            document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+                document.getElementById('mobile-menu').classList.toggle('hidden');
             });
 
-            // Mobile Menu
-            const menuBtn = document.getElementById('mobile-menu-btn');
-            const mobileMenu = document.getElementById('mobile-menu');
-            menuBtn.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
+            // Close mobile menu on link click
+            document.querySelectorAll('#mobile-menu .nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    document.getElementById('mobile-menu').classList.add('hidden');
+                });
+            });
 
-            // Header Scroll
             const header = document.getElementById('header');
             window.addEventListener('scroll', () => {
                 if (window.scrollY > 50) header.classList.add('scrolled');
@@ -1192,7 +1815,26 @@
             });
 
             document.getElementById('current-year').textContent = new Date().getFullYear();
+
+            // Back to Top Button Logic
+            const backToTopBtn = document.getElementById('back-to-top');
+
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 400) {
+                    backToTopBtn.classList.add('visible');
+                } else {
+                    backToTopBtn.classList.remove('visible');
+                }
+            });
+
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
         });
     </script>
 </body>
+
 </html>
