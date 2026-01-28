@@ -145,6 +145,14 @@
             box-shadow: 0 20px 40px -5px rgba(255, 215, 0, 0.1);
         }
 
+        /* Performance Optimizations */
+        .project-card,
+        .gsap-hero,
+        .section-content,
+        .modal-container {
+            will-change: transform, opacity;
+        }
+
         /* Mouse Spotlight */
         .project-card::after {
             content: "";
@@ -287,43 +295,30 @@
             border-radius: 3px;
         }
 
-        /* Blobs - OPTIMIZED: Reduced blur from 80px to 40px */
-        .bg-blob {
-            position: absolute;
-            filter: blur(40px);
-            opacity: var(--blob-opacity);
-            animation: blob 10s infinite;
-            transition: opacity 0.5s ease;
+        .hero-bg {
+            background: radial-gradient(circle at 15% 25%, rgba(192, 132, 252, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 85% 75%, rgba(236, 72, 153, 0.15) 0%, transparent 50%);
         }
 
-        .blob-1 {
-            top: -10%;
-            left: -10%;
-            width: 500px;
-            height: 500px;
-            background: #4c1d95;
-            animation-delay: 0s;
+        #antigravity-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            /* Let clicks pass through */
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
         }
 
-        .blob-2 {
-            top: 20%;
-            right: -10%;
-            width: 400px;
-            height: 400px;
-            background: #831843;
-            animation-delay: 2s;
+        main {
+            position: relative;
+            z-index: 10;
+            /* Ensure content flows above canvas */
         }
 
-        .blob-3 {
-            bottom: -10%;
-            left: 20%;
-            width: 600px;
-            height: 600px;
-            background: #1e1b4b;
-            animation-delay: 4s;
-        }
-
-        /* Smooth Hide/Show for Filters */
         .project-card.hidden {
             display: none;
         }
@@ -433,10 +428,858 @@
                 transform: none;
             }
         }
+
+        /* Loading Animation Styles */
+        #loader-wrapper {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--bg-color);
+            transition: opacity 0.6s cubic-bezier(0.77, 0, 0.175, 1), visibility 0.6s;
+        }
+
+        #loader-wrapper.loaded {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .three-body {
+            --uib-size: 45px;
+            --uib-speed: 0.8s;
+            --uib-color: #a855f7;
+            position: relative;
+            display: inline-block;
+            height: var(--uib-size);
+            width: var(--uib-size);
+            animation: spin78236 calc(var(--uib-speed) * 2.5) infinite linear;
+        }
+
+        .three-body__dot {
+            position: absolute;
+            height: 100%;
+            width: 30%;
+        }
+
+        .three-body__dot:after {
+            content: '';
+            position: absolute;
+            height: 0%;
+            width: 100%;
+            padding-bottom: 100%;
+            background-color: var(--uib-color);
+            border-radius: 50%;
+        }
+
+        .three-body__dot:nth-child(1) {
+            bottom: 5%;
+            left: 0;
+            transform: rotate(60deg);
+            transform-origin: 50% 85%;
+        }
+
+        .three-body__dot:nth-child(1)::after {
+            bottom: 0;
+            left: 0;
+            animation: wobble1 var(--uib-speed) infinite ease-in-out;
+            animation-delay: calc(var(--uib-speed) * -0.3);
+        }
+
+        .three-body__dot:nth-child(2) {
+            bottom: 5%;
+            right: 0;
+            transform: rotate(-60deg);
+            transform-origin: 50% 85%;
+        }
+
+        .three-body__dot:nth-child(2)::after {
+            bottom: 0;
+            left: 0;
+            animation: wobble1 var(--uib-speed) infinite calc(var(--uib-speed) * -0.15) ease-in-out;
+        }
+
+        .three-body__dot:nth-child(3) {
+            bottom: -5%;
+            left: 0;
+            transform: translateX(116.666%);
+        }
+
+        .three-body__dot:nth-child(3)::after {
+            top: 0;
+            left: 0;
+            animation: wobble2 var(--uib-speed) infinite ease-in-out;
+        }
+
+        @keyframes spin78236 {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes wobble1 {
+
+            0%,
+            100% {
+                transform: translateY(0%) scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: translateY(-66%) scale(0.65);
+                opacity: 0.8;
+            }
+        }
+
+        @keyframes wobble2 {
+
+            0%,
+            100% {
+                transform: translateY(0%) scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: translateY(66%) scale(0.65);
+                opacity: 0.8;
+            }
+        }
+
+        /* Expanding Showcase Styles */
+        .showcase-container {
+            display: flex;
+            gap: 15px;
+            width: 100%;
+            height: 450px;
+            margin: 40px 0 60px 0;
+        }
+
+        .showcase-item {
+            height: 100%;
+            flex: 1;
+            overflow: hidden;
+            cursor: pointer;
+            border-radius: 24px;
+            transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            backdrop-filter: blur(12px);
+        }
+
+        .showcase-item::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(168, 85, 247, 0.15) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+
+        .showcase-item:hover::before {
+            opacity: 1;
+        }
+
+        .showcase-item:hover {
+            flex: 8;
+            border-color: #ff568e;
+            box-shadow: 0 40px 80px -15px rgba(255, 86, 142, 0.25);
+        }
+
+        .showcase-item .label-text {
+            min-width: 18em;
+            padding: 1.5em;
+            text-align: center;
+            transform: rotate(-90deg);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            text-transform: uppercase;
+            color: #ff568e;
+            letter-spacing: .3em;
+            font-size: 1.1rem;
+            font-weight: 800;
+            white-space: nowrap;
+            display: block;
+            z-index: 10;
+        }
+
+        .showcase-item:hover .label-text {
+            transform: rotate(0);
+            font-size: 2.2rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 200px;
+            color: var(--text-primary);
+        }
+
+        .showcase-details {
+            position: absolute;
+            bottom: -150px;
+            left: 0;
+            width: 100%;
+            padding: 50px;
+            opacity: 0;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            text-align: left;
+            pointer-events: none;
+            z-index: 20;
+        }
+
+        .showcase-item:hover .showcase-details {
+            bottom: 0;
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        @media (max-width: 1024px) {
+            .showcase-container {
+                height: 400px;
+            }
+
+            .showcase-item span {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .showcase-container {
+                flex-direction: column;
+                height: auto;
+                gap: 10px;
+            }
+
+            .showcase-item {
+                height: 100px;
+                flex: none;
+            }
+
+            .showcase-item:hover {
+                height: 400px;
+                flex: none;
+            }
+
+            .showcase-item .label-text {
+                transform: rotate(0);
+                font-size: 1rem;
+                letter-spacing: 0.1em;
+            }
+
+            .showcase-item:hover .label-text {
+                margin-bottom: 220px;
+                font-size: 1.8rem;
+            }
+
+            .showcase-details {
+                padding: 30px;
+            }
+        }
+
+        /* Project Grid Neighbor Blur Effect */
+        #projects-grid:hover>.project-card:not(:hover) {
+            filter: blur(1px);
+            opacity: 0.9;
+            transform: scale(0.98);
+            transition: all 0.4s ease;
+        }
+
+        /* EKG Pulse Animation Styles (Resized) */
+        .loading {
+            width: 40px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .loading svg polyline {
+            fill: none;
+            stroke-width: 3;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .loading svg polyline#back {
+            fill: none;
+            stroke: #ff4d5033;
+        }
+
+        .loading svg polyline#front {
+            fill: none;
+            stroke: #ff4d4f;
+            stroke-dasharray: 48, 144;
+            stroke-dashoffset: 192;
+            animation: dash_682 1.4s linear infinite;
+        }
+
+        @keyframes dash_682 {
+            72.5% {
+                opacity: 0;
+            }
+
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        /* Send Message Button */
+        .send-msg-btn {
+            font-family: inherit;
+            font-size: 18px;
+            background: linear-gradient(to bottom, #4dc7d9 0%, #66a6ff 100%);
+            color: white;
+            padding: 0.8em 1.2em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            border-radius: 25px;
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .send-msg-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .send-msg-btn:active {
+            transform: scale(0.95);
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .send-msg-btn span {
+            display: block;
+            margin-left: 0.4em;
+            transition: all 0.3s;
+        }
+
+        .send-msg-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: white;
+            transition: all 0.3s;
+        }
+
+        .send-msg-btn .svg-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.2);
+            margin-right: 0.5em;
+            transition: all 0.3s;
+        }
+
+        .send-msg-btn:hover .svg-wrapper {
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .send-msg-btn:hover svg {
+            transform: rotate(45deg);
+        }
+
+        /* --- Project Icon Animations --- */
+
+        /* 1. Beating Heart (Pregnancy Diabetes) */
+        .heart-beat {
+            animation: heartPulse 1.5s infinite ease-in-out;
+            transform-origin: center;
+        }
+
+        @keyframes heartPulse {
+            0% {
+                transform: scale(1);
+            }
+
+            15% {
+                transform: scale(1.15);
+            }
+
+            30% {
+                transform: scale(1);
+            }
+
+            45% {
+                transform: scale(1.15);
+            }
+
+            60% {
+                transform: scale(1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* 2. Scanning Shield (Breast Cancer) */
+        .shield-scan-path {
+            stroke-dasharray: 100;
+            stroke-dashoffset: 100;
+            animation: shieldDraw 3s infinite ease-in-out;
+        }
+
+        .shield-inner {
+            animation: shieldFade 3s infinite ease-in-out;
+        }
+
+        @keyframes shieldDraw {
+            0% {
+                stroke-dashoffset: 100;
+                opacity: 0;
+            }
+
+            20% {
+                opacity: 1;
+            }
+
+            80% {
+                stroke-dashoffset: 0;
+            }
+
+            100% {
+                stroke-dashoffset: 0;
+                opacity: 0;
+            }
+        }
+
+        @keyframes shieldFade {
+
+            0%,
+            100% {
+                opacity: 0.3;
+            }
+
+            50% {
+                opacity: 0.8;
+            }
+        }
+
+        /* 3. Rising Bars (ClassPulse AI) */
+        .bar-anim {
+            transform-origin: bottom;
+            animation: barRise 1.2s infinite ease-in-out alternate;
+        }
+
+        .bar-1 {
+            animation-delay: 0s;
+        }
+
+        .bar-2 {
+            animation-delay: 0.2s;
+        }
+
+        .bar-3 {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes barRise {
+            0% {
+                transform: scaleY(0.4);
+            }
+
+            100% {
+                transform: scaleY(1);
+            }
+        }
+
+        /* 4. Flashing Zap (Synergy 2K26) */
+        .zap-flash {
+            animation: zapPulse 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+        }
+
+        @keyframes zapPulse {
+
+            0%,
+            100% {
+                opacity: 1;
+                filter: drop-shadow(0 0 0 rgba(6, 182, 212, 0));
+            }
+
+            50% {
+                opacity: 0.5;
+                filter: drop-shadow(0 0 10px rgba(6, 182, 212, 0.5));
+            }
+
+            55% {
+                opacity: 1;
+                filter: drop-shadow(0 0 15px rgba(6, 182, 212, 0.8));
+            }
+
+            60% {
+                opacity: 0.5;
+            }
+        }
+
+        /* 5. Typing Text (Resume Screening) */
+        .doc-line {
+            stroke-dasharray: 12;
+            stroke-dashoffset: 12;
+            animation: lineWrite 2s infinite linear;
+        }
+
+        .doc-line-1 {
+            animation-delay: 0s;
+        }
+
+        .doc-line-2 {
+            animation-delay: 0.5s;
+        }
+
+        .doc-line-3 {
+            animation-delay: 1s;
+        }
+
+        @keyframes lineWrite {
+            0% {
+                stroke-dashoffset: 12;
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                stroke-dashoffset: 0;
+                opacity: 1;
+            }
+
+            100% {
+                stroke-dashoffset: 0;
+                opacity: 0;
+            }
+        }
+
+        /* 6. Camera Flash (AR Gesture Games) */
+        .camera-flash {
+            animation: cameraPulse 2s infinite ease-out;
+            transform-origin: center;
+        }
+
+        @keyframes cameraPulse {
+            0% {
+                opacity: 0.5;
+                transform: scale(1);
+            }
+
+            2% {
+                opacity: 1;
+                transform: scale(1.1);
+                fill: currentColor;
+            }
+
+            4% {
+                opacity: 0.5;
+                transform: scale(1);
+                fill: none;
+            }
+
+            100% {
+                opacity: 0.5;
+                transform: scale(1);
+            }
+        }
+
+        /* 7. Calendar Page Flip (Academic Suite) */
+        .calendar-flip {
+            transform-origin: top;
+            animation: pageFlip 3s infinite ease-in-out;
+        }
+
+        @keyframes pageFlip {
+
+            0%,
+            80% {
+                transform: rotateX(0deg);
+            }
+
+            90% {
+                transform: rotateX(-180deg);
+                opacity: 0;
+            }
+
+            100% {
+                transform: rotateX(0deg);
+                opacity: 1;
+            }
+        }
+
+        /* 8. Glasses Scan (NeuroLink) */
+        .glasses-scan {
+            animation: glassesScan 4s infinite ease-in-out;
+            transform-origin: center;
+        }
+
+        @keyframes glassesScan {
+
+            0%,
+            100% {
+                stroke-dasharray: 20;
+                stroke-dashoffset: 0;
+            }
+
+            50% {
+                stroke-dasharray: 20;
+                stroke-dashoffset: 40;
+            }
+        }
+
+        /* 9. Safety Shield Pulse (Project Vishnu) */
+        .shield-pulse {
+            animation: shieldPulse 3s infinite ease-in-out;
+            transform-origin: center;
+        }
+
+        @keyframes shieldPulse {
+            0% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+
+            50% {
+                transform: scale(1.1);
+                opacity: 1;
+                filter: drop-shadow(0 0 5px currentColor);
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+        }
+
+        /* New Theme Switch Styles */
+        .switch {
+            font-size: 17px;
+            position: relative;
+            display: inline-block;
+            width: 64px;
+            height: 34px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #73C0FC;
+            transition: .4s;
+            border-radius: 30px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 30px;
+            width: 30px;
+            border-radius: 20px;
+            left: 2px;
+            bottom: 2px;
+            z-index: 2;
+            background-color: #e8e8e8;
+            transition: .4s;
+        }
+
+        .sun svg {
+            position: absolute;
+            top: 6px;
+            left: 36px;
+            z-index: 1;
+            width: 24px;
+            height: 24px;
+        }
+
+        .moon svg {
+            fill: #73C0FC;
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            z-index: 1;
+            width: 24px;
+            height: 24px;
+        }
+
+        .sun svg {
+            animation: rotate 15s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .moon svg {
+            animation: tilt 5s linear infinite;
+        }
+
+        @keyframes tilt {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            25% {
+                transform: rotate(-10deg);
+            }
+
+            75% {
+                transform: rotate(10deg);
+            }
+
+            100% {
+                transform: rotate(0deg);
+            }
+        }
+
+        .input:checked+.slider {
+            background-color: #183153;
+        }
+
+        .input:focus+.slider {
+            box-shadow: 0 0 1px #183153;
+        }
+
+        .input:checked+.slider:before {
+            transform: translateX(30px);
+        }
+
+        /* 10. Core Competency (Chip Pulse) */
+        .chip-pulse {
+            animation: chipPulse 3s infinite ease-in-out;
+            transform-origin: center;
+        }
+
+        @keyframes chipPulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 0 rgba(79, 70, 229, 0));
+            }
+
+            50% {
+                transform: scale(1.1);
+                filter: drop-shadow(0 0 10px rgba(79, 70, 229, 0.5));
+            }
+        }
+
+        /* 11. Languages (Code Typing) */
+        .code-typing {
+            stroke-dasharray: 20;
+            stroke-dashoffset: 20;
+            animation: codeType 3s infinite steps(20);
+        }
+
+        @keyframes codeType {
+
+            0%,
+            20% {
+                stroke-dashoffset: 20;
+            }
+
+            50%,
+            90% {
+                stroke-dashoffset: 0;
+            }
+
+            100% {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        /* 12. Domains (Layers Float) */
+        .layer-float-1 {
+            animation: layerFloat 3s infinite ease-in-out 0s;
+        }
+
+        .layer-float-2 {
+            animation: layerFloat 3s infinite ease-in-out 0.2s;
+        }
+
+        .layer-float-3 {
+            animation: layerFloat 3s infinite ease-in-out 0.4s;
+        }
+
+        @keyframes layerFloat {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-3px);
+            }
+        }
+
+        /* 13. Hardware (Circuit Flow) */
+        .circuit-flow {
+            stroke-dasharray: 10;
+            stroke-dashoffset: 100;
+            animation: circuitFlow 4s infinite linear;
+        }
+
+        @keyframes circuitFlow {
+            100% {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        /* 14. Tools (Wrench Rotate) */
+        .tool-rotate {
+            transform-origin: center;
+            animation: toolRotate 2s infinite ease-in-out;
+        }
+
+        @keyframes toolRotate {
+
+            0%,
+            100% {
+                transform: rotate(-15deg);
+            }
+
+            50% {
+                transform: rotate(15deg);
+            }
+        }
     </style>
 </head>
 
 <body class="font-sans antialiased selection:bg-primary-500/30 selection:text-primary-600">
+    <!-- Loader wrapper -->
+    <div id="loader-wrapper">
+        <div class="three-body">
+            <div class="three-body__dot"></div>
+            <div class="three-body__dot"></div>
+            <div class="three-body__dot"></div>
+        </div>
+    </div>
+
+    <!-- Physics Engine Background -->
+    <canvas id="antigravity-canvas"></canvas>
 
     <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -452,20 +1295,31 @@
                     <a href="#resume" class="nav-link">Experience</a>
                     <a href="#contact" class="nav-link">Contact</a>
 
-                    <!-- Theme Toggle -->
-                    <button id="theme-toggle"
-                        class="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors btn-press ml-4"
-                        aria-label="Toggle Theme">
-                        <i data-feather="moon" class="w-5 h-5 text-gray-500 dark:hidden"></i>
-                        <i data-feather="sun" class="w-5 h-5 text-yellow-400 hidden dark:block"></i>
-                    </button>
+                    <!-- Theme Toggle Switch -->
+                    <label class="switch ml-4">
+                        <span class="sun"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <g fill="#ffd43b">
+                                    <circle r="5" cy="12" cx="12"></circle>
+                                    <path
+                                        d="m21 13h-1a1 1 0 0 1 0-2h1a1 1 0 0 1 0 2zm-17 0h-1a1 1 0 0 1 0-2h1a1 1 0 0 1 0 2zm13.66-5.66a1 1 0 0 1 -.66-.29 1 1 0 0 1 0-1.41l.71-.71a1 1 0 1 1 1.41 1.41l-.71.71a1 1 0 0 1 -.75.29zm-12.02 12.02a1 1 0 0 1 -.71-.29 1 1 0 0 1 0-1.41l.71-.66a1 1 0 0 1 1.41 1.41l-.71.71a1 1 0 0 1 -.7.24zm6.36-14.36a1 1 0 0 1 -1-1v-1a1 1 0 0 1 2 0v1a1 1 0 0 1 -1 1zm0 17a1 1 0 0 1 -1-1v-1a1 1 0 0 1 2 0v1a1 1 0 0 1 -1 1zm-5.66-14.66a1 1 0 0 1 -.7-.29l-.71-.71a1 1 0 0 1 1.41-1.41l.71.71a1 1 0 0 1 0 1.41 1 1 0 0 1 -.71.29zm12.02 12.02a1 1 0 0 1 -.7-.29l-.66-.71a1 1 0 0 1 1.36-1.36l.71.71a1 1 0 0 1 0 1.41 1 1 0 0 1 -.71.24z">
+                                    </path>
+                                </g>
+                            </svg></span>
+                        <span class="moon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+                                <path
+                                    d="m223.5 32c-123.5 0-223.5 100.3-223.5 224s100 224 223.5 224c60.6 0 115.5-24.2 155.8-63.4 5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6-96.9 0-175.5-78.8-175.5-176 0-65.8 36-123.1 89.3-153.3 6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z">
+                                </path>
+                            </svg></span>
+                        <input type="checkbox" class="input" id="theme-toggle-checkbox">
+                        <span class="slider"></span>
+                    </label>
                 </nav>
 
                 <div class="flex items-center gap-4 md:hidden">
                     <button id="theme-toggle-mobile"
-                        class="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors">
-                        <i data-feather="moon" class="w-5 h-5 text-gray-500 dark:hidden"></i>
-                        <i data-feather="sun" class="w-5 h-5 text-yellow-400 hidden dark:block"></i>
+                        class="theme-toggle-anim p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors">
+                        <i data-feather="moon" class="moon-icon w-5 h-5 text-gray-500"></i>
+                        <i data-feather="sun" class="sun-icon w-5 h-5 text-yellow-400"></i>
                     </button>
                     <button id="mobile-menu-btn" class="text-gray-500 hover:text-primary-500 p-2 transition-colors">
                         <i data-feather="menu" class="w-6 h-6"></i>
@@ -489,64 +1343,63 @@
     <main>
         <section id="home"
             class="hero-bg min-h-screen flex items-center justify-center relative px-4 py-20 overflow-hidden">
-            <div class="bg-gradient-mesh">
-                <div class="bg-blob blob-1"></div>
-                <div class="bg-blob blob-2"></div>
-                <div class="bg-blob blob-3"></div>
-            </div>
+
 
             <div class="container mx-auto text-center relative z-10 flex flex-col items-center">
 
-                <!-- Status Badge -->
-                <div class="gsap-hero opacity-0 translate-y-10 mb-10">
+                <!-- 1. Available Badge -->
+                <div class="gsap-hero opacity-0 translate-y-10 mb-12">
                     <div
-                        class="inline-flex items-center gap-3 px-5 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-gray-500 dark:text-gray-300 text-xs font-semibold uppercase tracking-widest hover:bg-white/10 transition-all cursor-default shadow-sm">
-                        <span class="relative flex h-2 w-2">
+                        class="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-white/50 dark:bg-white/5 border border-white/20 dark:border-white/10 backdrop-blur-md shadow-sm">
+                        <span class="relative flex h-2.5 w-2.5">
                             <span
                                 class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                            <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
                         </span>
-                        <span>Available for Research & Collaboration</span>
+                        <span class="text-xs font-bold tracking-widest text-[var(--text-secondary)] uppercase">Available
+                            for Research & Collaboration</span>
                     </div>
                 </div>
 
-                <!-- Adjusted font sizes: text-5xl on mobile, scaling up to 9xl -->
-                <h1
-                    class="gsap-hero opacity-0 translate-y-10 text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter leading-[1.1] mb-8 font-sans text-primary">
-                    <span class="block mb-2 text-[var(--text-primary)]">Hello, I'm</span>
-                    <span class="inline-block logo-gradient-text">Kasi</span>
-                    <span class="inline-block logo-gradient-text">Viswanath</span>
+                <!-- 2. Main Heading -->
+                <h1 class="gsap-hero opacity-0 translate-y-10 flex flex-col items-center leading-tight mb-10 font-sans">
+                    <span class="text-[var(--text-primary)] font-bold text-5xl md:text-7xl mb-2 tracking-tight">Hello,
+                        I'm</span>
+                    <span
+                        class="text-6xl md:text-8xl lg:text-9xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#d946ef] to-[#a855f7] tracking-tighter py-2">Kasi
+                        Viswanath</span>
                 </h1>
 
-                <!-- Semantic Motion Subtitle with Typewriter -->
-                <div class="gsap-hero opacity-0 translate-y-10 h-12 flex items-center justify-center gap-2 mb-8">
-                    <span class="text-xl md:text-2xl text-gray-400 font-light">Architecting</span>
-                    <span
-                        class="text-xl md:text-2xl font-medium text-[var(--text-primary)] min-w-[240px] text-left relative">
+                <!-- 3. Subheading (Typewriter) -->
+                <div
+                    class="gsap-hero opacity-0 translate-y-10 flex items-center justify-center gap-2 text-xl md:text-3xl text-[var(--text-secondary)] font-light mb-8">
+                    <span>Architecting</span>
+                    <span class="font-medium text-[var(--text-primary)] relative">
                         <span id="semantic-subtitle"></span><span class="cursor"></span>
                     </span>
                 </div>
 
-                <!-- Strategic Positioning -->
-                <div
-                    class="gsap-hero opacity-0 translate-y-10 border-t border-[var(--glass-border)] pt-6 mt-2 max-w-2xl mx-auto">
-                    <p class="text-base md:text-lg text-[var(--text-primary)] tracking-wide font-medium">
-                        Designing AI systems that survive <span class="text-primary-500">real-world constraints</span>
+                <!-- 4. Description -->
+                <div class="gsap-hero opacity-0 translate-y-10 max-w-2xl mx-auto space-y-4">
+                    <p class="text-lg md:text-xl text-[var(--text-primary)] font-medium leading-relaxed">
+                        Designing AI systems that survive <span class="text-[#a855f7] font-bold">real-world
+                            constraints</span>
                     </p>
-                    <p class="text-sm md:text-base text-[var(--text-secondary)] mt-2 font-light">
+                    <p class="text-base md:text-lg text-[var(--text-secondary)] font-light tracking-wide">
                         Edge Intelligence • NLP • Embedded Systems
                     </p>
                 </div>
 
-                <div class="gsap-hero opacity-0 translate-y-10 flex flex-wrap justify-center gap-6 mt-10">
+                <!-- 5. CTA Buttons -->
+                <div class="gsap-hero opacity-0 translate-y-10 flex flex-wrap justify-center gap-6 mt-12">
                     <a href="#research"
-                        class="magnetic-btn btn-press group relative px-8 py-4 bg-[var(--text-primary)] text-[var(--bg-color)] rounded-full font-bold overflow-hidden transition-all hover:scale-105 shadow-lg">
+                        class="group relative px-8 py-4 bg-[var(--text-primary)] text-[var(--bg-color)] rounded-full font-bold overflow-hidden transition-all hover:scale-105 shadow-xl hover:shadow-2xl">
                         <span class="relative z-10 flex items-center gap-2">View Projects <i data-feather="arrow-right"
                                 class="w-4 h-4 transition-transform group-hover:translate-x-1"></i></span>
                     </a>
                     <a href="https://drive.google.com/file/d/1Ti58tEKvOFAB2KChTGhPDp8eMoQ61iiZ/view?usp=sharing"
                         target="_blank"
-                        class="magnetic-btn btn-press glass px-8 py-4 rounded-full font-semibold text-[var(--text-primary)] hover:bg-white/10 transition-all duration-300 flex items-center gap-2">
+                        class="magnetic-btn btn-press glass px-8 py-4 rounded-full font-semibold text-[var(--text-primary)] hover:bg-white/10 transition-all duration-300 flex items-center gap-2 shadow-lg">
                         <i data-feather="external-link" class="w-4 h-4"></i> Open Resume
                     </a>
                 </div>
@@ -578,7 +1431,20 @@
                                 <h3 class="text-2xl font-bold text-[var(--text-primary)] mb-8 flex items-center gap-4">
                                     <div
                                         class="p-3 rounded-lg bg-[var(--bg-color)] border border-[var(--glass-border)]">
-                                        <i data-feather="cpu" class="text-primary-500 w-6 h-6 icon-float"></i>
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round" class="text-primary-500 w-6 h-6 chip-pulse">
+                                            <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
+                                            <rect x="9" y="9" width="6" height="6"></rect>
+                                            <line x1="9" y1="1" x2="9" y2="4"></line>
+                                            <line x1="15" y1="1" x2="15" y2="4"></line>
+                                            <line x1="9" y1="20" x2="9" y2="23"></line>
+                                            <line x1="15" y1="20" x2="15" y2="23"></line>
+                                            <line x1="20" y1="9" x2="23" y2="9"></line>
+                                            <line x1="20" y1="14" x2="23" y2="14"></line>
+                                            <line x1="1" y1="9" x2="4" y2="9"></line>
+                                            <line x1="1" y1="14" x2="4" y2="14"></line>
+                                        </svg>
                                     </div>
                                     <span>Core Competencies</span>
                                 </h3>
@@ -618,29 +1484,56 @@
                         <div class="grid grid-cols-2 gap-5">
                             <div
                                 class="glass p-8 rounded-2xl hover:bg-[var(--glass-bg)] transition-all duration-300 group">
-                                <i data-feather="code"
-                                    class="text-primary-500 mb-4 group-hover:scale-110 transition-transform duration-300"></i>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                    class="text-primary-500 mb-4 w-6 h-6 group-hover:scale-110 transition-transform duration-300">
+                                    <polyline points="16 18 22 12 16 6" class="code-typing"></polyline>
+                                    <polyline points="8 6 2 12 8 18" class="code-typing" style="animation-delay: 1.5s">
+                                    </polyline>
+                                </svg>
                                 <h4 class="font-semibold text-[var(--text-primary)] mb-2 tracking-wide">Languages</h4>
                                 <p class="text-sm text-gray-500 font-mono">Python, C, C++, Java</p>
                             </div>
                             <div
                                 class="glass p-8 rounded-2xl hover:bg-[var(--glass-bg)] transition-all duration-300 group">
-                                <i data-feather="layers"
-                                    class="text-secondary-500 mb-4 group-hover:scale-110 transition-transform duration-300"></i>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                    class="text-secondary-500 mb-4 w-6 h-6 group-hover:scale-110 transition-transform duration-300">
+                                    <polygon points="12 2 2 7 12 12 22 7 12 2" class="layer-float-1"></polygon>
+                                    <polyline points="2 17 12 22 22 17" class="layer-float-3"></polyline>
+                                    <polyline points="2 12 12 17 22 12" class="layer-float-2"></polyline>
+                                </svg>
                                 <h4 class="font-semibold text-[var(--text-primary)] mb-2 tracking-wide">Domains</h4>
                                 <p class="text-sm text-gray-500 font-mono">NLP, Machine Learning, Embedded Systems</p>
                             </div>
                             <div
                                 class="glass p-8 rounded-2xl hover:bg-[var(--glass-bg)] transition-all duration-300 group">
-                                <i data-feather="cpu"
-                                    class="text-blue-500 mb-4 group-hover:scale-110 transition-transform duration-300"></i>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                    class="text-blue-500 mb-4 w-6 h-6 group-hover:scale-110 transition-transform duration-300 circuit-flow">
+                                    <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
+                                    <rect x="9" y="9" width="6" height="6"></rect>
+                                    <line x1="9" y1="1" x2="9" y2="4"></line>
+                                    <line x1="15" y1="1" x2="15" y2="4"></line>
+                                    <line x1="9" y1="20" x2="9" y2="23"></line>
+                                    <line x1="15" y1="20" x2="15" y2="23"></line>
+                                    <line x1="20" y1="9" x2="23" y2="9"></line>
+                                    <line x1="20" y1="14" x2="23" y2="14"></line>
+                                    <line x1="1" y1="9" x2="4" y2="9"></line>
+                                    <line x1="1" y1="14" x2="4" y2="14"></line>
+                                </svg>
                                 <h4 class="font-semibold text-[var(--text-primary)] mb-2 tracking-wide">Hardware</h4>
                                 <p class="text-sm text-gray-500 font-mono">Arduino, ESP32, RPi, Snapdragon</p>
                             </div>
                             <div
                                 class="glass p-8 rounded-2xl hover:bg-[var(--glass-bg)] transition-all duration-300 group">
-                                <i data-feather="tool"
-                                    class="text-green-500 mb-4 group-hover:scale-110 transition-transform duration-300"></i>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                    class="text-green-500 mb-4 w-6 h-6 group-hover:scale-110 transition-transform duration-300 tool-rotate">
+                                    <path
+                                        d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z">
+                                    </path>
+                                </svg>
                                 <h4 class="font-semibold text-[var(--text-primary)] mb-2 tracking-wide">Tools</h4>
                                 <p class="text-sm text-gray-500 font-mono">Vosk, Git, Docker, ADB</p>
                             </div>
@@ -701,8 +1594,14 @@
                         <div class="card-content p-8">
                             <div class="flex justify-between items-start mb-6">
                                 <div
-                                    class="p-3 rounded-2xl bg-gradient-to-br from-rose-500/20 to-fuchsia-600/10 border border-rose-500/20 text-rose-400 dark:text-rose-400 text-rose-600">
-                                    <i data-feather="heart" class="w-6 h-6"></i>
+                                    class="p-1.5 rounded-xl bg-gradient-to-br from-rose-500/20 to-fuchsia-600/10 border border-rose-500/20 text-rose-400 dark:text-rose-400 text-rose-600">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                        class="heart-beat">
+                                        <path
+                                            d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                                        </path>
+                                    </svg>
                                 </div>
                                 <span
                                     class="px-3 py-1 bg-white/5 rounded-full text-[10px] font-bold tracking-widest uppercase text-gray-400 border border-white/5">HEALTHCARE</span>
@@ -726,9 +1625,17 @@
                                 <button onclick="openModal('diabetes')"
                                     class="magnetic-btn text-xs font-bold text-[var(--text-primary)] hover:text-primary-500 transition-all flex items-center gap-1 hover:scale-105 origin-left duration-300">View
                                     case study <i data-feather="arrow-right" class="w-3 h-3"></i></button>
-                                <a href="https://github.com/Viswanath129" target="_blank"
-                                    class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-white/10 cursor-pointer"><i
-                                        data-feather="github" class="w-4 h-4 text-gray-400"></i></a>
+                                <div class="group relative">
+                                    <a href="https://github.com/Viswanath129" target="_blank">
+                                        <svg stroke-linejoin="round" stroke-linecap="round" stroke-width="2"
+                                            stroke="currentColor" fill="none" viewBox="0 0 24 24"
+                                            class="w-6 h-6 text-gray-400 hover:scale-125 duration-200 hover:stroke-blue-500 transition-all">
+                                            <path
+                                                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+                                            </path>
+                                        </svg>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -739,8 +1646,15 @@
                         <div class="card-content p-8">
                             <div class="flex justify-between items-start mb-6">
                                 <div
-                                    class="p-3 rounded-2xl bg-gradient-to-br from-orange-500/20 to-red-600/10 border border-orange-500/20 text-orange-600 dark:text-orange-400">
-                                    <i data-feather="activity" class="w-6 h-6"></i>
+                                    class="p-1.5 rounded-xl bg-gradient-to-br from-orange-500/10 to-red-600/5 border border-orange-500/20">
+                                    <div class="loading">
+                                        <svg width="24" height="18" viewBox="0 0 64 48">
+                                            <polyline points="0.157 23.954, 14 23.954, 21.843 48, 43 0, 50 24, 64 24"
+                                                id="back"></polyline>
+                                            <polyline points="0.157 23.954, 14 23.954, 21.843 48, 43 0, 50 24, 64 24"
+                                                id="front"></polyline>
+                                        </svg>
+                                    </div>
                                 </div>
                                 <span
                                     class="px-3 py-1 bg-white/5 rounded-full text-[10px] font-bold tracking-widest uppercase text-gray-400 border border-white/5">HEALTHCARE</span>
@@ -764,9 +1678,17 @@
                                 <button onclick="openModal('stroke')"
                                     class="magnetic-btn text-xs font-bold text-[var(--text-primary)] hover:text-primary-500 transition-all flex items-center gap-1 hover:scale-105 origin-left duration-300">View
                                     case study <i data-feather="arrow-right" class="w-3 h-3"></i></button>
-                                <a href="https://github.com/Viswanath129" target="_blank"
-                                    class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-white/10 cursor-pointer"><i
-                                        data-feather="github" class="w-4 h-4 text-gray-400"></i></a>
+                                <div class="group relative">
+                                    <a href="https://github.com/Viswanath129" target="_blank">
+                                        <svg stroke-linejoin="round" stroke-linecap="round" stroke-width="2"
+                                            stroke="currentColor" fill="none" viewBox="0 0 24 24"
+                                            class="w-5 h-5 text-gray-400 hover:scale-125 duration-200 hover:stroke-blue-500 transition-all">
+                                            <path
+                                                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+                                            </path>
+                                        </svg>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -777,8 +1699,14 @@
                         <div class="card-content p-8">
                             <div class="flex justify-between items-start mb-6">
                                 <div
-                                    class="p-3 rounded-2xl bg-gradient-to-br from-pink-500/20 to-rose-600/10 border border-pink-500/20 text-pink-600 dark:text-pink-400">
-                                    <i data-feather="shield" class="w-6 h-6"></i>
+                                    class="p-2 rounded-2xl bg-gradient-to-br from-pink-500/20 to-rose-600/10 border border-pink-500/20 text-pink-600 dark:text-pink-400">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" class="shield-scan-path">
+                                        </path>
+                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" class="shield-inner"
+                                            fill="currentColor" stroke="none"></path>
+                                    </svg>
                                 </div>
                                 <div class="flex items-center gap-2">
                                     <span
@@ -804,9 +1732,17 @@
                                 <button onclick="openModal('cancer')"
                                     class="magnetic-btn text-xs font-bold text-[var(--text-primary)] hover:text-primary-500 transition-all flex items-center gap-1 hover:scale-105 origin-left duration-300">View
                                     case study <i data-feather="arrow-right" class="w-3 h-3"></i></button>
-                                <a href="https://github.com/Viswanath129" target="_blank"
-                                    class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-white/10 cursor-pointer"><i
-                                        data-feather="github" class="w-4 h-4 text-gray-400"></i></a>
+                                <div class="group relative">
+                                    <a href="https://github.com/Viswanath129" target="_blank">
+                                        <svg stroke-linejoin="round" stroke-linecap="round" stroke-width="2"
+                                            stroke="currentColor" fill="none" viewBox="0 0 24 24"
+                                            class="w-6 h-6 text-gray-400 hover:scale-125 duration-200 hover:stroke-blue-500 transition-all">
+                                            <path
+                                                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+                                            </path>
+                                        </svg>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -817,8 +1753,13 @@
                         <div class="card-content p-8">
                             <div class="flex justify-between items-start mb-6">
                                 <div
-                                    class="p-3 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-violet-600/10 border border-indigo-500/20 text-indigo-600 dark:text-indigo-400">
-                                    <i data-feather="bar-chart-2" class="w-6 h-6"></i>
+                                    class="p-2 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-violet-600/10 border border-indigo-500/20 text-indigo-600 dark:text-indigo-400">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <line x1="18" y1="20" x2="18" y2="10" class="bar-anim bar-1"></line>
+                                        <line x1="12" y1="20" x2="12" y2="4" class="bar-anim bar-2"></line>
+                                        <line x1="6" y1="20" x2="6" y2="14" class="bar-anim bar-3"></line>
+                                    </svg>
                                 </div>
                                 <span
                                     class="px-3 py-1 bg-white/5 rounded-full text-[10px] font-bold tracking-widest uppercase text-gray-400 border border-white/5">ENGINEERING</span>
@@ -842,9 +1783,17 @@
                                 <button onclick="openModal('classpulse')"
                                     class="magnetic-btn text-xs font-bold text-[var(--text-primary)] hover:text-primary-500 transition-all flex items-center gap-1 hover:scale-105 origin-left duration-300">View
                                     case study <i data-feather="arrow-right" class="w-3 h-3"></i></button>
-                                <a href="https://github.com/Viswanath129" target="_blank"
-                                    class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-white/10 cursor-pointer"><i
-                                        data-feather="github" class="w-4 h-4 text-gray-400"></i></a>
+                                <div class="group relative">
+                                    <a href="https://github.com/Viswanath129" target="_blank">
+                                        <svg stroke-linejoin="round" stroke-linecap="round" stroke-width="2"
+                                            stroke="currentColor" fill="none" viewBox="0 0 24 24"
+                                            class="w-6 h-6 text-gray-400 hover:scale-125 duration-200 hover:stroke-blue-500 transition-all">
+                                            <path
+                                                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+                                            </path>
+                                        </svg>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -855,8 +1804,12 @@
                         <div class="card-content p-8">
                             <div class="flex justify-between items-start mb-6">
                                 <div
-                                    class="p-3 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-blue-600/10 border border-cyan-500/20 text-cyan-600 dark:text-cyan-400">
-                                    <i data-feather="zap" class="w-6 h-6"></i>
+                                    class="p-2 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-blue-600/10 border border-cyan-500/20 text-cyan-600 dark:text-cyan-400">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="zap-flash">
+                                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                                    </svg>
                                 </div>
                                 <div class="flex items-center gap-2">
                                     <span
@@ -895,8 +1848,15 @@
                         <div class="card-content p-8">
                             <div class="flex justify-between items-start mb-6">
                                 <div
-                                    class="p-3 rounded-2xl bg-gradient-to-br from-sky-500/20 to-blue-600/10 border border-sky-500/20 text-sky-600 dark:text-sky-400">
-                                    <i data-feather="file-text" class="w-6 h-6"></i>
+                                    class="p-2 rounded-2xl bg-gradient-to-br from-sky-500/20 to-blue-600/10 border border-sky-500/20 text-sky-600 dark:text-sky-400">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                        <polyline points="14 2 14 8 20 8"></polyline>
+                                        <line x1="16" y1="13" x2="8" y2="13" class="doc-line doc-line-1"></line>
+                                        <line x1="16" y1="17" x2="8" y2="17" class="doc-line doc-line-2"></line>
+                                        <line x1="10" y1="9" x2="8" y2="9" class="doc-line doc-line-3"></line>
+                                    </svg>
                                 </div>
                                 <span
                                     class="px-3 py-1 bg-white/5 rounded-full text-[10px] font-bold tracking-widest uppercase text-gray-400 border border-white/5">ENGINEERING</span>
@@ -920,9 +1880,17 @@
                                 <button onclick="openModal('resume')"
                                     class="magnetic-btn text-xs font-bold text-[var(--text-primary)] hover:text-primary-500 transition-all flex items-center gap-1 hover:scale-105 origin-left duration-300">View
                                     case study <i data-feather="arrow-right" class="w-3 h-3"></i></button>
-                                <a href="https://github.com/Viswanath129" target="_blank"
-                                    class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-white/10 cursor-pointer"><i
-                                        data-feather="github" class="w-4 h-4 text-gray-400"></i></a>
+                                <div class="group relative">
+                                    <a href="https://github.com/Viswanath129" target="_blank">
+                                        <svg stroke-linejoin="round" stroke-linecap="round" stroke-width="2"
+                                            stroke="currentColor" fill="none" viewBox="0 0 24 24"
+                                            class="w-6 h-6 text-gray-400 hover:scale-125 duration-200 hover:stroke-blue-500 transition-all">
+                                            <path
+                                                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+                                            </path>
+                                        </svg>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -933,8 +1901,15 @@
                         <div class="card-content p-8">
                             <div class="flex justify-between items-start mb-6">
                                 <div
-                                    class="p-3 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-green-600/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400">
-                                    <i data-feather="camera" class="w-6 h-6"></i>
+                                    class="p-2 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-green-600/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="camera-flash">
+                                        <path
+                                            d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z">
+                                        </path>
+                                        <circle cx="12" cy="13" r="4"></circle>
+                                    </svg>
                                 </div>
                                 <span
                                     class="px-3 py-1 bg-white/5 rounded-full text-[10px] font-bold tracking-widest uppercase text-gray-400 border border-white/5">ENGINEERING</span>
@@ -958,9 +1933,17 @@
                                 <button onclick="openModal('ar')"
                                     class="magnetic-btn text-xs font-bold text-[var(--text-primary)] hover:text-primary-500 transition-all flex items-center gap-1 hover:scale-105 origin-left duration-300">View
                                     case study <i data-feather="arrow-right" class="w-3 h-3"></i></button>
-                                <a href="https://github.com/Viswanath129" target="_blank"
-                                    class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-white/10 cursor-pointer"><i
-                                        data-feather="github" class="w-4 h-4 text-gray-400"></i></a>
+                                <div class="group relative">
+                                    <a href="https://github.com/Viswanath129" target="_blank">
+                                        <svg stroke-linejoin="round" stroke-linecap="round" stroke-width="2"
+                                            stroke="currentColor" fill="none" viewBox="0 0 24 24"
+                                            class="w-6 h-6 text-gray-400 hover:scale-125 duration-200 hover:stroke-blue-500 transition-all">
+                                            <path
+                                                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+                                            </path>
+                                        </svg>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -971,8 +1954,15 @@
                         <div class="card-content p-8">
                             <div class="flex justify-between items-start mb-6">
                                 <div
-                                    class="p-3 rounded-2xl bg-gradient-to-br from-teal-500/20 to-cyan-600/10 border border-teal-500/20 text-teal-600 dark:text-teal-400">
-                                    <i data-feather="calendar" class="w-6 h-6"></i>
+                                    class="p-2 rounded-2xl bg-gradient-to-br from-teal-500/20 to-cyan-600/10 border border-teal-500/20 text-teal-600 dark:text-teal-400">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                        class="calendar-flip">
+                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                                    </svg>
                                 </div>
                                 <span
                                     class="px-3 py-1 bg-white/5 rounded-full text-[10px] font-bold tracking-widest uppercase text-gray-400 border border-white/5">ENGINEERING</span>
@@ -995,9 +1985,17 @@
                                 <button onclick="openModal('automation')"
                                     class="magnetic-btn text-xs font-bold text-[var(--text-primary)] hover:text-primary-500 transition-all flex items-center gap-1 hover:scale-105 origin-left duration-300">View
                                     case study <i data-feather="arrow-right" class="w-3 h-3"></i></button>
-                                <a href="https://github.com/Viswanath129" target="_blank"
-                                    class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-white/10 cursor-pointer"><i
-                                        data-feather="github" class="w-4 h-4 text-gray-400"></i></a>
+                                <div class="group relative">
+                                    <a href="https://github.com/Viswanath129" target="_blank">
+                                        <svg stroke-linejoin="round" stroke-linecap="round" stroke-width="2"
+                                            stroke="currentColor" fill="none" viewBox="0 0 24 24"
+                                            class="w-6 h-6 text-gray-400 hover:scale-125 duration-200 hover:stroke-blue-500 transition-all">
+                                            <path
+                                                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+                                            </path>
+                                        </svg>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1009,7 +2007,14 @@
                             <div class="flex justify-between items-start mb-6">
                                 <div
                                     class="p-3 rounded-2xl bg-gradient-to-br from-amber-500/20 to-yellow-600/10 border border-amber-500/20 text-amber-600 dark:text-amber-400">
-                                    <i data-feather="shield" class="w-6 h-6"></i>
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                        class="shield-pulse">
+                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor"
+                                            stroke-width="1" fill="currentColor" fill-opacity="0.2"
+                                            style="transform: scale(0.6); transform-origin: center;"></path>
+                                    </svg>
                                 </div>
                                 <div class="flex items-center gap-2">
                                     <span
@@ -1051,7 +2056,14 @@
                             <div class="flex justify-between items-start mb-6">
                                 <div
                                     class="p-3 rounded-2xl bg-gradient-to-br from-lime-500/20 to-green-600/10 border border-lime-500/20 text-lime-600 dark:text-lime-400">
-                                    <i data-feather="activity" class="w-6 h-6"></i>
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                        class="glasses-scan relative">
+                                        <path d="M22 7v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7"></path>
+                                        <line x1="2" y1="10" x2="22" y2="10"></line>
+                                        <circle cx="7" cy="13" r="3"></circle>
+                                        <circle cx="17" cy="13" r="3"></circle>
+                                    </svg>
                                 </div>
                                 <div class="flex items-center gap-2">
                                     <span
@@ -1341,9 +2353,20 @@
                                     <label for="message"
                                         class="absolute left-0 top-3 text-gray-500 text-base transition-all duration-300 peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-focus:-top-6 peer-focus:text-xs peer-focus:text-primary-500 peer-valid:-top-6 peer-valid:text-xs peer-valid:text-gray-400">Message</label>
                                 </div>
-                                <button type="submit"
-                                    class="magnetic-btn btn-press w-full bg-[var(--text-primary)] text-[var(--bg-color)] px-8 py-4 rounded-xl font-bold hover:bg-gray-400 transition-all duration-300 shadow-lg mt-4">Send
-                                    Message</button>
+                                <button type="submit" class="send-msg-btn w-full mt-4">
+                                    <div class="svg-wrapper-1">
+                                        <div class="svg-wrapper">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
+                                                height="24">
+                                                <path fill="none" d="M0 0h24v24H0z"></path>
+                                                <path fill="currentColor"
+                                                    d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z">
+                                                </path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <span>Send Message</span>
+                                </button>
                             </form>
                         </div>
                     </div>
@@ -1400,6 +2423,17 @@
     </button>
 
     <script>
+        // Loader Logic
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader-wrapper');
+            if (loader) {
+                loader.classList.add('loaded');
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                }, 600);
+            }
+        });
+
         document.addEventListener('DOMContentLoaded', function () {
             // 1. Feather Icons
             feather.replace();
@@ -1410,25 +2444,41 @@
             }
 
             // 3. Theme Toggle
-            const themeBtn = document.getElementById('theme-toggle');
+            const themeCheckbox = document.getElementById('theme-toggle-checkbox');
             const themeBtnMobile = document.getElementById('theme-toggle-mobile');
             const htmlElement = document.documentElement;
 
-            function toggleTheme() {
+            function toggleTheme(isCheckbox = false) {
                 document.body.classList.add('no-transition');
                 const isLight = htmlElement.getAttribute('data-theme') === 'light';
-                htmlElement.setAttribute('data-theme', isLight ? 'dark' : 'light');
+                const newTheme = isLight ? 'dark' : 'light';
+
+                htmlElement.setAttribute('data-theme', newTheme);
                 htmlElement.classList.toggle('dark', !isLight);
-                localStorage.setItem('theme', isLight ? 'dark' : 'light');
+                localStorage.setItem('theme', newTheme);
+
+                // Sync UI
+                if (themeCheckbox) themeCheckbox.checked = newTheme === 'dark';
+
                 setTimeout(() => document.body.classList.remove('no-transition'), 50);
             }
 
             const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
             htmlElement.setAttribute('data-theme', savedTheme);
-            if (savedTheme === 'dark') htmlElement.classList.add('dark');
+            if (savedTheme === 'dark') {
+                htmlElement.classList.add('dark');
+                if (themeCheckbox) themeCheckbox.checked = true;
+            }
 
-            themeBtn.addEventListener('click', toggleTheme);
-            themeBtnMobile.addEventListener('click', toggleTheme);
+            if (themeCheckbox) {
+                themeCheckbox.addEventListener('change', () => toggleTheme(true));
+            }
+            if (themeBtnMobile) {
+                themeBtnMobile.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    toggleTheme(false);
+                });
+            }
 
             // 4. GSAP Hero & Typewriter Effect (FIXED)
             gsap.registerPlugin(ScrollTrigger, TextPlugin);
@@ -1447,18 +2497,18 @@
                 masterTl.add(tl);
             });
 
-            // 5. Scroll Animations (FIXED: Smoother Batching)
+            // 5. Scroll Animations (Refined for Antigravity Feel)
             // Clean up CSS conflicts
-            gsap.set(".section-heading, .section-content", { opacity: 0, y: 30 });
+            gsap.set(".section-heading, .section-content", { autoAlpha: 0, y: 50, scale: 0.95 });
 
             ScrollTrigger.batch(".section-heading", {
                 start: "top 85%",
-                onEnter: batch => gsap.to(batch, { opacity: 1, y: 0, duration: 1, stagger: 0.2, ease: "power3.out", overwrite: true })
+                onEnter: batch => gsap.to(batch, { autoAlpha: 1, y: 0, scale: 1, duration: 1.2, stagger: 0.15, ease: "power4.out", overwrite: true })
             });
 
             ScrollTrigger.batch(".section-content", {
                 start: "top 80%",
-                onEnter: batch => gsap.to(batch, { opacity: 1, y: 0, duration: 1, stagger: 0.2, ease: "power3.out", overwrite: true })
+                onEnter: batch => gsap.to(batch, { autoAlpha: 1, y: 0, scale: 1, duration: 1.2, stagger: 0.1, ease: "back.out(0.5)", overwrite: true })
             });
 
             // Filter Fade In
@@ -1833,6 +2883,271 @@
                     behavior: 'smooth'
                 });
             });
+        });
+    </script>
+    <script>
+        /**
+         * Antigravity Physics Engine v2.0 (Ultimate)
+         * Features: Constellations, Scroll Warp, Mouse Repulsion, Click Pulse, Gyroscope
+         */
+
+        class Antigravity {
+            constructor(canvasId) {
+                this.canvas = document.getElementById(canvasId);
+                if (!this.canvas) {
+                    console.error("Antigravity: Canvas not found!");
+                    return;
+                }
+                this.ctx = this.canvas.getContext('2d');
+                this.particles = [];
+                this.width = window.innerWidth;
+                this.height = window.innerHeight;
+
+                // Configuration
+                this.config = {
+                    particleCount: 70, // Balanced for connection performance
+                    baseRadius: 1.5,
+                    maxRadius: 4,
+                    speedFactor: 0.35,
+                    mouseRepelRadius: 200,
+                    mouseRepelForce: 2,
+                    scrollWarpFactor: 0.15,
+                    connectionDistance: 130, // Max distance to draw lines
+                    pulseRadius: 350,   // Shockwave size
+                    pulseForce: 15,     // Shockwave strength
+                    colorPalette: [
+                        'rgba(168, 85, 247, ', // Purple
+                        'rgba(236, 72, 153, ', // Pink
+                        'rgba(56, 189, 248, '  // Blue
+                    ]
+                };
+
+                this.mouse = { x: null, y: null };
+                this.pulse = { x: null, y: null, active: false };
+                this.scrollY = window.scrollY;
+                this.scrollSpeed = 0;
+
+                // Gyroscope Data
+                this.gyro = { x: 0, y: 0 };
+
+                this.init();
+            }
+
+            init() {
+                this.resize();
+                window.addEventListener('resize', () => this.resize());
+
+                // Mouse Tracking
+                window.addEventListener('mousemove', (e) => {
+                    this.mouse.x = e.clientX;
+                    this.mouse.y = e.clientY;
+                });
+                window.addEventListener('mouseout', () => {
+                    this.mouse.x = null;
+                    this.mouse.y = null;
+                });
+
+                // Click Pulse
+                window.addEventListener('mousedown', (e) => {
+                    this.pulse.x = e.clientX;
+                    this.pulse.y = e.clientY;
+                    this.pulse.active = true;
+
+                    // Reset pulse after a frame
+                    setTimeout(() => { this.pulse.active = false; }, 100);
+                });
+
+                // Scroll Tracking
+                window.addEventListener('scroll', () => {
+                    const currentScroll = window.scrollY;
+                    this.scrollSpeed = currentScroll - this.scrollY;
+                    this.scrollY = currentScroll;
+
+                    // Toggle Visibility: Show canvas only after scrolling past 30% of viewport
+                    if (window.scrollY > window.innerHeight * 0.3) {
+                        this.canvas.style.opacity = '1';
+                    } else {
+                        this.canvas.style.opacity = '0';
+                    }
+                });
+
+                // Gyroscope (Mobile)
+                if (window.DeviceOrientationEvent) {
+                    window.addEventListener('deviceorientation', (e) => {
+                        // Approximate tilt values normalized
+                        this.gyro.x = (e.gamma || 0) / 45; // Left/Right tilt
+                        this.gyro.y = (e.beta || 0) / 45;  // Front/Back tilt
+                    });
+                }
+
+                this.createParticles();
+                this.animate();
+            }
+
+            resize() {
+                this.width = window.innerWidth;
+                this.height = window.innerHeight;
+                this.canvas.width = this.width;
+                this.canvas.height = this.height;
+            }
+
+            createParticles() {
+                this.particles = [];
+                for (let i = 0; i < this.config.particleCount; i++) {
+                    this.particles.push(new Particle(this, this.config));
+                }
+            }
+
+            animate() {
+                this.ctx.clearRect(0, 0, this.width, this.height);
+
+                // Decay scroll speed
+                this.scrollSpeed *= 0.92;
+
+                // 1. Update & Draw Particles
+                this.particles.forEach(particle => {
+                    particle.update(this.scrollSpeed, this.gyro, this.pulse);
+                    particle.draw();
+                });
+
+                // 2. Draw Constellations (Connections)
+                this.drawConstellations();
+
+                requestAnimationFrame(() => this.animate());
+            }
+
+            drawConstellations() {
+                // Nested loop to connect nearby particles
+                // Optimization: Checking i vs j (j > i) to avoid double drawing
+                for (let i = 0; i < this.particles.length; i++) {
+                    for (let j = i + 1; j < this.particles.length; j++) {
+                        const p1 = this.particles[i];
+                        const p2 = this.particles[j];
+
+                        const dx = p1.x - p2.x;
+                        const dy = p1.y - p2.y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+
+                        if (dist < this.config.connectionDistance) {
+                            // Opacity based on distance (closer = brighter)
+                            let opacity = 1 - (dist / this.config.connectionDistance);
+                            opacity = opacity * 0.15; // Keep it subtle
+
+                            this.ctx.beginPath();
+                            this.ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
+                            this.ctx.lineWidth = 0.5;
+                            this.ctx.moveTo(p1.x, p1.y);
+                            this.ctx.lineTo(p2.x, p2.y);
+                            this.ctx.stroke();
+                        }
+                    }
+                }
+            }
+        }
+
+        class Particle {
+            constructor(game, config) {
+                this.game = game;
+                this.config = config;
+                this.reset();
+                this.x = Math.random() * this.game.width;
+                this.y = Math.random() * this.game.height;
+            }
+
+            reset() {
+                this.radius = Math.random() * this.config.maxRadius + this.config.baseRadius;
+                this.x = Math.random() * this.game.width;
+                this.y = Math.random() * this.game.height;
+                this.vx = (Math.random() - 0.5) * this.config.speedFactor;
+                this.vy = (Math.random() - 0.5) * this.config.speedFactor;
+
+                // Color Selection
+                const baseColor = this.config.colorPalette[Math.floor(Math.random() * this.config.colorPalette.length)];
+                this.colorStr = baseColor; // e.g., 'rgba(255,0,0, '
+                this.alpha = Math.random() * 0.5 + 0.2;
+
+                this.phase = Math.random() * Math.PI * 2;
+            }
+
+            update(scrollSpeed, gyro, pulse) {
+                // 1. Basic Motion
+                this.x += this.vx;
+                this.y += this.vy;
+
+                // 2. Scroll Warp (Vertical Boost)
+                this.y -= scrollSpeed * this.config.scrollWarpFactor;
+
+                // 3. Gyroscope Tilt (Mobile Parallax)
+                this.x += gyro.x * 0.5;
+                this.y += gyro.y * 0.5;
+
+                // 4. Antigravity Drift
+                this.phase += 0.01;
+                this.y += Math.sin(this.phase) * 0.15;
+
+                // 5. Boundary Wrap
+                if (this.x < -100) this.x = this.game.width + 100;
+                if (this.x > this.game.width + 100) this.x = -100;
+                if (this.y < -100) this.y = this.game.height + 100;
+                if (this.y > this.game.height + 100) this.y = -100;
+
+                // 6. Interaction
+                this.handleInteractions(pulse);
+            }
+
+            handleInteractions(pulse) {
+                // Mouse Repulsion
+                if (this.game.mouse.x != null) {
+                    this.applyForce(this.game.mouse.x, this.game.mouse.y, this.config.mouseRepelRadius, this.config.mouseRepelForce);
+                }
+
+                // Click Pulse (Shockwave)
+                if (pulse.active) {
+                    this.applyForce(pulse.x, pulse.y, this.config.pulseRadius, this.config.pulseForce);
+                }
+            }
+
+            applyForce(centerX, centerY, radius, strength) {
+                let dx = centerX - this.x;
+                let dy = centerY - this.y;
+                let distance = Math.sqrt(dx * dx + dy * dy);
+
+                if (distance < radius) {
+                    const force = (radius - distance) / radius;
+                    const forceX = (dx / distance) * force * strength;
+                    const forceY = (dy / distance) * force * strength;
+
+                    // Move away from center
+                    this.x -= forceX;
+                    this.y -= forceY;
+                }
+            }
+
+            draw() {
+                const ctx = this.game.ctx;
+                ctx.save();
+                ctx.globalCompositeOperation = 'lighter';
+
+                ctx.beginPath();
+                // Soft Glow Gradient
+                const g = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.radius * 2);
+                g.addColorStop(0, this.colorStr + this.alpha + ')');
+                g.addColorStop(1, 'rgba(0,0,0,0)');
+
+                ctx.fillStyle = g;
+                ctx.arc(this.x, this.y, this.radius * 2, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        // Initialize on load
+        window.addEventListener('DOMContentLoaded', () => {
+            // Check if user prefers reduced motion
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (!prefersReducedMotion) {
+                new Antigravity('antigravity-canvas');
+            }
         });
     </script>
 </body>
