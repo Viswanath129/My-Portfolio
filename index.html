@@ -62,6 +62,24 @@
     <style>
         /* CSS Variables for Theming */
         :root {
+            --bg-color: #fbfbff;
+            --bg-gradient:
+                radial-gradient(at 0% 100%, rgba(56, 189, 248, 0.3) 0%, transparent 50%),
+                radial-gradient(at 100% 80%, rgba(192, 132, 252, 0.4) 0%, transparent 50%),
+                radial-gradient(at 50% 0%, rgba(56, 189, 248, 0.1) 0%, transparent 40%);
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --glass-bg: rgba(255, 255, 255, 0.4);
+            --glass-border: rgba(0, 0, 0, 0.05);
+            --glass-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+            --card-bg: rgba(255, 255, 255, 0.6);
+            --modal-bg: rgba(255, 255, 255, 0.98);
+            --accent-glow: rgba(99, 102, 241, 0.12);
+            --brand-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            --brand-primary: #4f46e5;
+        }
+
+        :root[data-theme="dark"] {
             --bg-color: #030014;
             --bg-gradient:
                 radial-gradient(circle at 50% 0%, rgba(118, 58, 240, 0.3) 0%, transparent 60%),
@@ -78,24 +96,6 @@
             --accent-glow: rgba(192, 132, 252, 0.25);
             --brand-gradient: linear-gradient(135deg, #c084fc 0%, #6366f1 50%, #3b82f6 100%);
             --brand-primary: #a855f7;
-        }
-
-        :root[data-theme="light"] {
-            --bg-color: #fbfbff;
-            --bg-gradient:
-                radial-gradient(at 0% 100%, rgba(56, 189, 248, 0.3) 0%, transparent 50%),
-                radial-gradient(at 100% 80%, rgba(192, 132, 252, 0.4) 0%, transparent 50%),
-                radial-gradient(at 50% 0%, rgba(56, 189, 248, 0.1) 0%, transparent 40%);
-            --text-primary: #0f172a;
-            --text-secondary: #475569;
-            --glass-bg: rgba(255, 255, 255, 0.4);
-            --glass-border: rgba(0, 0, 0, 0.05);
-            --glass-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
-            --card-bg: rgba(255, 255, 255, 0.6);
-            --modal-bg: rgba(255, 255, 255, 0.98);
-            --accent-glow: rgba(99, 102, 241, 0.12);
-            --brand-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
-            --brand-primary: #4f46e5;
         }
 
 
@@ -567,6 +567,7 @@
         }
 
         /* Unified Glass Back to Top */
+        /* Liquid Glass Back to Top */
         #back-to-top {
             position: fixed;
             bottom: 30px;
@@ -574,21 +575,29 @@
             width: 50px;
             height: 50px;
             border-radius: 50%;
+            /* Liquid Glass Base */
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-top: 1px solid rgba(255, 255, 255, 0.5);
+            border-left: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow:
+                10px 10px 20px rgba(0, 0, 0, 0.1),
+                inset 0px 0px 15px rgba(255, 255, 255, 0.2);
+            /* Internal fluid glow */
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 0;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            /* Fluid bounce */
+            overflow: hidden;
             z-index: 1000;
             opacity: 0;
             pointer-events: none;
             transform: translateY(20px);
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
             color: var(--text-primary);
-            box-shadow: var(--glass-shadow);
         }
 
         #back-to-top.show {
@@ -598,41 +607,50 @@
         }
 
         #back-to-top:hover {
-            width: 140px;
-            border-radius: 25px;
-            background: var(--brand-gradient);
-            color: #ffffff;
-            border-color: transparent;
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px -5px var(--accent-glow);
-        }
-
-        #back-to-top::after {
-            content: 'BACK TO TOP';
-            position: absolute;
-            opacity: 0;
-            font-size: 10px;
-            font-weight: 800;
-            letter-spacing: 0.15em;
-            transition: all 0.3s;
-            pointer-events: none;
-            white-space: nowrap;
-        }
-
-        #back-to-top:hover::after {
-            opacity: 1;
-            transform: translateX(12px);
+            width: 150px;
+            border-radius: 50px;
+            /* Liquid White Hover */
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(240, 240, 255, 0.8));
+            border-color: rgba(255, 255, 255, 0.8);
+            /* High Gloss Liquid Effect */
+            box-shadow:
+                0 20px 40px -10px rgba(255, 255, 255, 0.4),
+                inset 0 0 20px rgba(255, 255, 255, 1),
+                inset 0 1px 0 rgba(255, 255, 255, 1);
+            color: #1e293b;
+            /* Dark text for contrast */
+            align-items: center;
         }
 
         .back-to-top-icon {
-            width: 18px;
-            height: 18px;
+            width: 20px;
+            height: 20px;
+            transition-duration: 0.3s;
             fill: currentColor;
-            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
         #back-to-top:hover .back-to-top-icon {
-            transform: translateX(-40px) scale(0.9);
+            transition-duration: 0.3s;
+            transform: translateY(-250%);
+            opacity: 0;
+        }
+
+        #back-to-top::before {
+            position: absolute;
+            bottom: -30px;
+            content: "Back to Top";
+            color: #1e293b;
+            /* Dark text matching hover */
+            font-size: 0px;
+            transition-duration: 0.3s;
+            font-weight: 700;
+        }
+
+        #back-to-top:hover::before {
+            font-size: 14px;
+            opacity: 1;
+            bottom: unset;
+            transition-duration: 0.3s;
         }
 
         @media (max-width: 768px) {
@@ -3311,8 +3329,11 @@
                         <div
                             class="lg:w-1/2 bg-[var(--bg-color)]/30 p-10 rounded-3xl border border-[var(--glass-border)] backdrop-blur-sm">
                             <!-- Important: Replace with your actual Formspree ID -->
-                            <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="space-y-8"
-                                id="contact-form">
+                            <form class="space-y-8" id="contact-form" action="https://api.web3forms.com/submit"
+                                method="POST" onsubmit="sendMail(event)">
+                                <input type="hidden" name="access_key" value="c3b0aaa5-b97d-405b-a7c8-59d6fd044e40">
+                                <!-- Optional: Custom redirect or subject -->
+                                <input type="hidden" name="subject" value="New Submission from Portfolio">
                                 <div class="relative group">
                                     <input type="text" id="name" name="name" required
                                         class="modern-input w-full px-0 py-3 text-[var(--text-primary)] text-lg outline-none placeholder-transparent peer"
@@ -3416,6 +3437,56 @@
     </button>
 
     <script>
+        function sendMail(e) {
+            e.preventDefault();
+            const form = document.getElementById('contact-form');
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.innerHTML;
+
+            // Loading State
+            submitBtn.innerHTML = '<span class="three-body" style="--uib-size: 25px; --uib-color: white;"> <div class="three-body__dot"></div> <div class="three-body__dot"></div> <div class="three-body__dot"></div> </span>';
+            submitBtn.disabled = true;
+
+            const formData = new FormData(form);
+
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                body: formData
+            })
+                .then(async (response) => {
+                    const json = await response.json();
+                    if (response.status == 200) {
+                        // Success Logic
+                        document.getElementById('modal-content').innerHTML = `
+                        <div class="text-center">
+                            <div class="w-20 h-20 bg-green-500/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                                <i data-feather="check" class="w-10 h-10 text-green-500"></i>
+                            </div>
+                            <h2 class="text-3xl font-bold mb-4">Message Sent!</h2>
+                            <p class="text-[var(--text-secondary)] mb-8">Thank you for reaching out. I'll get back to you within 24 hours.</p>
+                            <button onclick="closeModal()" class="glass-btn px-8 py-3 rounded-full font-bold">Close</button>
+                        </div>
+                    `;
+                        document.getElementById('modal-overlay').classList.add('active');
+                        document.body.classList.add('modal-open');
+                        feather.replace();
+                        form.reset();
+                    } else {
+                        // Error Logic
+                        console.log(response);
+                        alert(json.message);
+                    }
+                })
+                .catch(error => {
+                    console.log(error);
+                    alert('Something went wrong. Please try again later.');
+                })
+                .finally(() => {
+                    submitBtn.innerHTML = originalBtnText;
+                    submitBtn.disabled = false;
+                });
+        }
+
         // Loader Logic
         window.addEventListener('load', () => {
             const loader = document.getElementById('loader-wrapper');
@@ -3462,7 +3533,7 @@
                 setTimeout(() => document.body.classList.remove('no-transition'), 50);
             }
 
-            const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+            const savedTheme = localStorage.getItem('theme') || 'light';
             htmlElement.setAttribute('data-theme', savedTheme);
             if (savedTheme === 'dark') {
                 htmlElement.classList.add('dark');
@@ -3944,11 +4015,12 @@
 
         window.addEventListener('scroll', () => {
             if (window.scrollY > 400) {
-                backToTopBtn.classList.add('visible');
+                backToTopBtn.classList.add('show');
             } else {
-                backToTopBtn.classList.remove('visible');
+                backToTopBtn.classList.remove('show');
             }
         });
+
 
         backToTopBtn.addEventListener('click', () => {
             window.scrollTo({
